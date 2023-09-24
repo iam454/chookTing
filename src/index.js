@@ -2,7 +2,8 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import { createGlobalStyle } from "styled-components";
+import { createGlobalStyle, ThemeProvider } from "styled-components";
+import theme from "./theme";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
@@ -37,9 +38,6 @@ const GlobalStyle = createGlobalStyle`
   *[hidden] {
       display: none;
   }
-  body {
-    line-height: 1;
-  }
   menu, ol, ul {
     list-style: none;
   }
@@ -61,6 +59,10 @@ const GlobalStyle = createGlobalStyle`
   body {
     font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
     line-height: 1.2;
+    background-color: ${(props) => props.theme.black};
+    color: ${(props) => props.theme.white};
+    font-size: 14px;
+    font-weight: 400;
   }
   a {
     text-decoration: none;
@@ -70,8 +72,10 @@ const GlobalStyle = createGlobalStyle`
 
 root.render(
   <React.StrictMode>
-    <GlobalStyle />
-    <App />
+    <ThemeProvider theme={theme}>
+      <GlobalStyle />
+      <App />
+    </ThemeProvider>
   </React.StrictMode>
 );
 
