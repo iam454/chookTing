@@ -4,9 +4,8 @@ import { styled } from "styled-components";
 
 const Nav = styled.nav`
   z-index: 10;
-  position: absolute;
-  bottom: 0;
   border-top: 1px solid ${(props) => props.theme.modal.black};
+  background-color: ${(props) => props.theme.black};
 `;
 
 const Tabs = styled.ul`
