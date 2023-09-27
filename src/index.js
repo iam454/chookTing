@@ -62,7 +62,6 @@ const GlobalStyle = createGlobalStyle`
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
     background-color: rgb(15, 15, 15);
     color: ${(props) => props.theme.white};
     font-size: 14px;
