@@ -15,6 +15,10 @@ const ModalBtn = styled.button`
   align-items: center;
   justify-content: center;
   gap: 5px;
+  font-family: "Pretendard Variable", Pretendard, -apple-system,
+    BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI",
+    "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
   color: ${(props) => {
     switch (props.$modalType) {
       case "login":
@@ -39,6 +43,11 @@ const ModalBtn = styled.button`
   }};
 `;
 
+const Icon = styled.img`
+  width: 20px;
+  height: 20px;
+`;
+
 const OneBtnModal = ( { handleShowModal, $isVisibleModal, $modalType, children, execution} ) => {
   // 모달 타입 4개
   // 1. 인스타그램 연동
@@ -55,21 +64,21 @@ const OneBtnModal = ( { handleShowModal, $isVisibleModal, $modalType, children, 
   // ---------------------
 
   const [buttonText, setButtonText] = useState("");
-  const [logoImg, setLogoImg] = useState("./");
+  const [logoImg, setLogoImg] = useState("");
 
   useEffect(() => {
     switch ($modalType.toString()) {
       case "insta":
         setButtonText("인스타그램 연결하기");
-        setLogoImg("instagramLogo.png");
+        setLogoImg("./icons/instagram.png");
         return ;
       case "login":
         setButtonText("카카오톡으로 시작하기");
-        setLogoImg("kakaoLogo.png");
+        setLogoImg("./icons/kakao.png");
         return ;
       case "firework":
         setButtonText("네, 사용할래요!");
-        setLogoImg("fireworkLogo.png");
+        setLogoImg("./icons/firework.png");
       return ;
       case "completeReport":
         setButtonText("닫기");
@@ -84,7 +93,7 @@ const OneBtnModal = ( { handleShowModal, $isVisibleModal, $modalType, children, 
     <ModalTemplate handleShowModal={handleShowModal} $isVisibleModal={$isVisibleModal}>
         {children}
       <ModalBtn onClick={execution} $modalType={$modalType}>
-        <img src={logoImg} alt={logoImg}/>
+        <Icon src={logoImg} alt={logoImg}/>
         {buttonText}
       </ModalBtn>
     </ModalTemplate>

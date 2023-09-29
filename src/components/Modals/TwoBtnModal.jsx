@@ -10,6 +10,10 @@ const ModalBtn = styled.button`
   position: absolute;
   top: 102px;
   border: none;
+  font-family: "Pretendard Variable", Pretendard, -apple-system,
+    BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI",
+    "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
 `;
 
 const FirstModalBtn = styled(ModalBtn)`
@@ -37,7 +41,7 @@ const SecondModalBtn = styled(ModalBtn)`
   }};
 `;
 
-const TwoBtnModal = ( { handleShowModal, $isVisibleModal, $modalType, execution} ) => {
+const TwoBtnModal = ( { handleShowModal, $isVisibleModal, $modalType, execution, children} ) => {
   // 모달 타입 4개
   // 1. 로그아웃
   // 2. 신고하기
@@ -54,27 +58,22 @@ const TwoBtnModal = ( { handleShowModal, $isVisibleModal, $modalType, execution}
 
   const [firstButtonText, setFirstButtonText] = useState("");
   const [secondButtonText, setSecondButtonText] = useState("");
-  const [modalText, setModalText] = useState("");
 
   useEffect(() => {
     switch ($modalType.toString()) {
       case "logout":
-        setModalText("로그아웃 하시겠어요? 서비스 이용이 제한될 수 있습니다.");
         setFirstButtonText("취소");
         setSecondButtonText("로그아웃");
         return ;
       case "report":
-        setModalText("허위 신고 시 서비스 이용제한 등의 불이익을 받을 수 있으니 주의해 주세요.");
         setFirstButtonText("취소");
         setSecondButtonText("신고하기");
         return ;
       case "firework":
-        setModalText("보유 폭죽이 부족해요.");
         setFirstButtonText("내 폭죽 보러가기");
         setSecondButtonText("네, 사용할래요!");
       return ;
       case "widthdrawal":
-        setModalText("신정말 탈퇴하시겠어요? 계정은 삭제되며 복구되지 않습니다.");
         setFirstButtonText("취소");
         setSecondButtonText("탈퇴하기");
         return ;
@@ -86,7 +85,7 @@ const TwoBtnModal = ( { handleShowModal, $isVisibleModal, $modalType, execution}
 
   return (
     <ModalTemplate handleShowModal={handleShowModal} $isVisibleModal={$isVisibleModal}>
-      {modalText}
+      {children}
       <FirstModalBtn onClick={handleShowModal}>
         {firstButtonText}
       </FirstModalBtn>
