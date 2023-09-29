@@ -6,8 +6,8 @@ const theme = {
   pink: "#ff3a75",
   yellow: "#fee703",
   icon: {
-    white: "rgba(255, 255, 255, 0.1)",
-    hover: "rgba(255, 255, 255, 0.2)",
+    white: "rgba(255, 255, 255, 0.01)",
+    hover: "rgba(255, 255, 255, 0.1)",
   },
   album: {
     white: "#eee",

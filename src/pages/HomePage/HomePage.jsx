@@ -2,6 +2,19 @@ import React from "react";
 import Layout from "../../components/Layout";
 import ModalButton from "../../components/ModalButton";
 import theme from "../../theme";
+import IconButton from "../../components/IconButton";
+import { ReactComponent as Like } from "../../assets/Favorite.svg";
+import { ReactComponent as Download } from "../../assets/Import.svg";
+import { styled } from "styled-components";
+
+const Test = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  position: absolute;
+  right: 16px;
+  bottom: 16px;
+`;
 
 const HomePage = () => {
   return (
@@ -62,6 +75,37 @@ const HomePage = () => {
         text="폭죽 내역"
         onClick={() => console.log("modal button clicked")}
       />
+      <Test>
+        <IconButton
+          onClick={() => {
+            console.log("icon button clicked!");
+          }}
+          text={51}
+        >
+          <Like width={24} height={24} />
+        </IconButton>
+
+        <IconButton
+          onClick={() => {
+            console.log("icon button clicked!");
+          }}
+          text={33}
+        >
+          <img
+            src="icons/instagram.png"
+            width={20}
+            height={20}
+            alt="인스타그램"
+          />
+        </IconButton>
+        <IconButton
+          onClick={() => {
+            console.log("icon button clicked!");
+          }}
+        >
+          <Download width={24} height={24} />
+        </IconButton>
+      </Test>
     </Layout>
   );
 };
