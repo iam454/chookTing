@@ -10,7 +10,7 @@ const HomePage = () => {
       <ModalButton
         isLong
         bgColor={theme.orange}
-        iconSrc="fireworks.png"
+        iconSrc="icons/fireworks.png"
         text="네, 사용할래요!"
         onClick={() => console.log("modal button clicked")}
       />
@@ -34,7 +34,7 @@ const HomePage = () => {
         isLong
         isTextBlack
         bgColor={theme.yellow}
-        iconSrc="kakao.png"
+        iconSrc="icons/kakao.png"
         text="카카오톡으로 시작하기"
         onClick={() => console.log("modal button clicked")}
       />
@@ -43,7 +43,7 @@ const HomePage = () => {
       <ModalButton
         isLong
         bgColor={theme.pink}
-        iconSrc="instagram.png"
+        iconSrc="icons/instagram.png"
         text="인스타그램 연결하기"
         onClick={() => console.log("modal button clicked")}
       />
