@@ -55,7 +55,7 @@ const OneBtnModal = ( { handleShowModal, $isVisibleModal, $modalType, children, 
   // ---------------------
 
   const [buttonText, setButtonText] = useState("");
-  const [logoImg, setLogoImg] = useState("");
+  const [logoImg, setLogoImg] = useState("./");
 
   useEffect(() => {
     switch ($modalType.toString()) {

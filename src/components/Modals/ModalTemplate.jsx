@@ -50,7 +50,7 @@ const ModalText = styled.span`
 `;
 
 const ModalTemplate = ( {handleShowModal, $isVisibleModal, children} ) => {
-  //ModalType에 따라 다른 모달창 띄우기
+  // ModalType에 따라 다른 모달창 띄우기
   // 버튼 1개
   // . 인스타 연동 모달
   // . 로그인 안내 모달
