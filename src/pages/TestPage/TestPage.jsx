@@ -1,75 +1,82 @@
 import React, { useState } from "react";
 import Layout from "../../components/Layout";
-import ModalButton from "../../components/ModalButton";
-import { Modal } from "../../components/Modal";
-import theme from "../../theme";
+import { SkeletonPage } from "../SkeletonPage/SkeletonPage";
+import Post from "../../components/Post";
+import PostInfos from "../../components/PostInfos";
+import IconButton from "../../components/IconButton";
+import { ReactComponent as Like } from "../../assets/Favorite.svg";
+
+const posts = [
+  {
+    id: 1,
+    image: "sample.png",
+    name: "안녕하세요",
+    hashtags: ["#대박", "#굿", "#하이"],
+  },
+  {
+    id: 5,
+    image: "sample2.png",
+    name: "예시2",
+    hashtags: ["#대박", "#굿", "#하이"],
+  },
+  {
+    id: 13,
+    image: "sample5.png",
+    name: "예시3",
+    hashtags: ["#대박", "#굿", "#하이"],
+  },
+  {
+    id: 51,
+    image: "sample3.png",
+    name: "예시4",
+    hashtags: ["#대박", "#굿", "#하이"],
+  },
+  {
+    id: 33,
+    image: "sample4.png",
+    name: "예시5",
+    hashtags: ["#대박", "#굿", "#하이"],
+  },
+];
 
 const TestPage = () => {
-  const [isShortModalOpen, setIsShortModalOpen] = useState(false);
-  const [isLongModalOpen, setIsLongModalOpen] = useState(false);
-
-  const handleShortModalClick = () => {
-    setIsShortModalOpen((prev) => !prev);
-  };
-  const handleLongModalClick = () => {
-    setIsLongModalOpen((prev) => !prev);
-  };
+  const [isLoading, setIsLoading] = useState(true);
 
   return (
     <Layout>
-      <ModalButton
-        isLong
-        isTextBlack
-        onClick={handleShortModalClick}
-        text="텍스트 한개 short 모달 열기"
-      />
-      <br />
-      <br />
-      <ModalButton
-        isLong
-        isTextBlack
-        onClick={handleLongModalClick}
-        text="텍스트 두개 long 모달 열기"
-      />
-
-      <Modal.Short
-        isOpen={isShortModalOpen}
-        onRequestClose={() => setIsShortModalOpen(false)}
-        text="보유 폭죽이 부족해요."
-      >
-        <ModalButton
-          onClick={() => {
-            console.log("폭죽 내역 보러가기");
-          }}
-          text="폭죽 내역"
-          bgColor={theme.modal.gray}
-        />
-        <ModalButton
-          onClick={() => {
-            console.log("확인");
-            setIsShortModalOpen(false);
-          }}
-          text="확인"
-          bgColor={theme.orange}
-        />
-      </Modal.Short>
-
-      <Modal.Long
-        isOpen={isLongModalOpen}
-        onRequestClose={() => setIsLongModalOpen(false)}
-        text1="폭죽을 사용하여"
-        text2="인스타그램 계정에 방문할 수 있어요!"
-      >
-        <ModalButton
-          isLong
-          onClick={() => {
-            console.log("인스타그램 방문!");
-          }}
-          iconSrc="icons/instagram.png"
-          bgColor={theme.pink}
-          text="인스타그램 방문하기"
-        />
-      </Modal.Long>
+      {isLoading ? (
+        <SkeletonPage.Home />
+      ) : (
+        posts.map((post) => {
+          return (
+            <Post
+              key={post.id}
+              image={post.image}
+              info={<PostInfos name={post.name} hashtags={post.hashtags} />}
+            >
+              <IconButton
+                onClick={() => {
+                  console.log("좋아요 누를 아이디: ", post.id);
+                }}
+              >
+                <Like width={24} height={24} />
+              </IconButton>
+              <IconButton
+                onClick={() => {
+                  console.log("폭죽 보낼 아이디: ", post.id);
+                }}
+              >
+                <img
+                  src="icons/instagram.png"
+                  width={20}
+                  height={20}
+                  alt="인스타그램"
+                />
+              </IconButton>
+            </Post>
+          );
+        })
+      )}
     </Layout>
   );
 };
