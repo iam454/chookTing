@@ -3,6 +3,7 @@ import HomePage from "./pages/HomePage/HomePage";
 import PopPage from "./pages/PopPage/PopPage";
 import MyPage from "./pages/MyPage/MyPage";
 import NavigationBar from "./components/NavigationBar";
+import TestPage from "./pages/TestPage/TestPage";
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
         <Route path="/" element={<HomePage />}></Route>
         <Route path="/pop" element={<PopPage />}></Route>
         <Route path="/profile" element={<MyPage />}></Route>
+        <Route path="/test" element={<TestPage />}></Route>
       </Routes>
       <NavigationBar />
     </BrowserRouter>
