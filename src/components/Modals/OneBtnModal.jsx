@@ -26,7 +26,6 @@ const ModalBtn = styled.button`
       default:
         return "white";
     }}};
-
   background-color: ${(props) => {
     switch (props.$modalType) {
       case "insta":
