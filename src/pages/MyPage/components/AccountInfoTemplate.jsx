@@ -1,5 +1,6 @@
 import { styled } from "styled-components";
-import ImgButton from "./ImgButton";
+import Button from "./Button";
+import Text from "./Text";
 
 const Container = styled.div`
   height:300px;
@@ -27,20 +28,13 @@ const ProfileImg = styled.img`
   border-radius: 50%;
 `;
 
-const UserName = styled.p`
-  margin: 8px 0 0;
-  `;
-
-const UserEmail = styled.p`
-  `;
-
-const Text = styled.p`
-  font-size: ${props => props.fontSize};
-  margin: ${props => props.$margin};
-`;
-
 const InstaConnectionBox = styled.div`
   margin-top: 8px;
+`;
+
+const ImgButton = styled(Button)`
+  width: ${props => props.width};
+  height: ${props => props.height};
 `;
 
 const Icon = styled.img`
@@ -70,7 +64,6 @@ const RecievedBox = styled.div`
   width: 33%;
 `;
 
-
 const AccountInfoTemplate = () => {
   const profileImg = "./icons/accountIcon.png";
   const userName = "카카오";
@@ -88,8 +81,8 @@ const AccountInfoTemplate = () => {
       <Box>
         <KakaoAccountBox>
           <ProfileImg src={profileImg} alt="accountIcon"/>
-          <UserName>{userName}</UserName>
-          <UserEmail>{userEmail}</UserEmail>
+          <Text $margin="8px 0 0 0">{userName}</Text>
+          <Text>{userEmail}</Text>
         </KakaoAccountBox>
 
         <InstaConnectionBox>

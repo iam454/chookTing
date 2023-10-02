@@ -1,17 +1,16 @@
 import { styled } from "styled-components";
 
 const Box = styled.button`
-  width: ${props => props.width};
-  height: ${props => props.height};
+  background: none;
   border: none;
   padding: 0;
-  background: none;
 `;
 
-const ImgButton = ({ children, onClick}) => {
+const Button = ( {children, onClick} ) => {
   return (
     <Box onClick={onClick}>{children}</Box>
   )
-};
 
-export default ImgButton;
+}
+
+export default Button;
