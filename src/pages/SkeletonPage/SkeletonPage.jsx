@@ -1,15 +1,10 @@
 import React from "react";
-import Layout from "../../components/Layout";
 import Post from "../../components/Post";
 import SkeletonInfos from "./components/SkeletonInfos";
 import SkeletonIcon from "./components/SkeletonIcon";
 
 const BaseSkeletonPage = ({ children }) => {
-  return (
-    <Layout>
-      <Post info={<SkeletonInfos />}>{children}</Post>
-    </Layout>
-  );
+  return <Post info={<SkeletonInfos />}>{children}</Post>;
 };
 
 const HomeSkeletonPage = () => {
