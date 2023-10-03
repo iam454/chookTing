@@ -1,16 +1,12 @@
 import React from "react";
 import Layout from "../../components/Layout";
-import HomeCardSkeleton from "../Skeleton/HomeCardSkeleton";
-import PopCardSkeleton from "../Skeleton/PopCardSkeleton";
-import MyCardSkeleton from "../Skeleton/MyCardSkeleton";
+import { SkeletonPage } from "../SkeletonPage/SkeletonPage";
 
 const HomePage = () => {
   return (
     <>
       <Layout>
-        {/* <HomeCardSkeleton /> */}
-        {/* <PopCardSkeleton /> */}
-        <MyCardSkeleton />
+        <SkeletonPage.Home />
       </Layout>
     </>
   );
