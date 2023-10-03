@@ -13,9 +13,9 @@ const Image = styled.img`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 390px;
-  max-height: calc(100vh - 57px);
-  max-height: calc(100dvh - 57px); /* Mobile */
+  width: 100%;
+  max-height: calc(80vh - 57px);
+  max-height: calc(80dvh - 57px); /* Mobile */
   object-fit: contain;
 `;
 

@@ -10,7 +10,9 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<HomePage />}></Route>
-        <Route path="/pop" element={<PopPage />}></Route>
+        <Route path="/pop" element={<PopPage />}>
+          <Route path="post/:postId" element={<PopPage />}></Route>
+        </Route>
         <Route path="/profile" element={<MyPage />}></Route>
         <Route path="/test" element={<TestPage />}></Route>
       </Routes>
