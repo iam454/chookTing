@@ -87,7 +87,6 @@ const Detail = styled(motion.div)`
 const PopPage = () => {
   const navigate = useNavigate();
   const detailMatch = useMatch("/pop/post/:postId");
-  const [isLoading, setIsLoading] = useState(false);
 
   const handleCardClick = (postId) => {
     navigate(`post/${postId}`);
@@ -127,11 +126,7 @@ const PopPage = () => {
               exit={{ opacity: 0 }}
             />
             <Detail layoutId={detailMatch.params.postId}>
-              {isLoading ? (
-                <SkeletonPage.Pop />
-              ) : (
-                <PopDetailPage image={clickedId.image} id={clickedId} />
-              )}
+              <PopDetailPage image={clickedId.image} id={clickedId} />
             </Detail>
           </>
         )}
