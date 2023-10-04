@@ -17,10 +17,6 @@ const Button = styled.button`
   justify-content: center;
   align-items: center;
   box-shadow: rgba(0, 0, 0, 0.35) 0 5px 15px;
-
-  &:hover {
-    background-color: ${(props) => props.theme.icon.hover};
-  }
 `;
 
 const Text = styled.div`

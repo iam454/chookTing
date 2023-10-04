@@ -9,6 +9,7 @@ const overlay = {
   height: "100dvh",
   margin: "0 auto",
   backgroundColor: theme.modal.dim,
+  zIndex: "20",
 };
 
 const content = {
@@ -21,6 +22,7 @@ const content = {
   backgroundColor: theme.modal.black,
   border: "none",
   borderRadius: "8px",
+  zIndex: "20",
 };
 
 const Layout = styled.div`
