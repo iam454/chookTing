@@ -40,7 +40,7 @@ const MyAlbumTemplate = ({ children }) => {
       <UploadBox>
         <UploadButton onClick={() => {console.log("upload")}}> 
           <UploadIcon src="./icons/upload.png" alt="UploadIcon"/>
-          <UploadText >사진을 업로드해보세요!</UploadText>
+          <UploadText >사진을 업로드해 보세요!</UploadText>
         </UploadButton>
       </UploadBox>
 

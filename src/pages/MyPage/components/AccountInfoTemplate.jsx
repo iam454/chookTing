@@ -64,16 +64,7 @@ const RecievedBox = styled.div`
   width: 33%;
 `;
 
-const AccountInfoTemplate = () => {
-  const profileImg = "./icons/accountIcon.png";
-  const userName = "카카오";
-  const userEmail = "kakao@email.com";
-
-  const recievedLikes = 60;
-  const recievedFirework = 30;
-  const myFireworks = 200;
-
-  const isInstaConnected = true;
+const AccountInfoTemplate = ({ profileImg, userName, userEmail, totalLikes, totalFirework, myFireworks, isInstaConnected }) => {
 
   return (
     <>
@@ -107,11 +98,11 @@ const AccountInfoTemplate = () => {
         <AmountInfoContainer>
           <AmountBox>
             <RecievedBox>
-              <Text fontSize="24px">{recievedLikes}</Text>
+              <Text fontSize="24px">{totalLikes}</Text>
               <Text fontSize="12px" $margin="8px">내가 받은 좋아요</Text>
             </RecievedBox>
             <RecievedBox>
-              <Text fontSize="24px">{recievedFirework}</Text>
+              <Text fontSize="24px">{totalFirework}</Text>
               <Text fontSize="12px" $margin="8px">내가 받은 폭죽</Text>
             </RecievedBox>
             <RecievedBox>
