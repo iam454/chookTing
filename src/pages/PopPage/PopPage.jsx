@@ -1,8 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import Layout from "../../components/Layout";
 import Container from "./components/Container";
 import Card from "./components/Card";
 import { MasonryInfiniteGrid } from "@egjs/react-infinitegrid";
+import { useMatch, useNavigate } from "react-router-dom";
+import { motion, AnimatePresence } from "framer-motion";
+import { styled } from "styled-components";
+import { SkeletonPage } from "../SkeletonPage/SkeletonPage";
+import PopDetailPage from "../PopDetailPage/PopDetailPage";
 
 const photos = [
   {
@@ -57,18 +62,75 @@ const photos = [
   },
 ];
 
+const Overlay = styled(motion.div)`
+  position: fixed;
+  width: 390px;
+  height: 100%;
+  background-color: ${(props) => props.theme.modal.dim};
+  opacity: 0;
+`;
+
+const Detail = styled(motion.div)`
+  position: fixed;
+  top: 0;
+  bottom: 57px;
+  left: 0;
+  right: 0;
+  margin: auto;
+  width: 374px;
+  height: 80vh;
+  height: 80dvh;
+  border-radius: 8px;
+  background-color: rgb(15, 15, 15);
+`;
+
 const PopPage = () => {
+  const navigate = useNavigate();
+  const detailMatch = useMatch("/pop/post/:postId");
+
+  const handleCardClick = (postId) => {
+    navigate(`post/${postId}`);
+  };
+
+  const handleOverlayClick = () => {
+    navigate("/pop");
+  };
+
+  const clickedId =
+    detailMatch?.params.postId &&
+    photos.find((photo) => photo.id === +detailMatch?.params.postId);
+
   return (
     <Layout>
       <Container>
         <MasonryInfiniteGrid gap={8} isConstantSize={true} threshold={1000}>
           {photos.map((photo) => {
             return (
-              <Card key={photo.id} level={photo.level} image={photo.image} />
+              <Card
+                layoutId={photo.id + ""}
+                key={photo.id}
+                level={photo.level}
+                image={photo.image}
+                onClick={() => handleCardClick(photo.id)}
+              />
             );
           })}
         </MasonryInfiniteGrid>
       </Container>
+      <AnimatePresence>
+        {detailMatch && (
+          <>
+            <Overlay
+              onClick={handleOverlayClick}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+            />
+            <Detail layoutId={detailMatch.params.postId}>
+              <PopDetailPage image={clickedId.image} id={clickedId} />
+            </Detail>
+          </>
+        )}
+      </AnimatePresence>
     </Layout>
   );
 };
