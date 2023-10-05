@@ -1,7 +1,9 @@
 import { styled } from "styled-components";
 import Text from "./Text";
 
-const Layout = styled.div`
+const Layout = styled.button`
+  border: none;
+  text-align: start;
   width: 350px;
   height: 220px;
   border-radius: 10px;
@@ -54,10 +56,12 @@ const InstaBox = styled(LikeBox)`
   margin-left: 10px;
 `;
 
-const PhotoCard = ({ imgSrc, univercity, date, likeCount, snsViewCount}) => {
+const PhotoCard = ({ imgSrc, univercity, date, likeCount, snsViewCount, onClick}) => {
 
   return (
-    <Layout>
+    <Layout onClick={() => {
+      console.log("click")
+    }}>
       <Box>
         <Photo src={imgSrc} alt="photo"/>
         <InfoBox>

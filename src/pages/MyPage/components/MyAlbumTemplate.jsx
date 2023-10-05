@@ -1,4 +1,5 @@
 import { styled } from "styled-components";
+import PhotoList from "./PhotoList";
 
 const Layout = styled.div`
   width: 350px;
@@ -10,6 +11,7 @@ const UploadBox = styled.div`
   height: 110px;
   border-radius: 10px;
   border: 1px solid #5F6368;
+  margin-top: 8px;
 `;
 
 const UploadButton = styled.button`
@@ -33,7 +35,7 @@ const UploadText = styled.p`
   color: #5F6368;
 `;
 
-const MyAlbumTemplate = ({ children }) => {
+const MyAlbumTemplate = ({ photos }) => {
 
   return (
     <Layout>
@@ -43,8 +45,9 @@ const MyAlbumTemplate = ({ children }) => {
           <UploadText >사진을 업로드해 보세요!</UploadText>
         </UploadButton>
       </UploadBox>
-
-      
+      <PhotoList
+        photos={photos}
+      />
     </Layout>
   );
 };

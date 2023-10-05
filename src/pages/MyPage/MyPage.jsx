@@ -3,18 +3,20 @@ import Layout from "../../components/Layout";
 import Container from "./components/Container";
 import AccountInfoTemplate from "./components/AccountInfoTemplate";
 import MyAlbumTemplate from "./components/MyAlbumTemplate";
-import PhotoList from "./components/PhotoList";
-
 
 const MyPage = () => {
 
-  const profileImg = "./icons/accountIcon.png";
-  const userName = "카카오";
-  const userEmail = "kakao@email.com";
+  const userInfo = {
+    profileImg : "./icons/accountIcon.png",
+    userName : "카카오",
+    userEmail : "kakao@email.com"
+  }
 
-  const totalLikes = 60;
-  const totalFirework = 30;
-  const myFireworks = 200;
+  const totalCount = {
+    totalLikes : 60,
+    totalFirework : 30,
+    myFireworks : 200
+  }
 
   const isInstaConnected = true;
 
@@ -45,26 +47,17 @@ const MyPage = () => {
         }
       ]
     }
-]
+  ]
 
   return (
     <Layout>
       <Container>
       <AccountInfoTemplate 
-        profileImg={profileImg}
-        userName={userName}
-        userEmail={userEmail}
-
-        totalLikes={totalLikes} 
-        totalFirework={totalFirework}
-        myFireworks={myFireworks}
-
+        userInfo={userInfo}
+        totalCount={totalCount}
         isInstaConnected={isInstaConnected}
       />
-      <MyAlbumTemplate />
-      <PhotoList
-      photos={photos}
-        />
+      <MyAlbumTemplate photos={photos}/>
       </Container>
     </Layout>
   )
