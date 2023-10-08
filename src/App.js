@@ -4,6 +4,7 @@ import PopPage from "./pages/PopPage/PopPage";
 import MyPage from "./pages/MyPage/MyPage";
 import NavigationBar from "./components/NavigationBar";
 import TestPage from "./pages/TestPage/TestPage";
+import SettingPage from "./pages/SettingPage/SettingPage";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
           <Route path="post/:postId" element={<PopPage />}></Route>
         </Route>
         <Route path="/profile" element={<MyPage />}></Route>
+        <Route path="/profile/setting" element={<SettingPage />}></Route>
         <Route path="/test" element={<TestPage />}></Route>
       </Routes>
       <NavigationBar />
