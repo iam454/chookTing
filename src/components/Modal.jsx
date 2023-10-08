@@ -22,7 +22,7 @@ const content = {
   backgroundColor: theme.modal.black,
   border: "none",
   borderRadius: "8px",
-  zIndex: "20",
+  zIndex: "30",
 };
 
 const Layout = styled.div`
@@ -92,7 +92,7 @@ const ShortModal = ({ isOpen, onRequestClose, text, children }) => {
 const LongModal = ({ isOpen, onRequestClose, text1, text2, children }) => {
   return (
     <Modal isOpen={isOpen} onRequestClose={onRequestClose}>
-      <Layout>
+      <Layout onClick={(e) => e.stopPropagation()}>
         <LongTextContainer>
           <Text>{text1}</Text>
           <Text>{text2}</Text>

@@ -31,7 +31,14 @@ const Text = styled.div`
 const IconButton = ({ onClick, children, text }) => {
   return (
     <Layout>
-      <Button onClick={onClick}>{children}</Button>
+      <Button
+        onClick={(e) => {
+          e.stopPropagation();
+          onClick();
+        }}
+      >
+        {children}
+      </Button>
       {text && <Text>{text}</Text>}
     </Layout>
   );
