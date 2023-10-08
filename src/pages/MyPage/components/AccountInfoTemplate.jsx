@@ -83,7 +83,6 @@ const MyfireworkText = styled.p`
 const AccountInfoTemplate = ({ userInfo, totalCount, isInstaConnected }) => {
 
   return (
-    <>
     <Container>
       <Box>
         <KakaoAccountBox>
@@ -148,10 +147,8 @@ const AccountInfoTemplate = ({ userInfo, totalCount, isInstaConnected }) => {
             </RecievedBox>
           </AmountBox>
         </AmountInfoContainer>
-
       </Box>
     </Container>
-    </>
   );
 };
 

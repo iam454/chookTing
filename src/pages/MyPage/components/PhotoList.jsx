@@ -10,34 +10,21 @@ const Layout = styled.div`
 `;
 
 const PhotoList = ({ photos }) => {
-  const LenderPhotos = ({ photos }) => {
-    let renderComponent = [];
-
-    photos.forEach(photo => {
-      renderComponent.push(photo.info.map(photo => {
-      return (
-        <PhotoCard 
-        key ={photo.id}
-        imgSrc = {photo.imgSrc}
-        univercity = {photo.univercity}
-        date = {photo.date}
-        likeCount = {photo.likeCount}
-        snsViewCount = {photo.snsViewCount}
-        />
-      )
-      }))
-    });
-    return renderComponent;
-  }
-
 
   return (
-  <Layout>
-    <LenderPhotos photos={photos}/>
-  </Layout>
+    <Layout>
+      {photos.map(photo => (
+        <PhotoCard
+          key={photo.id}
+          imgSrc={photo.imgSrc}
+          univercity={photo.univercity}
+          date={photo.date}
+          likeCount={photo.likeCount}
+          snsViewCount={photo.snsViewCount}
+        />
+      ))}
+    </Layout>
   );
-
-
 }
 
 export default PhotoList;

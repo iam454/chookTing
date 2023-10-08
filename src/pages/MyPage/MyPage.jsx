@@ -19,45 +19,57 @@ const MyPage = () => {
   }
 
   const isInstaConnected = true;
+  
+  // const photoData ={
+  //     success: true,
+  //     response : [{
+  //       id: 1,
+  //       imgSrc: "./sample5.png",
+  //       univercity: "전남대학교" ,
+  //       date: "2023.08.23",
+  //       likeCount: "652",
+  //       snsViewCount: "134"
+  //     },{
+  //       id: 2,
+  //       imgSrc: "./sample.png",
+  //       univercity: "전남대학교" ,
+  //       date: "2023.08.23",
+  //       likeCount: "60",
+  //       snsViewCount: "17"
+  //     }
+  //   ],
+  //    error: null
+  // }
+
 
   const photos = [
     { 
       id: 1,
-      info:[
-        {
-          id: 1,
-          imgSrc: "./sample.png",
-          univercity: "전남대학교" ,
-          date: "2023.08.23",
-          likeCount: "60",
-          snsViewCount: "17"
-        }
-      ]
+      imgSrc: "./sample.png",
+      univercity: "전남대학교" ,
+      date: "2023.08.23",
+      likeCount: "60",
+      snsViewCount: "17"
     },
     { 
-      id:2,
-      info:[
-        {
-          id: 2,
-          imgSrc: "./sample5.png",
-          univercity: "전남대학교" ,
-          date: "2023.08.22",
-          likeCount: "452",
-          snsViewCount: "124"
-        }
-      ]
+      id: 2,
+      imgSrc: "./sample5.png",
+      univercity: "전남대학교" ,
+      date: "2023.08.22",
+      likeCount: "452",
+      snsViewCount: "124"
     }
   ]
 
   return (
     <Layout>
       <Container>
-      <AccountInfoTemplate 
-        userInfo={userInfo}
-        totalCount={totalCount}
-        isInstaConnected={isInstaConnected}
-      />
-      <MyAlbumTemplate photos={photos}/>
+        <AccountInfoTemplate 
+          userInfo={userInfo}
+          totalCount={totalCount}
+          isInstaConnected={isInstaConnected}
+        />
+        <MyAlbumTemplate photos={photos}/>
       </Container>
     </Layout>
   )
