@@ -104,6 +104,9 @@ npm start
   <img src="https://img.shields.io/badge/create react app-09D3AC?style=for-the-badge&logo=create react app&logoColor=white">
   <img src="https://img.shields.io/badge/styled components-DB7093?style=for-the-badge&logo=styled components&logoColor=white">
   <img src="https://img.shields.io/badge/react router dom-CA4245?style=for-the-badge&logo=react router&logoColor=white">
+  <img src="https://img.shields.io/badge/react modal-61DAFB?style=for-the-badge&logo=react&logoColor=white">
+  <img src="https://img.shields.io/badge/framer motion-0055FF?style=for-the-badge&logo=framer&logoColor=white">
+  <img src="https://img.shields.io/badge/swiper-6332F6?style=for-the-badge&logo=swiper&logoColor=white">
 </div>
 
 <br />
@@ -152,7 +155,7 @@ npm start
 ### ✅ 산출물
 
 ```
-기획안 발표
+- 기획안 발표
 ```
 
   </div>
@@ -183,7 +186,7 @@ npm start
 
 ### ❓ 멘토링 질문
 
-**🍪 건형, GhoRid**
+**건형, GhoRid**
 
 1. 컴포넌트를 만들 때, 재사용성을 고려하면 컴포넌트에 받을 props가 너무 많아지는 걸 느꼈습니다. 예를 들어, 모달창 하나를 만드려면 모달창을 열고 닫는 함수, 모달창이 열려있는 상태, 모달창 텍스트, 버튼 함수, 버튼에 들어갈 텍스트(버튼이 2개면 두 개), 버튼 색상, 버튼 아이콘 등... 재사용성을 확보하려면 전달할 props가 워낙 많아지니 이런저런 상황에 활용할 수 있도록 만든 컴포넌트를 처음부터 알아서 만드는 느낌이 강해지는 터라 이에 대해 헷갈립니다. 커스텀을 어디까지 허용해야 할까요?
 
@@ -191,7 +194,7 @@ npm start
 
 3. 개발 첫 주를 진행하면서 코드 리뷰의 중요성을 몸소 깨달았습니다. 자주 소통하지 않으면 방향성이 틀어지는 걸 늦게 캐치하여 큰 수정이 필요하게 됩니다. 현업에서는 코드 리뷰의 주기가 어떻게 되나요?
 
-**🍪 완석, iam454**
+**완석, iam454**
 
 1️⃣ 코드 리뷰에 대한 조언을 여쭙고자 합니다.
 
@@ -268,8 +271,32 @@ my-app
 ### ✅ 산출물
 
 ```
-- to do
+민주
+- 홈 페이지 Swiper 적용
+
+건형
+- 마이 페이지 UI 생성
+
+완석
+- 게시물 Skeleton UI 리팩토링
+- 모달 리팩토링(react-modal 적용)
+- 게시물 UI 생성
+- 인기 페이지 UI 생성
+- 인기 페이지 게시물 상세 조회 UI 생성
+- 게시물 좋아요 애니메이션 생성
+- 설정 페이지 생성
+- 홈 페이지 Swiper 적용
+- 홈 페이지 게시물 time progress bar 기능 생성
+- 홈 페이지 게시물 pause/resume 기능 생성
 ```
+
+### ❓ 멘토링 질문
+
+**완석, iam454**
+
+1️⃣ 클릭 이벤트와 더블클릭 이벤트의 구분
+
+멘토링 시간 때 질문 드렸던 것과 동일합니다. 좀 더 연구해보겠습니다.
 
   </div>
 </details>
