@@ -52,7 +52,14 @@ const BasePost = ({ info, children }) => {
   );
 };
 
-const HomePost = ({ id, image, info, isLikedPost, points }) => {
+const HomePost = ({
+  id,
+  image,
+  info,
+  isLikedPost,
+  points,
+  handleAutoPlayPause,
+}) => {
   const [toggleLikeOn, setToggleLikeOn] = useState(isLikedPost);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const likeAnimation = useAnimation();
@@ -105,8 +112,20 @@ const HomePost = ({ id, image, info, isLikedPost, points }) => {
     setToggleLikeOn((prev) => !prev);
   };
 
+  const handleInstaButtonClick = (id, points) => {
+    console.log("폭죽 보낼 아이디: ", id);
+    console.log(points, "폭죽 소모");
+    handleAutoPlayPause();
+    setIsModalOpen(true);
+  };
+
   return (
-    <Layout onDoubleClick={(e) => handleDoubleClick(id)}>
+    <Layout
+      onDoubleClick={(e) => {
+        e.stopPropagation();
+        handleDoubleClick(id);
+      }}
+    >
       <Image src={image} alt="네컷 사진" />
       <InfoContainer>{info}</InfoContainer>
       <motion.svg
@@ -152,13 +171,7 @@ const HomePost = ({ id, image, info, isLikedPost, points }) => {
             />
           </motion.svg>
         </IconButton>
-        <IconButton
-          onClick={() => {
-            console.log("폭죽 보낼 아이디: ", id);
-            console.log(points, "폭죽 소모");
-            setIsModalOpen(true);
-          }}
-        >
+        <IconButton onClick={() => handleInstaButtonClick(id, points)}>
           <img
             src="/icons/instagram.png"
             width={20}
