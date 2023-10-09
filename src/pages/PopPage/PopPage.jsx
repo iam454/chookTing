@@ -82,6 +82,7 @@ const Detail = styled(motion.div)`
   height: 80dvh;
   border-radius: 8px;
   background-color: rgb(15, 15, 15);
+  overflow: hidden;
 `;
 
 const PopPage = () => {

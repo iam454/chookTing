@@ -11,6 +11,7 @@ const Button = styled.button`
   height: 44px;
   border: none;
   border-radius: 8px;
+  outline: none;
   color: ${(props) =>
     props.$isTextBlack ? props.theme.black : props.theme.white};
   background-color: ${(props) => props.$bgColor};
