@@ -1,7 +1,9 @@
 import { styled } from "styled-components";
 import Text from "./Text";
+import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
 
-const Layout = styled.button`
+const Layout = styled(motion.div)`
   border: none;
   text-align: start;
   width: 350px;
@@ -12,6 +14,7 @@ const Layout = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
 `;
 
 const Box = styled.div`
@@ -56,11 +59,23 @@ const InstaBox = styled(LikeBox)`
   margin-left: 10px;
 `;
 
-const PhotoCard = ({ imgSrc, univercity, date, likeCount, snsViewCount, onClick}) => {
+const PhotoCard = ({ photoId, imgSrc, univercity, date, likeCount, snsViewCount}) => {
+  const navigate = useNavigate();
 
   return (
-    <Layout onClick={() => {
-      console.log("click")
+    <Layout 
+      layoutId={"my" + photoId}
+      onClick={() => {
+      navigate(`/profile/post/${photoId}`, {
+      state: {
+        photoId: photoId,
+        imgSrc: imgSrc,
+        univercity: univercity,
+        date: date,
+        likeCount: likeCount,
+        snsViewCount: snsViewCount
+      }
+      })
     }}>
       <Box>
         <Photo src={imgSrc} alt="photo"/>

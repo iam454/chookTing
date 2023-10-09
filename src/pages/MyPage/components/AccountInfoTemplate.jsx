@@ -1,6 +1,7 @@
 import { styled } from "styled-components";
 import Button from "./Button";
 import Text from "./Text";
+import { useNavigate } from "react-router-dom";
 
 const Container = styled.div`
   
@@ -41,6 +42,7 @@ const SettingsImgButton = styled.button`
   position: absolute;
   top: 10px;
   right: 20px;
+  cursor: pointer;
 `;
 
 const Icon = styled.img`
@@ -81,6 +83,7 @@ const MyfireworkText = styled.p`
 `;
 
 const AccountInfoTemplate = ({ userInfo, totalCount, isInstaConnected }) => {
+  const navigate = useNavigate();
 
   return (
     <Container>
@@ -89,7 +92,7 @@ const AccountInfoTemplate = ({ userInfo, totalCount, isInstaConnected }) => {
           <ProfileImg src={userInfo.profileImg} alt="accountIcon"/>
           <SettingsImgButton 
             onClick={() => {
-              console.log("settings button")
+              navigate("/profile/setting");  
             }}
           >
             <Icon 

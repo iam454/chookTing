@@ -23,6 +23,7 @@ const UploadButton = styled.button`
   justify-content: center;
   align-items: center;
   gap: 8px;
+  cursor: pointer;
 `;
 
 const UploadIcon = styled.img`
