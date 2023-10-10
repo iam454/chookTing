@@ -5,7 +5,7 @@ import MyPage from "./pages/MyPage/MyPage";
 import NavigationBar from "./components/NavigationBar";
 import TestPage from "./pages/TestPage/TestPage";
 import SettingPage from "./pages/SettingPage/SettingPage";
-import MyDetailPage from "./pages/MyPage/MyDetailPage";
+import MyDetailPage from "./pages/MyDetailpage/MyDetailPage";
 
 function App() {
   return (

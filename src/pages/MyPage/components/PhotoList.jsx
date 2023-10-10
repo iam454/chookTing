@@ -9,15 +9,11 @@ const Layout = styled.div`
   gap: 8px;
 `;
 
-const PhotoList = ({ photos}) => {
-  // const [selectedId, setSelectedId] = useState(null)
-
+const PhotoList = ({ photos }) => {
   return (
     <Layout>
-      {photos.map(photo => (
+      {photos.map((photo) => (
         <PhotoCard
-          // layoutId={photo.id}
-          // onClick={() => setSelectedId(photo.id)}
           key={photo.id}
           photoId={photo.id}
           imgSrc={photo.imgSrc}
@@ -29,6 +25,6 @@ const PhotoList = ({ photos}) => {
       ))}
     </Layout>
   );
-}
+};
 
 export default PhotoList;

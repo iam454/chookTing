@@ -9,8 +9,8 @@ const Layout = styled(motion.div)`
   width: 350px;
   height: 220px;
   border-radius: 10px;
-  background-color: ${props => props.theme.album.white};
-  color: ${props => props.theme.album.black};
+  background-color: ${(props) => props.theme.album.white};
+  color: ${(props) => props.theme.album.black};
   display: flex;
   justify-content: center;
   align-items: center;
@@ -33,7 +33,7 @@ const InfoBox = styled.div`
   margin-left: 20px;
   width: 164px;
   height: 188px;
-  `;
+`;
 
 const NumericBox = styled.div`
   display: flex;
@@ -59,44 +59,53 @@ const InstaBox = styled(LikeBox)`
   margin-left: 10px;
 `;
 
-const PhotoCard = ({ photoId, imgSrc, univercity, date, likeCount, snsViewCount}) => {
+const PhotoCard = ({
+  photoId,
+  imgSrc,
+  univercity,
+  date,
+  likeCount,
+  snsViewCount,
+}) => {
   const navigate = useNavigate();
 
   return (
-    <Layout 
+    <Layout
       layoutId={"my" + photoId}
       onClick={() => {
-      navigate(`/profile/post/${photoId}`, {
-      state: {
-        photoId: photoId,
-        imgSrc: imgSrc,
-        univercity: univercity,
-        date: date,
-        likeCount: likeCount,
-        snsViewCount: snsViewCount
-      }
-      })
-    }}>
+        navigate(`/profile/post/${photoId}`, {
+          state: {
+            photoId: photoId,
+            imgSrc: imgSrc,
+            univercity: univercity,
+            date: date,
+            likeCount: likeCount,
+            snsViewCount: snsViewCount,
+          },
+        });
+      }}
+    >
       <Box>
-        <Photo src={imgSrc} alt="photo"/>
+        <Photo src={imgSrc} alt="photo" />
         <InfoBox>
-          <Text fontSize="20px" >{univercity}</Text>
-          <Text fontSize="18px" $margin="12px 0 0 0" >{date}</Text>
-          <NumericBox> 
+          <Text fontSize="20px">{univercity}</Text>
+          <Text fontSize="18px" $margin="12px 0 0 0">
+            {date}
+          </Text>
+          <NumericBox>
             <LikeBox>
-              <Icon src="./icons/like.png" alt="likeIcon"/>
-              <Text fontSize="20px" >{likeCount}</Text>
+              <Icon src="./icons/like.png" alt="likeIcon" />
+              <Text fontSize="20px">{likeCount}</Text>
             </LikeBox>
-            <InstaBox>  
-              <Icon src="./icons/instagram.png" alt="likeIcon"/>
-              <Text fontSize="20px" >{snsViewCount}</Text>
+            <InstaBox>
+              <Icon src="./icons/instagram.png" alt="likeIcon" />
+              <Text fontSize="20px">{snsViewCount}</Text>
             </InstaBox>
           </NumericBox>
         </InfoBox>
       </Box>
     </Layout>
-  )
-  
-}
+  );
+};
 
 export default PhotoCard;

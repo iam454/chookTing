@@ -5,41 +5,41 @@ import AccountInfoTemplate from "./components/AccountInfoTemplate";
 import MyAlbumTemplate from "./components/MyAlbumTemplate";
 import { AnimatePresence, motion } from "framer-motion";
 import { styled } from "styled-components";
-import MyDetailPage from "./MyDetailPage";
+import MyDetailPage from "../MyDetailpage/MyDetailPage";
 import { useMatch, useNavigate } from "react-router-dom";
 
 const userInfo = {
-  profileImg : "./icons/accountIcon.png",
-  userName : "카카오",
-  userEmail : "kakao@email.com"
-}
+  profileImg: "./icons/accountIcon.png",
+  userName: "카카오",
+  userEmail: "kakao@email.com",
+};
 
 const totalCount = {
-  totalLikes : 60,
-  totalFirework : 30,
-  myFireworks : 200
-}
+  totalLikes: 60,
+  totalFirework: 30,
+  myFireworks: 200,
+};
 
 const isInstaConnected = true;
 
 const photos = [
-  { 
+  {
     id: 1,
     imgSrc: "/sample.png",
-    univercity: "전남대학교" ,
+    univercity: "전남대학교",
     date: "2023.08.23",
     likeCount: "60",
-    snsViewCount: "17"
+    snsViewCount: "17",
   },
-  { 
+  {
     id: 2,
     imgSrc: "/sample5.png",
-    univercity: "전남대학교" ,
+    univercity: "전남대학교",
     date: "2023.08.22",
     likeCount: "452",
-    snsViewCount: "124"
-  }
-]
+    snsViewCount: "124",
+  },
+];
 
 const Overlay = styled(motion.div)`
   position: fixed;
@@ -67,6 +67,10 @@ const MyPage = () => {
   const navigate = useNavigate();
   const detailMatch = useMatch("/profile/post/:postId");
 
+  const clickedPhoto =
+    detailMatch?.params.postId &&
+    photos.find((photo) => photo.id === +detailMatch?.params.postId);
+
   const handleOverlayClick = () => {
     navigate("/profile");
   };
@@ -74,12 +78,12 @@ const MyPage = () => {
   return (
     <Layout>
       <Container>
-        <AccountInfoTemplate 
+        <AccountInfoTemplate
           userInfo={userInfo}
           totalCount={totalCount}
           isInstaConnected={isInstaConnected}
         />
-        <MyAlbumTemplate photos={photos}/>
+        <MyAlbumTemplate photos={photos} />
       </Container>
       <AnimatePresence>
         {detailMatch && (
@@ -90,13 +94,13 @@ const MyPage = () => {
               exit={{ opacity: 0 }}
             />
             <Detail layoutId={"my" + detailMatch?.params.postId}>
-              <MyDetailPage />
+              <MyDetailPage image={clickedPhoto.imgSrc} />
             </Detail>
           </>
         )}
       </AnimatePresence>
     </Layout>
-  )
+  );
 };
 
 export default MyPage;
