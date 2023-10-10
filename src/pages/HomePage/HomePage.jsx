@@ -95,26 +95,36 @@ const HomePage = () => {
   const progressBarRef = useRef();
   const pauseAnimation = useAnimation();
   const resumeAnimation = useAnimation();
+  let clickTimer = null;
 
   const handleProgessBarPaint = (s, t, progress) => {
     progressBarRef.current.style.setProperty("--progress", 1 - progress);
   };
 
   const handleSwiperClick = () => {
-    if (isPlaying) {
-      swiperRef.autoplay.pause();
-      pauseAnimation.start({
-        scale: [0, 1, 1, 1.2, 1],
-        opacity: [0, 1, 1, 1, 0],
-      });
-    } else {
-      swiperRef.autoplay.resume();
-      resumeAnimation.start({
-        scale: [0, 1, 1, 1.2, 1],
-        opacity: [0, 1, 1, 1, 0],
-      });
+    if (clickTimer) {
+      clearTimeout(clickTimer);
+      clickTimer = null;
+      return;
     }
-    setIsPlaying((prev) => !prev);
+
+    clickTimer = setTimeout(() => {
+      if (isPlaying) {
+        swiperRef.autoplay.pause();
+        pauseAnimation.start({
+          scale: [0, 1, 1, 1.2, 1],
+          opacity: [0, 1, 1, 1, 0],
+        });
+      } else {
+        swiperRef.autoplay.resume();
+        resumeAnimation.start({
+          scale: [0, 1, 1, 1.2, 1],
+          opacity: [0, 1, 1, 1, 0],
+        });
+      }
+      setIsPlaying((prev) => !prev);
+      clickTimer = null;
+    }, 200);
   };
 
   const handleAutoPlayPause = () => {
