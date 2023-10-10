@@ -3,6 +3,7 @@ import Layout from "../../components/Layout";
 import { Post } from "../../components/Post";
 import PostInfos from "../../components/PostInfos";
 import SkeletonInfos from "../SkeletonPage/components/SkeletonInfos";
+import UploadPage from "../UploadPage/UploadPage";
 
 const photo = {
   id: 17,
@@ -14,27 +15,32 @@ const photo = {
   instas: 7,
 };
 
+// const TestPage = () => {
+//   const [isLoading, setIsLoading] = useState(false);
+//   return (
+//     <Layout>
+//       <Post.My
+//         id={photo.id}
+//         isLikedPost={photo.isLiked}
+//         image={photo.image}
+//         info={
+//           isLoading ? (
+//             <SkeletonInfos />
+//           ) : (
+//             <PostInfos name={photo.name} hashtags={photo.hashtags} />
+//           )
+//         }
+//         numberLikes={photo.likes}
+//         numberInstas={photo.instas}
+//         isLoading={isLoading}
+//       />
+//     </Layout>
+//   );
+// };
+
 const TestPage = () => {
   const [isLoading, setIsLoading] = useState(false);
-  return (
-    <Layout>
-      <Post.My
-        id={photo.id}
-        isLikedPost={photo.isLiked}
-        image={photo.image}
-        info={
-          isLoading ? (
-            <SkeletonInfos />
-          ) : (
-            <PostInfos name={photo.name} hashtags={photo.hashtags} />
-          )
-        }
-        numberLikes={photo.likes}
-        numberInstas={photo.instas}
-        isLoading={isLoading}
-      />
-    </Layout>
-  );
+  return <UploadPage />;
 };
 
 export default TestPage;

@@ -7,7 +7,7 @@ const photo = {
   id: 1,
   image: "/sample.png",
   name: "대박사건",
-  hashtags: ["#안녕", "#좋아"],
+  hashtags: ["하이", "안녕"],
   likes: 49,
   points: 200,
   isLiked: false,

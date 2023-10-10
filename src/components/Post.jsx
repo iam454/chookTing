@@ -20,8 +20,7 @@ const Image = styled.img`
   left: 50%;
   transform: translate(-50%, -50%);
   width: 100%;
-  max-height: calc(80vh - 57px);
-  max-height: calc(80dvh - 57px); /* Mobile */
+  height: 100%;
   object-fit: contain;
 `;
 
@@ -29,6 +28,8 @@ const InfoContainer = styled.div`
   position: absolute;
   left: 16px;
   bottom: 16px;
+  display: flex;
+  flex-direction: column;
   z-index: 9;
 `;
 
@@ -43,11 +44,12 @@ const ButtonContainer = styled.div`
   z-index: 9;
 `;
 
-const BasePost = ({ info, children }) => {
+const BasePost = ({ image, info, children }) => {
   return (
     <Layout>
+      {image && <Image src={image} alt="네컷 사진" />}
       <InfoContainer>{info}</InfoContainer>
-      <ButtonContainer>{children}</ButtonContainer>
+      {children && <ButtonContainer>{children}</ButtonContainer>}
     </Layout>
   );
 };
