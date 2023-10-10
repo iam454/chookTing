@@ -1,10 +1,9 @@
 import { styled } from "styled-components";
 import Button from "./Button";
 import Text from "./Text";
+import { useNavigate } from "react-router-dom";
 
-const Container = styled.div`
-  
-`;
+const Container = styled.div``;
 
 const Box = styled.div`
   width: 350px;
@@ -31,8 +30,8 @@ const InstaConnectionBox = styled.div`
 `;
 
 const ImgButton = styled(Button)`
-  width: ${props => props.width};
-  height: ${props => props.height};
+  width: ${(props) => props.width};
+  height: ${(props) => props.height};
 `;
 
 const SettingsImgButton = styled.button`
@@ -41,12 +40,13 @@ const SettingsImgButton = styled.button`
   position: absolute;
   top: 10px;
   right: 20px;
+  cursor: pointer;
 `;
 
 const Icon = styled.img`
-  width: ${props => props.width};
-  height: ${props => props.height};
-  display: block; 
+  width: ${(props) => props.width};
+  height: ${(props) => props.height};
+  display: block;
   filter: ${(props) => {
     if (!props.$isInstaConnected) {
       return "grayScale(100%)";
@@ -74,28 +74,28 @@ const RecievedBox = styled.div`
 const MyfireworkText = styled.p`
   margin: 8px 0 0 0;
   display: flex;
-  font-size: ${props => props.fontSize};
+  font-size: ${(props) => props.fontSize};
   justify-content: center;
   align-items: center;
   gap: 2px;
 `;
 
 const AccountInfoTemplate = ({ userInfo, totalCount, isInstaConnected }) => {
+  const navigate = useNavigate();
 
   return (
-    <>
     <Container>
       <Box>
         <KakaoAccountBox>
-          <ProfileImg src={userInfo.profileImg} alt="accountIcon"/>
-          <SettingsImgButton 
+          <ProfileImg src={userInfo.profileImg} alt="accountIcon" />
+          <SettingsImgButton
             onClick={() => {
-              console.log("settings button")
+              navigate("/profile/setting");
             }}
           >
-            <Icon 
-              src="./icons/setting.png" 
-              alt="instaIcon" 
+            <Icon
+              src="./icons/setting.png"
+              alt="instaIcon"
               $isInstaConnected={isInstaConnected}
               width="24px"
               height="24px"
@@ -106,52 +106,66 @@ const AccountInfoTemplate = ({ userInfo, totalCount, isInstaConnected }) => {
         </KakaoAccountBox>
 
         <InstaConnectionBox>
-          <Text fontSize="12px" $margin="10px 0 16px 0">포토카드에 SNS 계정을 연결해서 공유해 보세요.</Text>
-          <ImgButton 
+          <Text fontSize="12px" $margin="10px 0 16px 0">
+            포토카드에 SNS 계정을 연결해서 공유해 보세요.
+          </Text>
+          <ImgButton
             onClick={() => {
               //연결 해제
-              console.log("instagramConnection")
+              console.log("instagramConnection");
             }}
           >
-            <Icon 
-              src="./icons/instagram.png" 
-              alt="instaIcon" 
+            <Icon
+              src="./icons/instagram.png"
+              alt="instaIcon"
               $isInstaConnected={isInstaConnected}
               width="24px"
               height="24px"
             />
           </ImgButton>
-          <Text fontSize="12px" $margin="6px 0 0 0">{isInstaConnected ? "연결완료" : "연결하기"}</Text>
+          <Text fontSize="12px" $margin="6px 0 0 0">
+            {isInstaConnected ? "연결완료" : "연결하기"}
+          </Text>
         </InstaConnectionBox>
 
         <AmountInfoContainer>
           <AmountBox>
             <RecievedBox>
               <Text fontSize="24px">{totalCount.totalLikes}</Text>
-              <Text fontSize="12px" $margin="8px">내가 받은 좋아요</Text>
+              <Text fontSize="12px" $margin="8px">
+                내가 받은 좋아요
+              </Text>
             </RecievedBox>
             <RecievedBox>
               <Text fontSize="24px">{totalCount.totalFirework}</Text>
-              <Text fontSize="12px" $margin="8px">내가 받은 폭죽</Text>
+              <Text fontSize="12px" $margin="8px">
+                내가 받은 폭죽
+              </Text>
             </RecievedBox>
             <RecievedBox>
               <Text fontSize="24px">{totalCount.myFireworks}</Text>
-              <MyfireworkText fontSize="12px">내 폭죽
-                <ImgButton width="12px" height="12px"
+              <MyfireworkText fontSize="12px">
+                내 폭죽
+                <ImgButton
+                  width="12px"
+                  height="12px"
                   onClick={() => {
-                    console.log("getFireworkInfo")
+                    console.log("getFireworkInfo");
                   }}
                 >
-                  <Icon src="./icons/info.png" alt="getFireworkInfo" width="12px" height="12px"/>
+                  <Icon
+                    src="./icons/info.png"
+                    alt="getFireworkInfo"
+                    width="12px"
+                    height="12px"
+                  />
                 </ImgButton>
               </MyfireworkText>
             </RecievedBox>
           </AmountBox>
         </AmountInfoContainer>
-
       </Box>
     </Container>
-    </>
   );
 };
 
