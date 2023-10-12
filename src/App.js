@@ -16,7 +16,9 @@ function App() {
         </Route>
         <Route path="/profile" element={<MyPage />}></Route>
         <Route path="/profile/setting" element={<SettingPage />}></Route>
-        <Route path="/test" element={<TestPage />}></Route>
+        <Route path="/test" element={<TestPage />}>
+          <Route path="post/:postId" element={<TestPage />}></Route>
+        </Route>
       </Routes>
       <NavigationBar />
     </BrowserRouter>
