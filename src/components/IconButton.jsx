@@ -39,7 +39,7 @@ const IconButton = ({ onClick, children, text }) => {
       >
         {children}
       </Button>
-      {text && <Text>{text}</Text>}
+      {text !== null && text !== undefined && <Text>{text}</Text>}
     </Layout>
   );
 };
