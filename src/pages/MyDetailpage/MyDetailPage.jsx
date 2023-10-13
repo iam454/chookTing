@@ -1,25 +1,17 @@
-import { useLocation } from "react-router-dom";
+import React from "react";
 import Post from "../../components/Post";
-import Layout from "../../components/Layout";
+import PostInfos from "../../components/PostInfos";
 
-const MyDetailPage = ({ image }) => {
-  const location = useLocation();
-  const photoInfo = { ...location.state };
-
-  //닫을 때 이미지가 커지는 현상... 해결 필요
-
+const MyDetailPage = ({ photo }) => {
   return (
-    <Layout>
-      <Post.My
-        id={photoInfo.phtoId}
-        image={image}
-        info="뭐지"
-        isLikedPost={false}
-        numberLikes={photoInfo.likeCount}
-        numberInstas={photoInfo.snsViewCount}
-        isLoading={false}
-      />
-    </Layout>
+    <Post.My
+      id={photo.id}
+      image={photo.image}
+      info={<PostInfos name={photo.name} hashtags={photo.hashtags} />}
+      isLikedPost={photo.isLiked}
+      numberLikes={photo.likes}
+      numberInstas={photo.instaViews}
+    />
   );
 };
 

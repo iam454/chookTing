@@ -1,12 +1,17 @@
-import { styled } from "styled-components";
+import React from "react";
+import styled from "styled-components";
 
-const Box = styled.p`
-    font-size: ${props => props.fontSize};
-    margin: ${props => props.$margin};
+const SmallText = styled.div`
+  height: 16px;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
 `;
 
-const Text = ({ children, fontSize, $margin }) => {
-  return <Box fontSize={fontSize} $margin={$margin}>{children}</Box>;
-}
+const Text = ({ children }) => {
+  return <SmallText>{children}</SmallText>;
+};
 
 export default Text;

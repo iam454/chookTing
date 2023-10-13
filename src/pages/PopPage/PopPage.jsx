@@ -108,7 +108,7 @@ const PopPage = () => {
           {photos.map((photo) => {
             return (
               <Card
-                layoutId={photo.id + ""}
+                layoutId={"pop" + photo.id}
                 key={photo.id}
                 level={photo.level}
                 image={photo.image}
@@ -126,7 +126,7 @@ const PopPage = () => {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
             />
-            <Detail layoutId={detailMatch.params.postId}>
+            <Detail layoutId={"pop" + detailMatch.params.postId}>
               <PopDetailPage image={clickedId.image} id={clickedId} />
             </Detail>
           </>
