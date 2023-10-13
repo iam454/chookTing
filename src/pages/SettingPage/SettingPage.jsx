@@ -16,10 +16,6 @@ const Header = styled.header`
   align-items: center;
 `;
 
-const Container = styled(motion.div)`
-
-`;
-
 const Prev = styled(Link)`
   width: 24px;
   height: 24px;
@@ -67,11 +63,10 @@ const SettingPage = () => {
 
   return (
     <Layout>
-      <Container
-        initial={{ x: 100 }}
-        animate={{ x: 0 }}
-        exit={{ x: 0 }}
-        transition={{ duration: 0.2}}
+      <motion.div
+        initial={{ x: 200, opacity: 0 }}
+        animate={{ x: 0, opacity: 1 }}
+        transition={{ duration: 0.2 }}
       >
         <Header>
           <Prev to="/profile">
@@ -82,7 +77,11 @@ const SettingPage = () => {
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
             >
-              <path d="M15 6L9 12L15 18" stroke="currentColor" strokeWidth="2" />
+              <path
+                d="M15 6L9 12L15 18"
+                stroke="currentColor"
+                strokeWidth="2"
+              />
             </svg>
           </Prev>
           <Title>설정</Title>
@@ -94,7 +93,7 @@ const SettingPage = () => {
           </List>
           <Quit onClick={handleQuitClick}>회원 탈퇴</Quit>
         </Main>
-      </Container>
+      </motion.div>
     </Layout>
   );
 };

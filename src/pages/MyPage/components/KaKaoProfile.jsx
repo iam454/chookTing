@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import SettingButton from "./SettingButton";
+import { useNavigate } from "react-router-dom";
 
 const Profile = styled.div`
   display: flex;
@@ -30,13 +31,15 @@ const Email = styled.div`
 `;
 
 const KaKaoProfile = ({ username, email, profileImage }) => {
+  const navigate = useNavigate();
+
+  const handleSettingButtonClick = () => {
+    navigate("setting");
+  };
+
   return (
     <Profile>
-      <SettingButton
-        onClick={() => {
-          console.log("setting button clicked");
-        }}
-      />
+      <SettingButton onClick={handleSettingButtonClick} />
       <Image src={profileImage} />
       <Name>{username}</Name>
       <Email>{email}</Email>
