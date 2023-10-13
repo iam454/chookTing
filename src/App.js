@@ -6,6 +6,7 @@ import NavigationBar from "./components/NavigationBar";
 import TestPage from "./pages/TestPage/TestPage";
 import SettingPage from "./pages/SettingPage/SettingPage";
 import MyDetailPage from "./pages/MyDetailpage/MyDetailPage";
+import UploadPage from "./pages/UploadPage/UploadPage";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route path="post/:postId" element={<MyDetailPage />}></Route>
         </Route>
         <Route path="/profile/setting" element={<SettingPage />}></Route>
+        <Route path="/upload" element={<UploadPage />}></Route>
         <Route path="/test" element={<TestPage />}></Route>
       </Routes>
       <NavigationBar />
