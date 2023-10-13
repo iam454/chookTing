@@ -3,6 +3,7 @@ import Layout from "../../components/Layout";
 import ListItem from "./components/ListItem";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 
 const Header = styled.header`
   width: 100%;
@@ -13,6 +14,10 @@ const Header = styled.header`
   position: relative;
   display: flex;
   align-items: center;
+`;
+
+const Container = styled(motion.div)`
+
 `;
 
 const Prev = styled(Link)`
@@ -62,27 +67,34 @@ const SettingPage = () => {
 
   return (
     <Layout>
-      <Header>
-        <Prev to="/profile">
-          <svg
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path d="M15 6L9 12L15 18" stroke="currentColor" strokeWidth="2" />
-          </svg>
-        </Prev>
-        <Title>설정</Title>
-      </Header>
-      <Main>
-        <List>
-          <ListItem onClick={handleAskClick}>카카오 문의하기</ListItem>
-          <ListItem onClick={handleSignOutClick}>로그아웃</ListItem>
-        </List>
-        <Quit onClick={handleQuitClick}>회원 탈퇴</Quit>
-      </Main>
+      <Container
+        initial={{ x: 100 }}
+        animate={{ x: 0 }}
+        exit={{ x: 0 }}
+        transition={{ duration: 0.2}}
+      >
+        <Header>
+          <Prev to="/profile">
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path d="M15 6L9 12L15 18" stroke="currentColor" strokeWidth="2" />
+            </svg>
+          </Prev>
+          <Title>설정</Title>
+        </Header>
+        <Main>
+          <List>
+            <ListItem onClick={handleAskClick}>카카오 문의하기</ListItem>
+            <ListItem onClick={handleSignOutClick}>로그아웃</ListItem>
+          </List>
+          <Quit onClick={handleQuitClick}>회원 탈퇴</Quit>
+        </Main>
+      </Container>
     </Layout>
   );
 };

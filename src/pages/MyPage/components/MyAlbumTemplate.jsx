@@ -10,7 +10,7 @@ const UploadBox = styled.div`
   width: 100%;
   height: 110px;
   border-radius: 10px;
-  border: 1px solid #5F6368;
+  border: 1px solid #5f6368;
   margin-top: 8px;
 `;
 
@@ -23,6 +23,7 @@ const UploadButton = styled.button`
   justify-content: center;
   align-items: center;
   gap: 8px;
+  cursor: pointer;
 `;
 
 const UploadIcon = styled.img`
@@ -31,23 +32,24 @@ const UploadIcon = styled.img`
 `;
 
 const UploadText = styled.p`
-  font-size:20px;
-  color: #5F6368;
+  font-size: 20px;
+  color: #5f6368;
 `;
 
 const MyAlbumTemplate = ({ photos }) => {
-
   return (
     <Layout>
       <UploadBox>
-        <UploadButton onClick={() => {console.log("upload")}}> 
-          <UploadIcon src="./icons/upload.png" alt="UploadIcon"/>
-          <UploadText >사진을 업로드해 보세요!</UploadText>
+        <UploadButton
+          onClick={() => {
+            console.log("upload");
+          }}
+        >
+          <UploadIcon src="./icons/upload.png" alt="UploadIcon" />
+          <UploadText>사진을 업로드해 보세요!</UploadText>
         </UploadButton>
       </UploadBox>
-      <PhotoList
-        photos={photos}
-      />
+      <PhotoList photos={photos} />
     </Layout>
   );
 };

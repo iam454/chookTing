@@ -20,9 +20,6 @@ const UserName = styled.p`
 const UserEmail = styled.p`
   `;
 
-
-
-
 const KakaoAccount = ({profileImg, userName, userEmail}) => {
 
   return(

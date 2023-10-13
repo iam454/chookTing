@@ -4,6 +4,7 @@ const Box = styled.button`
   background: none;
   border: none;
   padding: 0;
+  cursor: pointer;
 `;
 
 const Button = ( {children, onClick} ) => {
