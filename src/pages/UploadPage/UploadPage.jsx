@@ -5,6 +5,7 @@ import ModalButton from "../../components/ModalButton";
 import theme from "../../theme";
 import Post from "../../components/Post";
 import PostInfos from "../../components/PostInfos";
+import { useNavigate } from "react-router-dom";
 
 const Container = styled.div`
   width: 310px;
@@ -72,8 +73,10 @@ const isEmptyValue = (value) => {
 
 const UploadPage = () => {
   const [name, setName] = useState("");
+
   const [inputHashtag, setInputHashtag] = useState("");
   const [hashtags, setHashtags] = useState([]);
+  const navigate = useNavigate();
 
   const handleNameChange = (e) => {
     const newName = e.target.value;
@@ -146,6 +149,7 @@ const UploadPage = () => {
     }
     console.log("업로드 API 요청", name.trim());
     console.log("업로드 API 요청", hashtags);
+    navigate("/uploadDone");
   };
 
   const handleCancelClick = (e) => {
