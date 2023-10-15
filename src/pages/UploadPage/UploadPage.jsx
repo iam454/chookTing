@@ -76,7 +76,7 @@ const UploadPage = () => {
   const [inputHashtag, setInputHashtag] = useState("");
   const [hashtags, setHashtags] = useState([]);
   const navigate = useNavigate();
-  
+
   useEffect(() => {
     if (!uploadFile.name) {
       navigate("/profile");

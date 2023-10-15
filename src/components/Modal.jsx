@@ -23,6 +23,7 @@ const content = {
   border: "none",
   borderRadius: "8px",
   zIndex: "30",
+  boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px",
 };
 
 const Layout = styled.div`
