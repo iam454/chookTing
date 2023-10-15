@@ -72,10 +72,11 @@ const isEmptyValue = (value) => {
 const UploadPage = () => {
   const [uploadFile, setUploadFile] = useRecoilState(uploadFileState);
   const [name, setName] = useState("");
+
   const [inputHashtag, setInputHashtag] = useState("");
   const [hashtags, setHashtags] = useState([]);
   const navigate = useNavigate();
-
+  
   useEffect(() => {
     if (!uploadFile.name) {
       navigate("/profile");
@@ -163,6 +164,7 @@ const UploadPage = () => {
     console.log("업로드 API 요청 name String:", name.trim());
     console.log("업로드 API 요청 hashtags Array:", hashtags);
     setUploadFile({});
+    navigate("/uploadDone");
   };
 
   const handleCancelClick = (e) => {
