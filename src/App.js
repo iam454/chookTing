@@ -9,7 +9,6 @@ import MyDetailPage from "./pages/MyDetailpage/MyDetailPage";
 import UploadPage from "./pages/UploadPage/UploadPage";
 import UploadDonePage from "./pages/UploadPage/UploadDonePage";
 
-
 function App() {
   return (
     <BrowserRouter>
@@ -23,9 +22,8 @@ function App() {
         </Route>
         <Route path="/profile/setting" element={<SettingPage />}></Route>
         <Route path="/upload" element={<UploadPage />}></Route>
-        <Route path="/test" element={<TestPage />}></Route>
-        <Route path="/upload" element={<UploadPage />}></Route>
         <Route path="/uploadDone" element={<UploadDonePage />}></Route>
+        <Route path="/test" element={<TestPage />}></Route>
       </Routes>
       <NavigationBar />
     </BrowserRouter>
