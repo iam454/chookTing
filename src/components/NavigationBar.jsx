@@ -4,6 +4,8 @@ import { styled } from "styled-components";
 import { ReactComponent as Home } from "../assets/Home.svg";
 import { ReactComponent as Search } from "../assets/Search.svg";
 import { ReactComponent as Profile } from "../assets/User_alt.svg";
+import { useRecoilState } from "recoil";
+import uploadFileState from "../recoil/uploadImage/atom";
 
 const Nav = styled.nav`
   z-index: 10;
@@ -36,6 +38,12 @@ const Text = styled.div`
 `;
 
 const NavigationBar = () => {
+  const [uploadFile, setUploadFile] = useRecoilState(uploadFileState);
+  const handleMyButtonClick = () => {
+    if (uploadFile.name) {
+      setUploadFile({});
+    }
+  };
   return (
     <Nav>
       <Tabs>
@@ -52,7 +60,7 @@ const NavigationBar = () => {
           </NavLink>
         </Tab>
         <Tab>
-          <NavLink to="/profile">
+          <NavLink to="/profile" onClick={handleMyButtonClick}>
             <Profile width={24} height={24} />
             <Text>MY</Text>
           </NavLink>

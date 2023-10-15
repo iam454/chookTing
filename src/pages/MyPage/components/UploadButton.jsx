@@ -1,8 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Modal } from "../../../components/Modal";
 import theme from "../../../theme";
 import ModalButton from "../../../components/ModalButton";
+import { useNavigate } from "react-router-dom";
+import { useRecoilState } from "recoil";
+import uploadFileState from "../../../recoil/uploadImage/atom";
 
 const Layout = styled.div`
   width: 100%;
@@ -33,13 +36,26 @@ const Input = styled.input`
 `;
 
 const UploadButton = ({ isLinked }) => {
+  const [uploadFile, setUploadFile] = useRecoilState(uploadFileState);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const navigate = useNavigate();
 
-  const handleLabelClick = () => {
+  const handleLabelClick = (e) => {
     if (!isLinked) {
       setIsModalOpen(true);
     }
   };
+
+  const uploadImage = (e) => {
+    const file = e.target.files[0];
+    setUploadFile(file);
+  };
+
+  useEffect(() => {
+    if (uploadFile.name) {
+      navigate("/upload");
+    }
+  }, [uploadFile, navigate]);
 
   return (
     <Layout>
@@ -65,7 +81,13 @@ const UploadButton = ({ isLinked }) => {
           사진을 업로드해보세요!
         </UploadText>
       </Label>
-      <Input id="upload" type="file" accept="image/*" disabled={!isLinked} />
+      <Input
+        id="upload"
+        type="file"
+        accept="image/*"
+        disabled={!isLinked}
+        onChange={uploadImage}
+      />
       <Modal.Long
         isOpen={isModalOpen}
         onRequestClose={() => setIsModalOpen(false)}
