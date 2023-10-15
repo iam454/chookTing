@@ -107,6 +107,7 @@ npm start
   <img src="https://img.shields.io/badge/react modal-61DAFB?style=for-the-badge&logo=react&logoColor=white">
   <img src="https://img.shields.io/badge/framer motion-0055FF?style=for-the-badge&logo=framer&logoColor=white">
   <img src="https://img.shields.io/badge/swiper-6332F6?style=for-the-badge&logo=swiper&logoColor=white">
+  <img src="https://img.shields.io/badge/recoil-3578E5?style=for-the-badge&logo=recoil&logoColor=white">
 </div>
 
 <br />
@@ -310,7 +311,18 @@ my-app
 ### ✅ 산출물
 
 ```
-- to do
+민주
+- 업로드 완료 페이지 임시 생성
+
+건형
+- 마이 페이지 게시물 상세 조회 페이지 생성
+- 업로드 선택 페이지 임시 생성
+
+완석
+- 홈 페이지 클릭/더블클릭 이벤트 이슈 해결
+- 마이 페이지 리팩토링
+- 마이 페이지 이미지 파일 업로드 기능 생성
+- 업로드 페이지 임시 생성
 ```
 
   </div>
