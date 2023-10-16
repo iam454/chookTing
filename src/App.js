@@ -23,7 +23,7 @@ function App() {
         </Route>
         <Route path="/profile/setting" element={<SettingPage />}></Route>
         <Route path="/upload" element={<UploadPage />}></Route>
-        <Route path="/uploadDone" element={<UploadDonePage />}></Route>
+        <Route path="/upload-done" element={<UploadDonePage />}></Route>
         <Route path="/kakao/callback" element={<Loader />}></Route>
         <Route path="/test" element={<TestPage />}></Route>
       </Routes>
