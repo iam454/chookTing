@@ -5,6 +5,8 @@ import Button from "./components/Button";
 import theme from "../../theme";
 
 import { useNavigate } from "react-router-dom";
+import { useRecoilState } from "recoil";
+import uploadFileState from "../../recoil/uploadImage/atom";
 
 const Container = styled.div`
   width: 342px;
@@ -45,6 +47,7 @@ const ButtonBox = styled.div`
 
 const UploadDonePage = () => {
   const navigate = useNavigate();
+  const [uploadFile, setUploadFile] = useRecoilState(uploadFileState);
 
   return (
     <Layout>
