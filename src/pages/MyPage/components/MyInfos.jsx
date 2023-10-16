@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import Text from "./Text";
+import InfoModal from "./InfoModal";
 
 const List = styled.ul`
   width: 100%;
@@ -23,6 +24,8 @@ const Number = styled.div`
 
 const MyInfos = ({ isLinked, infos }) => {
   const { totalLikes, totalViews, fireworks } = infos;
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   return (
     <List>
       <Item>
@@ -33,7 +36,7 @@ const MyInfos = ({ isLinked, infos }) => {
         <Number>{isLinked ? (totalViews ? totalViews : "-") : "-"}</Number>
         <Text>내가 받은 폭죽</Text>
       </Item>
-      <Item>
+      <Item onClick={() => setIsModalOpen(true)}>
         <Number>{isLinked ? (fireworks ? fireworks : "-") : "-"}</Number>
         <Text>
           내 폭죽
@@ -53,6 +56,10 @@ const MyInfos = ({ isLinked, infos }) => {
           </svg>
         </Text>
       </Item>
+      <InfoModal
+        isOpen={isModalOpen}
+        onRequestClose={() => setIsModalOpen(false)}
+      />
     </List>
   );
 };

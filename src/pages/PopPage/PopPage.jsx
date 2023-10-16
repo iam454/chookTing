@@ -83,6 +83,7 @@ const Detail = styled(motion.div)`
   border-radius: 8px;
   background-color: rgb(15, 15, 15);
   overflow: hidden;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 `;
 
 const PopPage = () => {
@@ -104,7 +105,7 @@ const PopPage = () => {
   return (
     <Layout>
       <Container>
-        <MasonryInfiniteGrid gap={8} isConstantSize={true} threshold={1000}>
+        <MasonryInfiniteGrid gap={8} isConstantSize={true} threshold={300}>
           {photos.map((photo) => {
             return (
               <Card

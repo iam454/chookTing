@@ -7,7 +7,6 @@ const Box = styled.main`
   top: 16px;
   left: 50%;
   transform: translateX(-50%);
-  /* border: 1px solid red; */
 `;
 
 const Container = ({ children }) => {

@@ -1,10 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Layout from "../../components/Layout";
 import styled from "styled-components";
 import ModalButton from "../../components/ModalButton";
 import theme from "../../theme";
 import Post from "../../components/Post";
 import PostInfos from "../../components/PostInfos";
+import { useRecoilState } from "recoil";
+import uploadFileState from "../../recoil/uploadImage/atom";
+import { useNavigate } from "react-router-dom";
 
 const Container = styled.div`
   width: 310px;
@@ -56,10 +59,6 @@ const ButtonBlock = styled.div`
   gap: 8px;
 `;
 
-const imageSample = {
-  image: "/sample3.png",
-};
-
 const ALLOWED_TEXT_REG_EXP = /^[a-z|A-Z|가-힣|ㄱ-ㅎ|ㅏ-ㅣ|0-9| \t|]+$/;
 const NOT_ALLOWED_TEXT_REG_EXP = /[{}[\]/?.;:|)*~`!^\\\-_+<>@#$%&=('"₩€£¥•“’‘]/;
 
@@ -71,9 +70,26 @@ const isEmptyValue = (value) => {
 };
 
 const UploadPage = () => {
+  const [uploadFile, setUploadFile] = useRecoilState(uploadFileState);
   const [name, setName] = useState("");
+
   const [inputHashtag, setInputHashtag] = useState("");
   const [hashtags, setHashtags] = useState([]);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!uploadFile.name) {
+      navigate("/profile");
+    }
+  }, [uploadFile, navigate]);
+
+  const createImageUrl = (file) => {
+    if (!uploadFile.name) {
+      return;
+    }
+    const image = URL.createObjectURL(file);
+    return image;
+  };
 
   const handleNameChange = (e) => {
     const newName = e.target.value;
@@ -144,13 +160,17 @@ const UploadPage = () => {
     if (!name) {
       return;
     }
-    console.log("업로드 API 요청", name.trim());
-    console.log("업로드 API 요청", hashtags);
+    console.log("업로드 API 요청 파일 file:", uploadFile);
+    console.log("업로드 API 요청 name String:", name.trim());
+    console.log("업로드 API 요청 hashtags Array:", hashtags);
+    setUploadFile({});
+    navigate("/uploadDone");
   };
 
   const handleCancelClick = (e) => {
     e.preventDefault();
-    console.log("취소버튼 클릭");
+    setUploadFile({});
+    navigate("/profile");
   };
 
   return (
@@ -158,7 +178,7 @@ const UploadPage = () => {
       <Container>
         <ImageBox>
           <Post
-            image={imageSample.image}
+            image={createImageUrl(uploadFile)}
             info={
               <PostInfos
                 name={name || "닉네임(필수)"}
