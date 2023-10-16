@@ -2,84 +2,55 @@ import Layout from "../../components/Layout";
 import styled from "styled-components";
 import Post from "../../components/Post";
 import { useNavigate } from "react-router-dom";
+import Button from "./components/Button";
 
 const Container = styled.div`
   width: 342px;
-  height: 90%;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   display: flex;
   flex-direction: column;
-  gap: 24px;
-  background-color: rgba;
-`;
-
-const Text = styled.span`
-  font-family: "Pretendard Variable", Pretendard, -apple-system,
-    BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI",
-    "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji",
-    "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
-  font-size: ${(props) => props.size};
-  font-weight: ${(props) => props.weight};
-`;
-
-const Icon = styled.img`
-  width: ${(props) => props.width};
-  height: auto;
+  align-items: center;
+  gap: 10px;
+  padding: 20px 0 0 0;
 `;
 
 const ImgBox = styled.div`
   width: 304px;
   height: 457px;
   overflow: hidden;
-  margin: 50px auto 0;
-  box-shadow: 0px 0px 20px 5px rgba(0, 0, 0, 0.4);
+  margin-top: 5px auto;
+  box-shadow: 0px 0px 20px 10px rgba(0, 0, 0, 0.6);
 `;
 
 const ButtonBox = styled.div`
-  margin-top: 25px;
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 16px;
+  margin-top: 20px;
 `;
 
-const Button = styled.button`
-  border: none;
-  background: none;
-  cursor: pointer;
-`;
-
-const DownloadButton = styled(Button)`
+const DownloadButton = styled.button`
   width: 44px;
   height: 44px;
-  background-color: white;
+  background-color: ${(props) => props.theme.white};
   border-radius: 8px;
-`;
-
-const UploadButton = styled(Button)`
-  cursor: pointer;
-  width: 284px;
-  height: 44px;
-  background-color: white;
-  border-radius: 8px;
+  border: none;
   outline: none;
-  color: black;
   display: flex;
-  justify-content: center;
   align-items: center;
-  gap: 8px;
-`;
-
-const RejectText = styled.span`
-  color: #bebebe;
-  font-size: 12px;
+  justify-content: center;
+  cursor: pointer;
 `;
 
 const ToUploadPage = () => {
   const navigate = useNavigate();
+
+  // 로그인 여부 확인
+  let isLogined = true;
 
   // 이미지 불러오기
   const imageSrc = "/sample.png";
@@ -93,32 +64,43 @@ const ToUploadPage = () => {
           <Post image={imageSrc} />
         </ImgBox>
         <ButtonBox>
-          <DownloadButton
-            onClick={() => {
-              console.log("다운로드");
-            }}
-          >
-            <Icon src="/icons/download.png" alt="download" width="24px" />
+          <DownloadButton>
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M12 14L11.2929 14.7071L12 15.4142L12.7071 14.7071L12 14ZM13 5C13 4.44772 12.5523 4 12 4C11.4477 4 11 4.44771 11 5L13 5ZM6.29289 9.70711L11.2929 14.7071L12.7071 13.2929L7.70711 8.29289L6.29289 9.70711ZM12.7071 14.7071L17.7071 9.70711L16.2929 8.29289L11.2929 13.2929L12.7071 14.7071ZM13 14L13 5L11 5L11 14L13 14Z"
+                fill="#202124"
+              />
+              <path
+                d="M5 16L5 17C5 18.1046 5.89543 19 7 19L17 19C18.1046 19 19 18.1046 19 17V16"
+                stroke="#202124"
+                strokeWidth="2"
+              />
+            </svg>
           </DownloadButton>
-          <UploadButton
+          <Button
+            width="284px"
+            iconSrc="/icons/fireworks.png"
+            text="축팅 업로드"
             onClick={() => {
               // 페이지 이동하기
-              console.log("업로드");
+              isLogined ? navigate("/upload") : navigate("/profile");
             }}
-          >
-            <Icon src="/icons/fireworks.png" alt="폭죽 이미지" width="16px" />
-            <Text size="16px" weight="500">
-              축팅 업로드
-            </Text>
-          </UploadButton>
+          />
         </ButtonBox>
         <Button
+          width="200px"
+          text="아니요. 안 할래요!"
+          isReversed
           onClick={() => {
             navigate("/profile");
           }}
-        >
-          <RejectText>아니요, 안 할래요!</RejectText>
-        </Button>
+        />
       </Container>
     </Layout>
   );

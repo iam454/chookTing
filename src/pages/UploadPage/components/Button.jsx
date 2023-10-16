@@ -16,6 +16,9 @@ const StyledButton = styled.button`
   color: ${(props) => (props.$isReversed ? "#bebebe" : props.theme.black)};
   background-color: ${(props) =>
     props.$isReversed ? "transparent" : props.theme.white};
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
 `;
 
 const Layout = styled.div`
