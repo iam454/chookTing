@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Layout from "../../components/Layout";
 import styled from "styled-components";
-import ModalExtraButton from "../../components/ModalExtraButton";
+import Button from "./components/Button";
 import theme from "../../theme";
 
 import { useNavigate } from "react-router-dom";
@@ -50,26 +50,19 @@ const UploadDonePage = () => {
     <Layout>
       <Container>
         <Text>업로드 완료!</Text>
-        <ImageBox>{/* image, nickName, hashTags */}</ImageBox>
+        <ImageBox></ImageBox>
         <ButtonBox>
-          <ModalExtraButton
-            isLong
-            isTextBlack
-            onClick={() => {
-              console.log("스토리 공유!");
-            }}
-            iconSrc="/icons/instagram.png"
-            bgColor={theme.white}
+          <Button
             text="스토리 공유하기"
+            width="214px"
+            iconSrc="/icons/instagram.png"
           />
-          <ModalExtraButton
-            isLong={false}
-            isTextBlack
+          <Button
+            text="확인"
+            width="80px"
             onClick={() => {
               navigate("/");
             }}
-            bgColor={theme.white}
-            text="확인"
           />
         </ButtonBox>
       </Container>
