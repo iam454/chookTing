@@ -64,7 +64,11 @@ const ToUploadPage = () => {
           <Post image={imageSrc} />
         </ImgBox>
         <ButtonBox>
-          <DownloadButton>
+          <DownloadButton
+            onClick={() => {
+              console.log("다운로드 버튼 클릭");
+            }}
+          >
             <svg
               width="24"
               height="24"
