@@ -8,6 +8,7 @@ import SettingPage from "./pages/SettingPage/SettingPage";
 import MyDetailPage from "./pages/MyDetailpage/MyDetailPage";
 import UploadPage from "./pages/UploadPage/UploadPage";
 import UploadDonePage from "./pages/UploadPage/UploadDonePage";
+import Loader from "./components/Loader";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
         <Route path="/profile/setting" element={<SettingPage />}></Route>
         <Route path="/upload" element={<UploadPage />}></Route>
         <Route path="/uploadDone" element={<UploadDonePage />}></Route>
+        <Route path="/kakao/callback" element={<Loader />}></Route>
         <Route path="/test" element={<TestPage />}></Route>
       </Routes>
       <NavigationBar />

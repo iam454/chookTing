@@ -105,7 +105,7 @@ const PopPage = () => {
   return (
     <Layout>
       <Container>
-        <MasonryInfiniteGrid gap={8} isConstantSize={true} threshold={1000}>
+        <MasonryInfiniteGrid gap={8} isConstantSize={true} threshold={300}>
           {photos.map((photo) => {
             return (
               <Card
