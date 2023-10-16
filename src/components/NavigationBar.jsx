@@ -9,7 +9,7 @@ import uploadFileState from "../recoil/uploadImage/atom";
 import { Modal } from "./Modal";
 import ModalButton from "./ModalButton";
 import theme from "../theme";
-import { KAKAO_AUTH_URL } from "../\bauth/kakao/auth";
+import { KAKAO_AUTH_URL } from "../auth/kakao/auth";
 
 const Nav = styled.nav`
   z-index: 10;
