@@ -1,32 +1,35 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import Layout from "../../components/Layout";
 import styled from "styled-components";
 import Button from "./components/Button";
-import theme from "../../theme";
 
 import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import uploadFileState from "../../recoil/uploadImage/atom";
+import uploadContentsState from "../../recoil/uploadContents/atom";
+import Post from "../../components/Post";
+import PostInfos from "../../components/PostInfos";
 
 const Container = styled.div`
-  width: 342px;
-  height: 607px;
+  width: 358px;
+  height: 90%;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   display: flex;
   flex-direction: column;
-  background-color: ${(props) => props.theme.gray};
-  border-radius: 10px;
+  align-items: center;
+  gap: 12px;
+  background-color: ${(props) => props.theme.modal.black};
+  border-radius: 8px;
+  padding: 24px;
 `;
 
-const Text = styled.p`
-  font-size: 18px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-top: 28px;
+const Text = styled.header`
+  font-size: 20px;
+  font-weight: 500;
+  padding: 8px 0;
 `;
 
 const ImageBox = styled.div`
@@ -39,34 +42,60 @@ const ImageBox = styled.div`
 const ButtonBox = styled.div`
   width: 100%;
   display: flex;
-  align-items: center;
-  justify-content: center;
   gap: 8px;
-  margin-bottom: 20px;
 `;
 
 const UploadDonePage = () => {
   const navigate = useNavigate();
   const [uploadFile, setUploadFile] = useRecoilState(uploadFileState);
+  const [uploadContents, setUploadContents] =
+    useRecoilState(uploadContentsState);
+
+  useEffect(() => {
+    if (!uploadFile.name) {
+      navigate("/profile");
+    }
+  }, [uploadFile, navigate]);
+
+  const createImageUrl = (file) => {
+    if (!uploadFile.name) {
+      return;
+    }
+    const imageUrl = URL.createObjectURL(file);
+    return imageUrl;
+  };
+
+  const handleConfirmButtonClick = () => {
+    setUploadFile({});
+    setUploadContents({});
+    navigate("/");
+  };
 
   return (
     <Layout>
       <Container>
         <Text>업로드 완료!</Text>
-        <ImageBox></ImageBox>
+        <ImageBox>
+          <Post
+            image={createImageUrl(uploadFile)}
+            info={
+              <PostInfos
+                name={uploadContents.name}
+                hashtags={uploadContents.hashtags}
+              />
+            }
+          />
+        </ImageBox>
         <ButtonBox>
           <Button
             text="스토리 공유하기"
-            width="214px"
+            width="222px"
             iconSrc="/icons/instagram.png"
-          />
-          <Button
-            text="확인"
-            width="80px"
             onClick={() => {
-              navigate("/");
+              alert("미구현 기능입니다.");
             }}
           />
+          <Button text="확인" width="80px" onClick={handleConfirmButtonClick} />
         </ButtonBox>
       </Container>
     </Layout>
