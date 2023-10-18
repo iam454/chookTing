@@ -33,16 +33,18 @@ const Description = styled.div`
   font-size: 16px;
 `;
 
-const Name = styled.div`
+const Name = styled.span`
+  display: block;
   font-weight: 600;
   margin-bottom: 8px;
 `;
 
-const Date = styled.div`
+const Date = styled.span`
+  display: block;
   font-size: 14px;
 `;
 
-const Infos = styled.div`
+const Infos = styled.ul`
   position: absolute;
   bottom: 0;
   right: 0;
@@ -50,14 +52,14 @@ const Infos = styled.div`
   gap: 12px;
 `;
 
-const Info = styled.div`
+const Info = styled.li`
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 2px;
 `;
 
-const BoldText = styled.div`
+const BoldText = styled.span`
   font-weight: 500;
 `;
 

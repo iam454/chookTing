@@ -72,7 +72,7 @@ const ProgressBar = styled.svg`
   stroke-dasharray: 100;
 `;
 
-const Button = styled(motion.div)`
+const VideoController = styled(motion.div)`
   position: absolute;
   top: 0;
   left: 0;
@@ -134,7 +134,7 @@ const HomePage = () => {
 
   return (
     <Layout>
-      <Button
+      <VideoController
         animate={pauseAnimation}
         initial={{ opacity: 0 }}
         transition={{ duration: 1.2 }}
@@ -149,8 +149,8 @@ const HomePage = () => {
           <rect x="6" y="5" width="4" height="14" rx="1" fill="currentColor" />
           <rect x="14" y="5" width="4" height="14" rx="1" fill="currentColor" />
         </svg>
-      </Button>
-      <Button
+      </VideoController>
+      <VideoController
         animate={resumeAnimation}
         initial={{ opacity: 0 }}
         transition={{ duration: 1.2 }}
@@ -167,7 +167,7 @@ const HomePage = () => {
             fill="currentColor"
           />
         </svg>
-      </Button>
+      </VideoController>
       <Swiper
         style={swiperStyle}
         direction="vertical"

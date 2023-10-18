@@ -1,7 +1,7 @@
 import React from "react";
 import { styled } from "styled-components";
 
-const Name = styled.div`
+const Name = styled.span`
   height: 32px;
   font-size: 22px;
   line-height: 1.4;

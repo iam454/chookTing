@@ -70,7 +70,7 @@ const Icon = styled.div`
   box-shadow: rgba(0, 0, 0, 0.35) 0 5px 15px;
 `;
 
-const TextBox = styled.div`
+const TextBox = styled.p`
   display: flex;
   flex-direction: column;
 `;
