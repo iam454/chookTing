@@ -8,6 +8,7 @@ import PostInfos from "../../components/PostInfos";
 import { useRecoilState } from "recoil";
 import uploadFileState from "../../recoil/uploadImage/atom";
 import { useNavigate } from "react-router-dom";
+import uploadContentsState from "../../recoil/uploadContents/atom";
 
 const Container = styled.div`
   width: 310px;
@@ -71,6 +72,8 @@ const isEmptyValue = (value) => {
 
 const UploadPage = () => {
   const [uploadFile, setUploadFile] = useRecoilState(uploadFileState);
+  const [uploadContents, setUploadContents] =
+    useRecoilState(uploadContentsState);
   const [name, setName] = useState("");
 
   const [inputHashtag, setInputHashtag] = useState("");
@@ -87,8 +90,8 @@ const UploadPage = () => {
     if (!uploadFile.name) {
       return;
     }
-    const image = URL.createObjectURL(file);
-    return image;
+    const imageUrl = URL.createObjectURL(file);
+    return imageUrl;
   };
 
   const handleNameChange = (e) => {
@@ -163,8 +166,8 @@ const UploadPage = () => {
     console.log("업로드 API 요청 파일 file:", uploadFile);
     console.log("업로드 API 요청 name String:", name.trim());
     console.log("업로드 API 요청 hashtags Array:", hashtags);
-    setUploadFile({});
-    navigate("/uploadDone");
+    setUploadContents({ name: name.trim(), hashtags });
+    navigate("/upload-done");
   };
 
   const handleCancelClick = (e) => {
