@@ -20,13 +20,13 @@ const Image = styled.img`
   object-fit: cover;
 `;
 
-const Name = styled.div`
+const Name = styled.span`
   font-weight: 500;
   height: 20px;
   font-size: 16px;
 `;
 
-const Email = styled.div`
+const Email = styled.span`
   height: 18px;
 `;
 

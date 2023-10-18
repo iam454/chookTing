@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-const SmallText = styled.div`
+const SmallText = styled.span`
   height: 16px;
   font-size: 12px;
   display: flex;
