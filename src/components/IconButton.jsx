@@ -19,7 +19,7 @@ const Button = styled.button`
   box-shadow: rgba(0, 0, 0, 0.35) 0 5px 15px;
 `;
 
-const Text = styled.div`
+const Text = styled.span`
   width: 48px;
   height: 24px;
   display: flex;
