@@ -17,7 +17,7 @@ const Item = styled.li`
   gap: 4px;
 `;
 
-const Number = styled.div`
+const Number = styled.span`
   font-weight: 600;
   font-size: 20px;
 `;

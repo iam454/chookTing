@@ -31,7 +31,7 @@ const Icon = styled.img`
   height: 16px;
 `;
 
-const Text = styled.div`
+const Text = styled.span`
   height: 19px;
   line-height: 1.4;
 `;

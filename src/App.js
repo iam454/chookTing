@@ -10,6 +10,7 @@ import UploadPage from "./pages/UploadPage/UploadPage";
 import UploadDonePage from "./pages/UploadPage/UploadDonePage";
 import Loader from "./components/Loader";
 import ToUploadPage from "./pages/UploadPage/ToUploadPage";
+import NotFoundPage from "./pages/NotFoundPage/NotFoundPage";
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
         <Route path="/upload-done" element={<UploadDonePage />}></Route>
         <Route path="/kakao/callback" element={<Loader />}></Route>
         <Route path="/test" element={<TestPage />}></Route>
+        <Route path="*" element={<NotFoundPage />}></Route>
       </Routes>
       <NavigationBar />
     </BrowserRouter>

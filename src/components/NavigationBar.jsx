@@ -36,7 +36,8 @@ const Tab = styled.li`
   }
 `;
 
-const Text = styled.div`
+const Text = styled.span`
+  display: block;
   height: 12px;
   text-align: center;
 `;
