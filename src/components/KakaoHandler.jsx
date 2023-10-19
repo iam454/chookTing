@@ -13,13 +13,13 @@ const Container = styled.div`
   height: 100%;
 `;
 
-const KakaoLogin = () => {
+const KakaoHandler = () => {
   const location = useLocation();
   const code = new URLSearchParams(location.search).get("code");
 
   useEffect(() => {
     instance
-      .post("/login", code)
+      .get("/post")
       .then((res) => console.log(res))
       .catch((e) => console.log(e));
   }, []);
@@ -33,4 +33,4 @@ const KakaoLogin = () => {
   );
 };
 
-export default KakaoLogin;
+export default KakaoHandler;

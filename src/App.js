@@ -10,7 +10,8 @@ import UploadPage from "./pages/UploadPage/UploadPage";
 import UploadDonePage from "./pages/UploadPage/UploadDonePage";
 import ToUploadPage from "./pages/UploadPage/ToUploadPage";
 import NotFoundPage from "./pages/NotFoundPage/NotFoundPage";
-import KakaoLogin from "./components/KakaoLogin";
+import KakaoHandler from "./components/KakaoHandler";
+import InstagramHandler from "./components/InstagramHandler";
 
 function App() {
   return (
@@ -27,7 +28,11 @@ function App() {
         <Route path="/toUpload" element={<ToUploadPage />}></Route>
         <Route path="/upload" element={<UploadPage />}></Route>
         <Route path="/upload-done" element={<UploadDonePage />}></Route>
-        <Route path="/kakao/callback" element={<KakaoLogin />}></Route>
+        <Route path="/kakao/callback" element={<KakaoHandler />}></Route>
+        <Route
+          path="/instagram/callback"
+          element={<InstagramHandler />}
+        ></Route>
         <Route path="/test" element={<TestPage />}></Route>
         <Route path="*" element={<NotFoundPage />}></Route>
       </Routes>
