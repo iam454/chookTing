@@ -24,7 +24,7 @@ const Image = styled.img`
   object-fit: contain;
 `;
 
-const InfoContainer = styled.p`
+const InfoContainer = styled.div`
   position: absolute;
   left: 16px;
   bottom: 16px;
