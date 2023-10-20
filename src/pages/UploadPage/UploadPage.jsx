@@ -163,10 +163,14 @@ const UploadPage = () => {
     if (!name) {
       return;
     }
-    console.log("업로드 API 요청 파일 file:", uploadFile);
-    console.log("업로드 API 요청 name String:", name.trim());
-    console.log("업로드 API 요청 hashtags Array:", hashtags);
     setUploadContents({ name: name.trim(), hashtags });
+    const payload = {
+      image: uploadFile,
+      nickname: name.trim(),
+      hashTags: hashtags,
+    };
+    console.log(payload);
+    // createPost 호출
     navigate("/upload-done");
   };
 
