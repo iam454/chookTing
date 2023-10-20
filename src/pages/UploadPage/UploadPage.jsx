@@ -9,6 +9,9 @@ import { useRecoilState } from "recoil";
 import uploadFileState from "../../recoil/uploadImage/atom";
 import { useNavigate } from "react-router-dom";
 import uploadContentsState from "../../recoil/uploadContents/atom";
+import { useMutation } from "@tanstack/react-query";
+import { createPost } from "../../apis/api/post";
+import { instance, uploadInstance } from "../../apis";
 
 const Container = styled.div`
   width: 310px;
@@ -75,10 +78,18 @@ const UploadPage = () => {
   const [uploadContents, setUploadContents] =
     useRecoilState(uploadContentsState);
   const [name, setName] = useState("");
-
   const [inputHashtag, setInputHashtag] = useState("");
   const [hashtags, setHashtags] = useState([]);
   const navigate = useNavigate();
+  const { mutate } = useMutation(createPost, {
+    onSuccess: (e) => {
+      console.log("success", e);
+      navigate("/upload-done");
+    },
+    onError: (e) => {
+      console.log("error", e);
+    },
+  });
 
   useEffect(() => {
     if (!uploadFile.name) {
@@ -163,11 +174,13 @@ const UploadPage = () => {
     if (!name) {
       return;
     }
-    console.log("업로드 API 요청 파일 file:", uploadFile);
-    console.log("업로드 API 요청 name String:", name.trim());
-    console.log("업로드 API 요청 hashtags Array:", hashtags);
     setUploadContents({ name: name.trim(), hashtags });
-    navigate("/upload-done");
+
+    const payload = new FormData();
+    payload.append("image", uploadFile);
+    payload.append("nickname", name.trim());
+    payload.append("hashTags", hashtags);
+    mutate(payload);
   };
 
   const handleCancelClick = (e) => {

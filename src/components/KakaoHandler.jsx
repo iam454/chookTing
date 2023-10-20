@@ -4,6 +4,7 @@ import { instance } from "../apis";
 import { useLocation } from "react-router-dom";
 import styled from "styled-components";
 import HeartLoader from "./HeartLoader";
+import { kakaoLogin } from "../apis/api/user";
 
 const Container = styled.div`
   display: flex;
@@ -18,8 +19,7 @@ const KakaoHandler = () => {
   const code = new URLSearchParams(location.search).get("code");
 
   useEffect(() => {
-    instance
-      .get("/post")
+    kakaoLogin({ code })
       .then((res) => console.log(res))
       .catch((e) => console.log(e));
   }, []);
