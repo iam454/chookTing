@@ -8,3 +8,12 @@ export const instance = axios.create({
   },
   withCredentials: true,
 });
+
+export const uploadInstance = axios.create({
+  baseURL: process.env.REACT_APP_BASE_URL,
+  timeout: 1000,
+  headers: {
+    "Content-Type": "multipart/form-data",
+  },
+  withCredentials: true,
+});

@@ -1,7 +1,7 @@
-import { instance } from "..";
+import { instance, uploadInstance } from "..";
 
 export const createPost = (payload) => {
-  return instance.post("/post", payload);
+  return uploadInstance.post("/post", payload);
 };
 
 export const fetchHomePosts = () => {
