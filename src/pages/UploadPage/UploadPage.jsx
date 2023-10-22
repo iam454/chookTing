@@ -67,10 +67,7 @@ const ALLOWED_TEXT_REG_EXP = /^[a-z|A-Z|가-힣|ㄱ-ㅎ|ㅏ-ㅣ|0-9| \t|]+$/;
 const NOT_ALLOWED_TEXT_REG_EXP = /[{}[\]/?.;:|)*~`!^\\\-_+<>@#$%&=('"₩€£¥•“’‘]/;
 
 const isEmptyValue = (value) => {
-  if (!value.length) {
-    return true;
-  }
-  return false;
+  return !value.length;
 };
 
 const UploadPage = () => {
@@ -172,6 +169,7 @@ const UploadPage = () => {
   const handleUploadClick = (e) => {
     e.preventDefault();
     if (!name) {
+      // 닉네임은 필수항목입니다. - 사용자가 알아챌 수 있도록
       return;
     }
     setUploadContents({ name: name.trim(), hashtags });
