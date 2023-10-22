@@ -3,7 +3,6 @@ import HomePage from "./pages/HomePage/HomePage";
 import PopPage from "./pages/PopPage/PopPage";
 import MyPage from "./pages/MyPage/MyPage";
 import NavigationBar from "./components/NavigationBar";
-import TestPage from "./pages/TestPage/TestPage";
 import SettingPage from "./pages/SettingPage/SettingPage";
 import MyDetailPage from "./pages/MyDetailpage/MyDetailPage";
 import UploadPage from "./pages/UploadPage/UploadPage";
@@ -33,7 +32,6 @@ function App() {
           path="/instagram/callback"
           element={<InstagramHandler />}
         ></Route>
-        <Route path="/test" element={<TestPage />}></Route>
         <Route path="*" element={<NotFoundPage />}></Route>
       </Routes>
       <NavigationBar />
