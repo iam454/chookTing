@@ -45,15 +45,15 @@ npm start
       </thead>
       <tbody>
         <tr>
-          <td><a href="https://github.com/MINJOO-KIM" targe="_blank">김민주</a></td>
+          <td><a href="https://github.com/MINJOO-KIM" target="_blank">김민주</a></td>
           <td>리액셔너</td>
         </tr>
         <tr>
-          <td><a href="https://github.com/GhoRid" targe="_blank">박건형</a></td>
+          <td><a href="https://github.com/GhoRid" target="_blank">박건형</a></td>
           <td>기획리더</td>
         </tr>
         <tr>
-          <td><a href="https://github.com/iam454" targe="_blank">서완석</a></td>
+          <td><a href="https://github.com/iam454" target="_blank">서완석</a></td>
           <td>테크리더</td>
         </tr>
       </tbody>
@@ -70,19 +70,19 @@ npm start
       </thead>
       <tbody>
         <tr>
-          <td><a href="https://github.com/GoBeromsu" targe="_blank">고범수</a></td>
+          <td><a href="https://github.com/GoBeromsu" target="_blank">고범수</a></td>
           <td>테크리더</td>
         </tr>
         <tr>
-          <td><a href="https://github.com/yuseonkim" targe="_blank">김유선</a></td>
+          <td><a href="https://github.com/yuseonkim" target="_blank">김유선</a></td>
           <td>타임키퍼</td>
         </tr>
         <tr>
-          <td><a href="https://github.com/SongGaEun16" targe="_blank">송가은</a></td>
+          <td><a href="https://github.com/SongGaEun16" target="_blank">송가은</a></td>
           <td>리마인더</td>
         </tr>
         <tr>
-          <td><a href="https://github.com/hwangdaesun" targe="_blank">황대선</a></td>
+          <td><a href="https://github.com/hwangdaesun" target="_blank">황대선</a></td>
           <td>조장</td>
         </tr>
       </tbody>
@@ -108,6 +108,7 @@ npm start
   <img src="https://img.shields.io/badge/framer motion-0055FF?style=for-the-badge&logo=framer&logoColor=white">
   <img src="https://img.shields.io/badge/swiper-6332F6?style=for-the-badge&logo=swiper&logoColor=white">
   <img src="https://img.shields.io/badge/recoil-3578E5?style=for-the-badge&logo=recoil&logoColor=white">
+  <img src="https://img.shields.io/badge/react query-FF4154?style=for-the-badge&logo=react query&logoColor=white">
 </div>
 
 <br />
@@ -166,7 +167,7 @@ npm start
 
 <details>
   <summary>4주차(09.25 ~ 10.01)</summary>
-    <div>
+  <div>
   
 ### ✅ 산출물
 
@@ -267,7 +268,7 @@ my-app
 
 <details>
   <summary>5주차(10.02 ~ 10.08)</summary>
-    <div>
+  <div>
   
 ### ✅ 산출물
 
@@ -306,7 +307,7 @@ my-app
 
 <details>
   <summary>6주차(10.09 ~ 10.15)</summary>
-    <div>
+  <div>
   
 ### ✅ 산출물
 
@@ -332,12 +333,20 @@ my-app
 
 <details>
   <summary>7주차(10.16 ~ 10.22)</summary>
-    <div>
+  <div>
   
 ### ✅ 산출물
 
 ```
-- to do
+민주
+- 업로드 완료 페이지 리팩토링
+
+건형
+- 업로드 선택 페이지 리팩토링
+
+완석
+- 시맨틱 태그 적용
+- API 연결 준비
 ```
 
   </div>
@@ -347,7 +356,7 @@ my-app
 
 <details>
   <summary>8주차(10.23 ~ 10.29)</summary>
-    <div>
+  <div>
   
 ### ✅ 산출물
 
@@ -362,7 +371,7 @@ my-app
 
 <details>
   <summary>9주차(10.30 ~ 11.05)</summary>
-    <div>
+  <div>
   
 ### ✅ 산출물
 
@@ -377,7 +386,7 @@ my-app
 
 <details>
   <summary>10주차(11.06 ~ 11.12)</summary>
-    <div>
+  <div>
   
 ### ✅ 산출물
 
