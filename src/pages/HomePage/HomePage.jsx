@@ -10,48 +10,8 @@ import "swiper/css";
 import styled from "styled-components";
 import { motion, useAnimation } from "framer-motion";
 
-const posts = [
-  {
-    id: 1,
-    image: "sample.png",
-    name: "안녕하세요",
-    hashtags: ["대박", "굿", "하이"],
-    isLiked: false,
-    points: 100,
-  },
-  {
-    id: 5,
-    image: "sample2.png",
-    name: "나는열글자가되고싶다아",
-    hashtags: [],
-    isLiked: true,
-    points: 100,
-  },
-  {
-    id: 13,
-    image: "sample5.png",
-    name: "나는열두글자가되고싶다아",
-    hashtags: ["해시태그여덟글자", "테스트도여덟글자"],
-    isLiked: true,
-    points: 100,
-  },
-  {
-    id: 51,
-    image: "sample3.png",
-    name: "예시4",
-    hashtags: ["hastag", "english", "version"],
-    isLiked: false,
-    points: 100,
-  },
-  {
-    id: 33,
-    image: "sample4.png",
-    name: "예시5",
-    hashtags: ["hello", "spark", "대박"],
-    isLiked: true,
-    points: 100,
-  },
-];
+import { useQuery, useInfiniteQuery } from "@tanstack/react-query";
+import { fetchHomePosts } from "../../apis/api/post";
 
 const swiperStyle = {
   width: "100%",
@@ -95,6 +55,8 @@ const HomePage = () => {
   const progressBarRef = useRef();
   const pauseAnimation = useAnimation();
   const resumeAnimation = useAnimation();
+  const { data: home } = useQuery(["posts"], fetchHomePosts);
+
   let clickTimer = null;
 
   const handleProgessBarPaint = (s, t, progress) => {
@@ -177,15 +139,17 @@ const HomePage = () => {
         onSwiper={setSwiperRef}
         loop
       >
-        {posts.map((post) => {
+        {home?.data.response.postList.map((post) => {
           return (
-            <SwiperSlide key={post.id} onClick={handleSwiperClick}>
+            <SwiperSlide key={post.postId} onClick={handleSwiperClick}>
               <Post.Home
-                image={post.image}
-                info={<PostInfos name={post.name} hashtags={post.hashtags} />}
-                id={post.id}
-                isLikedPost={post.isLiked}
-                points={post.points}
+                image={post.imageUri}
+                info={
+                  <PostInfos name={post.nickname} hashtags={post.hashTags} />
+                }
+                id={post.postId}
+                // isLikedPost={post.isLiked}
+                points={post.postPoint}
                 handleAutoPlayPause={handleAutoPlayPause}
               />
             </SwiperSlide>
