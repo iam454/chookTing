@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef } from "react";
 import Layout from "../../components/Layout";
 import Container from "./components/Container";
 import Card from "./components/Card";
@@ -8,6 +8,9 @@ import { motion, AnimatePresence } from "framer-motion";
 import { styled } from "styled-components";
 import { SkeletonPage } from "../SkeletonPage/SkeletonPage";
 import PopDetailPage from "../PopDetailPage/PopDetailPage";
+import { useQuery, useInfiniteQuery } from "@tanstack/react-query";
+import { fetchPopPosts } from "../../apis/api/post";
+import HeartLoader from "../../components/HeartLoader";
 
 const photos = [
   {
@@ -62,6 +65,18 @@ const photos = [
   },
 ];
 
+// {
+//   "postId": 54,
+//   "imageUri": "/image/test.jpg",
+//   "hashTags": [
+//     "hashtag6"
+//   ],
+//   "likeCount": 0,
+//   "postPoint": 200,
+//   "nickname": "nickname16",
+//   "postLevel": 1
+// },
+
 const Overlay = styled(motion.div)`
   position: fixed;
   width: 390px;
@@ -89,6 +104,16 @@ const Detail = styled(motion.div)`
 const PopPage = () => {
   const navigate = useNavigate();
   const detailMatch = useMatch("/pop/post/:postId");
+  const { data: pop, fetchNextPage } = useInfiniteQuery(
+    ["pop"],
+    fetchPopPosts,
+    {
+      getNextPageParam: (lastPage, allPages) => {
+        return allPages.length;
+      },
+    }
+  );
+  const bottomObserverRef = useRef(null);
 
   const handleCardClick = (postId) => {
     navigate(`post/${postId}`);
@@ -100,24 +125,53 @@ const PopPage = () => {
 
   const clickedId =
     detailMatch?.params.postId &&
-    photos.find((photo) => photo.id === +detailMatch?.params.postId);
+    pop?.pages.map((page) =>
+      page.data.response.popularPosts.find(
+        (post) => post.postId === +detailMatch?.params.postId
+      )
+    );
+
+  useEffect(() => {
+    const handleObserver = (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          fetchNextPage();
+        }
+      });
+    };
+
+    const io = new IntersectionObserver(handleObserver, {
+      threshold: 0.3,
+    });
+
+    if (bottomObserverRef.current) {
+      io.observe(bottomObserverRef.current);
+    }
+
+    return () => {
+      io.disconnect();
+    };
+  }, [bottomObserverRef, fetchNextPage]);
 
   return (
     <Layout>
       <Container>
         <MasonryInfiniteGrid gap={8} isConstantSize={true} threshold={300}>
-          {photos.map((photo) => {
-            return (
-              <Card
-                layoutId={"pop" + photo.id}
-                key={photo.id}
-                level={photo.level}
-                image={photo.image}
-                onClick={() => handleCardClick(photo.id)}
-              />
-            );
-          })}
+          {pop?.pages.map((page) =>
+            page.data.response.popularPosts.map((post) => {
+              return (
+                <Card
+                  layoutId={"pop" + post.postId}
+                  key={post.postId}
+                  level={post.postLevel}
+                  image={post.imageUri}
+                  onClick={() => handleCardClick(post.postId)}
+                />
+              );
+            })
+          )}
         </MasonryInfiniteGrid>
+        <div ref={bottomObserverRef}></div>
       </Container>
       <AnimatePresence>
         {detailMatch && (
@@ -128,7 +182,10 @@ const PopPage = () => {
               exit={{ opacity: 0 }}
             />
             <Detail layoutId={"pop" + detailMatch.params.postId}>
-              <PopDetailPage image={clickedId.image} id={clickedId} />
+              <PopDetailPage
+                image={clickedId && clickedId.imageUri}
+                id={clickedId}
+              />
             </Detail>
           </>
         )}

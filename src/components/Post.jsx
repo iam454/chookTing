@@ -207,7 +207,7 @@ const PopPost = ({
   image,
   info,
   isLikedPost,
-  numberLikes,
+  numberLikes = 0,
   points,
   isLoading,
 }) => {
@@ -267,6 +267,14 @@ const PopPost = ({
     setToggleLikeOn((prev) => !prev);
   };
 
+  const convertToK = (number) => {
+    if (number >= 1000) {
+      return number / 1000 + "K";
+    } else {
+      return number + "";
+    }
+  };
+
   return (
     <Layout onDoubleClick={() => handleDoubleClick(id)}>
       <Image src={image} alt="네컷 사진" />
@@ -298,7 +306,10 @@ const PopPost = ({
           </>
         ) : (
           <>
-            <IconButton onClick={handleLikeButtonClick} text={likes}>
+            <IconButton
+              onClick={handleLikeButtonClick}
+              text={convertToK(likes)}
+            >
               <motion.svg
                 width={24}
                 height={24}
