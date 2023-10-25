@@ -8,6 +8,8 @@ import Card from "./components/Card";
 import { AnimatePresence, motion } from "framer-motion";
 import { useMatch, useNavigate } from "react-router-dom";
 import MyDetailPage from "../MyDetailpage/MyDetailPage";
+import { useQuery, useInfiniteQuery } from "@tanstack/react-query";
+import { fetchUserInfos } from "../../apis/api/user";
 
 const response = {
   id: 14,
@@ -132,6 +134,9 @@ const MyPage = () => {
   } = response3;
   const navigate = useNavigate();
   const detailMatch = useMatch("/profile/post/:postId");
+
+  // api 없는 듯
+  // const { data: userInfos } = useQuery(["userInfos"], fetchUserInfos);
 
   const handleCardClick = (postId) => {
     navigate(`post/${postId}`);

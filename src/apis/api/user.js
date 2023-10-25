@@ -7,3 +7,7 @@ export const kakaoLogin = (payload) => {
 export const instagramConnect = (payload) => {
   return instance.post("/user/instagram", payload);
 };
+
+export const fetchUserInfos = () => {
+  return instance.get("/user/info");
+};
