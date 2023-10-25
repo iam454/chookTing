@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { styled } from "styled-components";
 import { ReactComponent as Home } from "../assets/Home.svg";
@@ -43,7 +43,7 @@ const Text = styled.span`
 `;
 
 const NavigationBar = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(true); // 아마 로그인 상태는 로컬스토리지로 관리할 듯?
+  const isLoggedIn = !!localStorage.getItem("token");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [uploadFile, setUploadFile] = useRecoilState(uploadFileState);
   const navigate = useNavigate();

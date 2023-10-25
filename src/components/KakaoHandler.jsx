@@ -20,15 +20,14 @@ const KakaoHandler = () => {
   const code = new URLSearchParams(location.search).get("code");
   const { mutate } = useMutation(kakaoLogin, {
     onSuccess: (res) => {
-      console.log(res);
-      const token = res.data.accessToken;
+      const token = res.headers.authorization;
       localStorage.setItem("token", token);
-      // navigate("/");
+      navigate("/");
     },
     onError: (e) => {
       console.log("error", e);
       alert("로그인에 실패하였습니다.");
-      // navigate("/");
+      navigate("/");
     },
   });
 

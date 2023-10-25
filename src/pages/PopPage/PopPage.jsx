@@ -156,7 +156,7 @@ const PopPage = () => {
   return (
     <Layout>
       <Container>
-        <MasonryInfiniteGrid gap={8} isConstantSize={true} threshold={300}>
+        <MasonryInfiniteGrid gap={8} isConstantSize={true}>
           {pop?.pages.map((page) =>
             page.data.response.popularPosts.map((post) => {
               return (
