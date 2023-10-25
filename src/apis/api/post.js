@@ -16,7 +16,8 @@ export const fetchPopPost = ({ postId }) => {
   return instance.get(`/popular-post/${postId}`);
 };
 
-export const updateLike = ({ postId }) => {
+export const updateLike = (payload) => {
+  const { postId } = payload;
   return instance.post(`/post/${postId}/like`);
 };
 

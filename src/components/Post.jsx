@@ -6,6 +6,8 @@ import { Modal } from "./Modal";
 import ModalButton from "./ModalButton";
 import theme from "../theme";
 import SkeletonIcon from "../pages/SkeletonPage/components/SkeletonIcon";
+import { useMutation } from "@tanstack/react-query";
+import { updateLike } from "../apis/api/post";
 
 const Layout = styled.div`
   position: relative;
@@ -66,11 +68,14 @@ const HomePost = ({
   const [isModalOpen, setIsModalOpen] = useState(false);
   const likeAnimation = useAnimation();
   const dbclickAnimation = useAnimation();
-
-  const updateLike = (id, state) => {
-    console.log("업데이트 요청 API, id값은 ", id);
-    console.log("좋아요 요청", state);
-  };
+  const { mutate } = useMutation(updateLike, {
+    onSuccess: (e) => {
+      console.log("success", e);
+    },
+    onError: (e) => {
+      console.log("err", e);
+    },
+  });
 
   const handleDoubleClick = (id) => {
     if (!toggleLikeOn) {
@@ -79,7 +84,7 @@ const HomePost = ({
         stroke: "rgba(254, 32, 32, 1)",
         scale: [1, 1.2, 1],
       });
-      updateLike(id, true);
+      mutate({ postId: id, like: true });
     }
     dbclickAnimation.start({
       fill: "rgba(254, 32, 32, 1)",
@@ -96,7 +101,7 @@ const HomePost = ({
         fill: "rgba(254, 32, 32, 0)",
         stroke: "rgba(245, 245, 245, 1)",
       });
-      updateLike(id, false);
+      mutate({ postId: id, like: false });
     } else {
       likeAnimation.start({
         fill: "rgba(254, 32, 32, 1)",
@@ -109,7 +114,7 @@ const HomePost = ({
         scale: [1, 1.2, 1],
         opacity: [1, 1, 0],
       });
-      updateLike(id, true);
+      mutate({ postId: id, like: true });
     }
     setToggleLikeOn((prev) => !prev);
   };
@@ -216,11 +221,14 @@ const PopPost = ({
   const [likes, setLikes] = useState(numberLikes);
   const likeAnimation = useAnimation();
   const dbclickAnimation = useAnimation();
-
-  const updateLike = (id, state) => {
-    console.log("업데이트 요청 API, id값은 ", id);
-    console.log("좋아요 요청", state);
-  };
+  const { mutate } = useMutation(updateLike, {
+    onSuccess: (e) => {
+      console.log("success", e);
+    },
+    onError: (e) => {
+      console.log("err", e);
+    },
+  });
 
   const handleDoubleClick = (id) => {
     if (!toggleLikeOn) {
@@ -230,7 +238,7 @@ const PopPost = ({
         scale: [1, 1.2, 1],
       });
       setLikes((prev) => prev + 1);
-      updateLike(id, true);
+      mutate({ postId: id, like: true });
     }
     dbclickAnimation.start({
       fill: "rgba(254, 32, 32, 1)",
@@ -248,7 +256,7 @@ const PopPost = ({
         stroke: "rgba(245, 245, 245, 1)",
       });
       setLikes((prev) => prev - 1);
-      updateLike(id, false);
+      mutate({ postId: id, like: false });
     } else {
       likeAnimation.start({
         fill: "rgba(254, 32, 32, 1)",
@@ -262,7 +270,7 @@ const PopPost = ({
         opacity: [1, 1, 0],
       });
       setLikes((prev) => prev + 1);
-      updateLike(id, true);
+      mutate({ postId: id, like: true });
     }
     setToggleLikeOn((prev) => !prev);
   };
@@ -382,11 +390,14 @@ const MyPost = ({
   const [likes, setLikes] = useState(numberLikes);
   const likeAnimation = useAnimation();
   const dbclickAnimation = useAnimation();
-
-  const updateLike = (id, state) => {
-    console.log("업데이트 요청 API, id값은 ", id);
-    console.log("좋아요 요청", state);
-  };
+  const { mutate } = useMutation(updateLike, {
+    onSuccess: (e) => {
+      console.log("success", e);
+    },
+    onError: (e) => {
+      console.log("err", e);
+    },
+  });
 
   const handleDoubleClick = (id) => {
     if (!toggleLikeOn) {
@@ -396,7 +407,7 @@ const MyPost = ({
         scale: [1, 1.2, 1],
       });
       setLikes((prev) => prev + 1);
-      updateLike(id, true);
+      mutate({ postId: id, like: true });
     }
     dbclickAnimation.start({
       fill: "rgba(254, 32, 32, 1)",
@@ -414,7 +425,7 @@ const MyPost = ({
         stroke: "rgba(245, 245, 245, 1)",
       });
       setLikes((prev) => prev - 1);
-      updateLike(id, false);
+      mutate({ postId: id, like: false });
     } else {
       likeAnimation.start({
         fill: "rgba(254, 32, 32, 1)",
@@ -428,7 +439,7 @@ const MyPost = ({
         opacity: [1, 1, 0],
       });
       setLikes((prev) => prev + 1);
-      updateLike(id, true);
+      mutate({ postId: id, like: true });
     }
     setToggleLikeOn((prev) => !prev);
   };
@@ -488,12 +499,7 @@ const MyPost = ({
                 />
               </motion.svg>
             </IconButton>
-            <IconButton
-              onClick={() => {
-                console.log("클릭 이벤트가 필요 없을 듯?");
-              }}
-              text={numberInstas}
-            >
+            <IconButton text={numberInstas}>
               <img
                 src="/icons/instagram.png"
                 width={20}
