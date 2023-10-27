@@ -11,3 +11,7 @@ export const instagramConnect = (payload) => {
 export const fetchUserInfos = () => {
   return instance.get("/user/info");
 };
+
+export const kakaoLogout = () => {
+  return instance.post("/user/logout");
+};
