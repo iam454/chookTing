@@ -8,6 +8,7 @@ import theme from "../theme";
 import SkeletonIcon from "../pages/SkeletonPage/components/SkeletonIcon";
 import { useMutation } from "@tanstack/react-query";
 import { updateLike } from "../apis/api/post";
+import { KAKAO_AUTH_URL } from "../auth/kakao/auth";
 
 const Layout = styled.div`
   position: relative;
@@ -64,8 +65,10 @@ const HomePost = ({
   points,
   handleAutoPlayPause,
 }) => {
+  const isLoggedIn = !!localStorage.getItem("token");
   const [toggleLikeOn, setToggleLikeOn] = useState(isLikedPost);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isInstaModalOpen, setIsInstaModalOpen] = useState(false);
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const likeAnimation = useAnimation();
   const dbclickAnimation = useAnimation();
   const { mutate } = useMutation(updateLike, {
@@ -78,52 +81,71 @@ const HomePost = ({
   });
 
   const handleDoubleClick = (id) => {
-    if (!toggleLikeOn) {
-      likeAnimation.start({
-        fill: "rgba(254, 32, 32, 1)",
-        stroke: "rgba(254, 32, 32, 1)",
-        scale: [1, 1.2, 1],
-      });
-      mutate({ postId: id, like: true });
-    }
-    dbclickAnimation.start({
-      fill: "rgba(254, 32, 32, 1)",
-      stroke: "rgba(254, 32, 32, 1)",
-      scale: [1, 1.2, 1],
-      opacity: [1, 1, 0],
-    });
-    setToggleLikeOn(true);
-  };
-
-  const handleLikeButtonClick = () => {
-    if (toggleLikeOn) {
-      likeAnimation.start({
-        fill: "rgba(254, 32, 32, 0)",
-        stroke: "rgba(245, 245, 245, 1)",
-      });
-      mutate({ postId: id, like: false });
-    } else {
-      likeAnimation.start({
-        fill: "rgba(254, 32, 32, 1)",
-        stroke: "rgba(254, 32, 32, 1)",
-        scale: [1, 1.2, 1],
-      });
+    if (isLoggedIn) {
+      if (!toggleLikeOn) {
+        likeAnimation.start({
+          fill: "rgba(254, 32, 32, 1)",
+          stroke: "rgba(254, 32, 32, 1)",
+          scale: [1, 1.2, 1],
+        });
+        mutate({ postId: id, like: true });
+      }
       dbclickAnimation.start({
         fill: "rgba(254, 32, 32, 1)",
         stroke: "rgba(254, 32, 32, 1)",
         scale: [1, 1.2, 1],
         opacity: [1, 1, 0],
       });
-      mutate({ postId: id, like: true });
+      setToggleLikeOn(true);
+    } else {
+      handleAutoPlayPause();
+      setIsLoginModalOpen(true);
     }
-    setToggleLikeOn((prev) => !prev);
+  };
+
+  const handleLikeButtonClick = () => {
+    if (isLoggedIn) {
+      if (toggleLikeOn) {
+        likeAnimation.start({
+          fill: "rgba(254, 32, 32, 0)",
+          stroke: "rgba(245, 245, 245, 1)",
+        });
+        mutate({ postId: id, like: false });
+      } else {
+        likeAnimation.start({
+          fill: "rgba(254, 32, 32, 1)",
+          stroke: "rgba(254, 32, 32, 1)",
+          scale: [1, 1.2, 1],
+        });
+        dbclickAnimation.start({
+          fill: "rgba(254, 32, 32, 1)",
+          stroke: "rgba(254, 32, 32, 1)",
+          scale: [1, 1.2, 1],
+          opacity: [1, 1, 0],
+        });
+        mutate({ postId: id, like: true });
+      }
+      setToggleLikeOn((prev) => !prev);
+    } else {
+      handleAutoPlayPause();
+      setIsLoginModalOpen(true);
+    }
   };
 
   const handleInstaButtonClick = (id, points) => {
-    console.log("폭죽 보낼 아이디: ", id);
-    console.log(points, "폭죽 소모");
-    handleAutoPlayPause();
-    setIsModalOpen(true);
+    if (isLoggedIn) {
+      console.log("폭죽 보낼 아이디: ", id);
+      console.log(points, "폭죽 소모");
+      handleAutoPlayPause();
+      setIsInstaModalOpen(true);
+    } else {
+      handleAutoPlayPause();
+      setIsLoginModalOpen(true);
+    }
+  };
+
+  const handleKakaoButtonClick = () => {
+    window.location.href = KAKAO_AUTH_URL;
   };
 
   return (
@@ -190,8 +212,8 @@ const HomePost = ({
           />
         </IconButton>
         <Modal.Long
-          isOpen={isModalOpen}
-          onRequestClose={() => setIsModalOpen(false)}
+          isOpen={isInstaModalOpen}
+          onRequestClose={() => setIsInstaModalOpen(false)}
           text1="폭죽을 사용하여"
           text2="인스타그램 계정에 방문할 수 있어요!"
         >
@@ -205,6 +227,20 @@ const HomePost = ({
             text="인스타그램 방문하기"
           />
         </Modal.Long>
+        <Modal.Short
+          isOpen={isLoginModalOpen}
+          text="로그인이 필요한 서비스입니다."
+          onRequestClose={() => setIsLoginModalOpen(false)}
+        >
+          <ModalButton
+            isLong
+            isTextBlack
+            iconSrc="/icons/kakao.png"
+            onClick={handleKakaoButtonClick}
+            text="카카오로 3초만에 시작하기"
+            bgColor={theme.yellow}
+          />
+        </Modal.Short>
       </ButtonContainer>
     </Layout>
   );

@@ -26,7 +26,6 @@ const KakaoHandler = () => {
     },
     onError: (e) => {
       console.log("카카오 로그인 실패", e);
-      alert("로그인에 실패하였습니다.");
       navigate("/");
     },
   });

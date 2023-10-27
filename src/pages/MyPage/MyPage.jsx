@@ -135,8 +135,8 @@ const MyPage = () => {
   const navigate = useNavigate();
   const detailMatch = useMatch("/profile/post/:postId");
 
-  // api 없는 듯
-  // const { data: userInfos } = useQuery(["userInfos"], fetchUserInfos);
+  const { data: userInfos } = useQuery(["userInfos"], fetchUserInfos);
+  console.log(userInfos);
 
   const handleCardClick = (postId) => {
     navigate(`post/${postId}`);

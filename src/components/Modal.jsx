@@ -80,7 +80,7 @@ const BaseModal = ({ isOpen, onRequestClose, children }) => {
 const ShortModal = ({ isOpen, onRequestClose, text, children }) => {
   return (
     <Modal isOpen={isOpen} onRequestClose={onRequestClose}>
-      <Layout>
+      <Layout onClick={(e) => e.stopPropagation()}>
         <ShortTextContainer>
           <Text>{text}</Text>
         </ShortTextContainer>
