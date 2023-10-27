@@ -1,7 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import MyInfos from "./MyInfos";
 import Text from "./Text";
+import { Modal } from "../../../components/Modal";
+import theme from "../../../theme";
+import ModalButton from "../../../components/ModalButton";
+import { INSTAGRAM_AUTH_URL } from "../../../auth/instagram/auth";
 
 const Profile = styled.div`
   padding: 8px 0;
@@ -38,22 +42,40 @@ const InstaButton = styled.button`
 `;
 
 const InstaProfile = ({ isLinked, infos }) => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   const handleButtonClick = () => {
     if (!isLinked) {
-      console.log("인스타 연결하기");
-    } else {
-      console.log("연결해제");
-      console.log("후순위 고려");
+      setIsModalOpen(true);
     }
   };
+
+  const handleInstagramConnection = () => {
+    window.location.href = INSTAGRAM_AUTH_URL;
+  };
+
   return (
     <Profile>
       <Text>포토카드에 SNS 계정을 연결해서 공유해 보세요.</Text>
       <InstaButton onClick={handleButtonClick}>
         <Icon src="/icons/instagram.png" $isLinked={isLinked} />
-        <Text>{isLinked ? "연결해제" : "연결하기"}</Text>
+        <Text>{isLinked ? "연결 완료" : "연결하기"}</Text>
       </InstaButton>
       <MyInfos isLinked={isLinked} infos={infos} />
+      <Modal.Long
+        isOpen={isModalOpen}
+        onRequestClose={() => setIsModalOpen(false)}
+        text1="인스타그램 계정을 연결하여"
+        text2="축팅의 모든 서비스를 이용해보세요!"
+      >
+        <ModalButton
+          isLong
+          onClick={handleInstagramConnection}
+          iconSrc="/icons/instagram.png"
+          bgColor={theme.pink}
+          text="인스타그램 연결하기"
+        />
+      </Modal.Long>
     </Profile>
   );
 };

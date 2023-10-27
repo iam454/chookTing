@@ -131,7 +131,7 @@ const MyPage = () => {
     email,
     profileImage,
     instagram: { isLinked, infos, photos },
-  } = response3;
+  } = response2;
   const navigate = useNavigate();
   const detailMatch = useMatch("/profile/post/:postId");
 
