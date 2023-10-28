@@ -24,3 +24,8 @@ export const updateLike = (payload) => {
 export const fetchMyPosts = () => {
   return instance.get("/post/user");
 };
+
+export const fetchMyPost = (payload) => {
+  const { postId } = payload;
+  return instance.get(`/post/${postId}`);
+};

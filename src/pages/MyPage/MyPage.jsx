@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Layout from "../../components/Layout";
 import styled from "styled-components";
 import UploadButton from "./components/UploadButton";
@@ -8,9 +8,10 @@ import Card from "./components/Card";
 import { AnimatePresence, motion } from "framer-motion";
 import { useMatch, useNavigate } from "react-router-dom";
 import MyDetailPage from "../MyDetailpage/MyDetailPage";
-import { useQuery, useInfiniteQuery } from "@tanstack/react-query";
+import { useQuery, useInfiniteQuery, useQueries } from "@tanstack/react-query";
 import { fetchUserInfos } from "../../apis/api/user";
 import HeartLoader from "../../components/HeartLoader";
+import { fetchMyPosts } from "../../apis/api/post";
 
 const response = {
   id: 14,
@@ -137,6 +138,13 @@ const MyPage = () => {
   const detailMatch = useMatch("/profile/post/:postId");
 
   const { data: userInfos } = useQuery(["userInfos"], fetchUserInfos);
+  const { data: my, fetchNextPage } = useInfiniteQuery(["my"], fetchMyPosts, {
+    getNextPageParam: (lastPage, allPages) => {
+      return lastPage.data.response.hasNext ? allPages.length : undefined;
+    },
+  });
+  const bottomObserverRef = useRef(null);
+  console.log(my);
 
   const handleCardClick = (postId) => {
     navigate(`post/${postId}`);
@@ -148,7 +156,33 @@ const MyPage = () => {
 
   const clickedPhoto =
     detailMatch?.params.postId &&
-    photos.find((photo) => photo.id === +detailMatch?.params.postId);
+    my?.pages.map((page) =>
+      page.data.response.postList.find(
+        (post) => post.postid === +detailMatch?.params.postId
+      )
+    );
+
+  useEffect(() => {
+    const handleObserver = (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          fetchNextPage();
+        }
+      });
+    };
+
+    const io = new IntersectionObserver(handleObserver, {
+      threshold: 0.3,
+    });
+
+    if (bottomObserverRef.current) {
+      io.observe(bottomObserverRef.current);
+    }
+
+    return () => {
+      io.disconnect();
+    };
+  }, [bottomObserverRef, fetchNextPage]);
 
   return (
     <Layout>
@@ -160,17 +194,20 @@ const MyPage = () => {
         <InstaProfile isLinked={isLinked} infos={infos} />
         <UploadButton isLinked={isLinked} />
         <Album>
-          {photos.map((photo) => {
-            return (
-              <Card
-                key={photo.id}
-                photo={photo}
-                layoutId={"my" + photo.id}
-                onClick={() => handleCardClick(photo.id)}
-              />
-            );
-          })}
+          {my?.pages.map((page) =>
+            page.data.response.postList.map((post) => {
+              return (
+                <Card
+                  layoutId={"my" + post.postid}
+                  key={post.postid}
+                  photo={post}
+                  onClick={() => handleCardClick(post.postid)}
+                />
+              );
+            })
+          )}
         </Album>
+        <div ref={bottomObserverRef}></div>
       </Container>
       <AnimatePresence>
         {detailMatch && (
