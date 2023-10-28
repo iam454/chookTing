@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Layout from "../../components/Layout";
 import styled from "styled-components";
 import UploadButton from "./components/UploadButton";
@@ -10,6 +10,7 @@ import { useMatch, useNavigate } from "react-router-dom";
 import MyDetailPage from "../MyDetailpage/MyDetailPage";
 import { useQuery, useInfiniteQuery } from "@tanstack/react-query";
 import { fetchUserInfos } from "../../apis/api/user";
+import HeartLoader from "../../components/HeartLoader";
 
 const response = {
   id: 14,
@@ -136,7 +137,6 @@ const MyPage = () => {
   const detailMatch = useMatch("/profile/post/:postId");
 
   const { data: userInfos } = useQuery(["userInfos"], fetchUserInfos);
-  console.log(userInfos);
 
   const handleCardClick = (postId) => {
     navigate(`post/${postId}`);
@@ -154,9 +154,8 @@ const MyPage = () => {
     <Layout>
       <Container>
         <KaKaoProfile
-          username={username}
-          email={email}
-          profileImage={profileImage}
+          username={userInfos?.data.response.userName}
+          profileImage={userInfos?.data.response.profileImageUrl}
         />
         <InstaProfile isLinked={isLinked} infos={infos} />
         <UploadButton isLinked={isLinked} />
