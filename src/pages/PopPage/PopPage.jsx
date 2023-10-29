@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Layout from "../../components/Layout";
 import Container from "./components/Container";
 import Card from "./components/Card";
@@ -10,72 +10,6 @@ import { SkeletonPage } from "../SkeletonPage/SkeletonPage";
 import PopDetailPage from "../PopDetailPage/PopDetailPage";
 import { useQuery, useInfiniteQuery } from "@tanstack/react-query";
 import { fetchPopPosts } from "../../apis/api/post";
-import HeartLoader from "../../components/HeartLoader";
-
-const photos = [
-  {
-    id: 1,
-    image: "/sample.png",
-    level: 1,
-  },
-  {
-    id: 6,
-    image: "/sample2.png",
-    level: 2,
-  },
-  {
-    id: 4,
-    image: "/sample4.png",
-    level: 2,
-  },
-  {
-    id: 17,
-    image: "/sample3.png",
-    level: 3,
-  },
-  {
-    id: 22,
-    image: "/sample5.png",
-    level: 1,
-  },
-  {
-    id: 31,
-    image: "/sample.png",
-    level: 1,
-  },
-  {
-    id: 171,
-    image: "/sample3.png",
-    level: 3,
-  },
-  {
-    id: 34,
-    image: "/sample4.png",
-    level: 1,
-  },
-  {
-    id: 92,
-    image: "/sample.png",
-    level: 3,
-  },
-  {
-    id: 54,
-    image: "/sample2.png",
-    level: 2,
-  },
-];
-
-// {
-//   "postId": 54,
-//   "imageUri": "/image/test.jpg",
-//   "hashTags": [
-//     "hashtag6"
-//   ],
-//   "likeCount": 0,
-//   "postPoint": 200,
-//   "nickname": "nickname16",
-//   "postLevel": 1
-// },
 
 const Overlay = styled(motion.div)`
   position: fixed;
@@ -148,7 +82,7 @@ const PopPage = () => {
   return (
     <Layout>
       <Container>
-        <MasonryInfiniteGrid gap={8} isConstantSize={true}>
+        <MasonryInfiniteGrid gap={8} isConstantSize={true} column={2}>
           {pop?.pages.map((page) =>
             page.data.response.popularPosts.map((post) => {
               return (
