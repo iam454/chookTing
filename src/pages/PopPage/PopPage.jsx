@@ -123,14 +123,6 @@ const PopPage = () => {
     navigate("/pop");
   };
 
-  const clickedId =
-    detailMatch?.params.postId &&
-    pop?.pages.map((page) =>
-      page.data.response.popularPosts.find(
-        (post) => post.postId === +detailMatch?.params.postId
-      )
-    );
-
   useEffect(() => {
     const handleObserver = (entries) => {
       entries.forEach((entry) => {
@@ -182,10 +174,7 @@ const PopPage = () => {
               exit={{ opacity: 0 }}
             />
             <Detail layoutId={"pop" + detailMatch.params.postId}>
-              <PopDetailPage
-                image={clickedId && clickedId.imageUri}
-                id={clickedId}
-              />
+              <PopDetailPage />
             </Detail>
           </>
         )}
