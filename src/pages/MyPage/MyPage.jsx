@@ -144,7 +144,6 @@ const MyPage = () => {
     },
   });
   const bottomObserverRef = useRef(null);
-  console.log(my);
 
   const handleCardClick = (postId) => {
     navigate(`post/${postId}`);
@@ -153,14 +152,6 @@ const MyPage = () => {
   const handleOverlayClick = () => {
     navigate("/profile");
   };
-
-  const clickedPhoto =
-    detailMatch?.params.postId &&
-    my?.pages.map((page) =>
-      page.data.response.postList.find(
-        (post) => post.postid === +detailMatch?.params.postId
-      )
-    );
 
   useEffect(() => {
     const handleObserver = (entries) => {
@@ -218,7 +209,7 @@ const MyPage = () => {
               exit={{ opacity: 0 }}
             />
             <Detail layoutId={"my" + detailMatch.params.postId}>
-              <MyDetailPage photo={clickedPhoto} />
+              <MyDetailPage />
             </Detail>
           </>
         )}
