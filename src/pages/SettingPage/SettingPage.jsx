@@ -54,10 +54,11 @@ const SettingPage = () => {
   const navigate = useNavigate();
   const { mutate } = useMutation(kakaoLogout, {
     onSuccess: () => {
+      localStorage.removeItem("token");
       navigate("/");
     },
     onError: (e) => {
-      console.log("카카오 로그아웃 실패", e);
+      console.log("로그아웃 실패", e);
     },
   });
 
