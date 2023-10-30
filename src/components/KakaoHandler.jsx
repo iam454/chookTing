@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
 import Layout from "./Layout";
-import { instance } from "../apis";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import HeartLoader from "./HeartLoader";
 import { kakaoLogin } from "../apis/api/user";
+import { useMutation } from "@tanstack/react-query";
 
 const Container = styled.div`
   display: flex;
@@ -15,13 +15,23 @@ const Container = styled.div`
 `;
 
 const KakaoHandler = () => {
+  const navigate = useNavigate();
   const location = useLocation();
   const code = new URLSearchParams(location.search).get("code");
+  const { mutate } = useMutation(kakaoLogin, {
+    onSuccess: (res) => {
+      const token = res.headers.authorization;
+      localStorage.setItem("token", token);
+      navigate("/");
+    },
+    onError: (e) => {
+      console.log("카카오 로그인 실패", e);
+      navigate("/");
+    },
+  });
 
   useEffect(() => {
-    kakaoLogin({ code })
-      .then((res) => console.log(res))
-      .catch((e) => console.log(e));
+    mutate({ code });
   }, []);
 
   return (

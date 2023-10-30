@@ -1,40 +1,43 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Post from "../../components/Post";
 import PostInfos from "../../components/PostInfos";
-import SkeletonInfos from "../SkeletonPage/components/SkeletonInfos";
+import { useQuery } from "@tanstack/react-query";
+import { useNavigate, useParams } from "react-router-dom";
+import { fetchPopPost } from "../../apis/api/post";
+import { SkeletonPage } from "../SkeletonPage/SkeletonPage";
 
-const photo = {
-  id: 1,
-  image: "/sample.png",
-  name: "대박사건",
-  hashtags: ["하이", "안녕"],
-  likes: 49,
-  points: 200,
-  isLiked: false,
-};
+const PopDetailPage = () => {
+  const navigate = useNavigate();
+  const postId = useParams();
+  const {
+    isLoading,
+    data: popDetail,
+    refetch,
+  } = useQuery(["popDetail", postId], () => fetchPopPost(postId), {
+    onError: (e) => {
+      alert("게시물을 찾을 수 없습니다.");
+      refetch();
+      navigate("/pop");
+    },
+  });
 
-const PopDetailPage = ({ image, id }) => {
-  const [isLoading, setIsLoading] = useState(false);
-
-  const getPost = (id) => {
-    console.log("리액트 쿼리로 id값 사용");
-  };
+  if (isLoading) {
+    return <SkeletonPage.Pop />;
+  }
 
   return (
     <Post.Pop
-      isLoading={isLoading}
-      image={image}
+      image={popDetail.data.response.imageUri}
       info={
-        isLoading ? (
-          <SkeletonInfos />
-        ) : (
-          <PostInfos name={photo.name} hashtags={photo.hashtags} />
-        )
+        <PostInfos
+          name={popDetail.data.response.nickname}
+          hashtags={popDetail.data.response.hashTags}
+        />
       }
-      id={photo.id}
-      isLikedPost={photo.isLiked}
-      numberLikes={photo.likes}
-      points={photo.points}
+      id={popDetail.data.response.postId}
+      // isLikedPost={photo.isLiked}
+      numberLikes={popDetail.data.response.likeCount}
+      points={popDetail.data.response.postPoint}
     />
   );
 };

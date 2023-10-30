@@ -30,7 +30,7 @@ const Photo = styled.img`
 const Card = ({ layoutId, level, image, onClick }) => {
   return (
     <Box layoutId={layoutId} $level={level} onClick={onClick}>
-      <Photo src={image} />
+      <Photo src={`${process.env.REACT_APP_IMAGE_BASE_URL}${image}`} />
     </Box>
   );
 };

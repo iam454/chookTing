@@ -1,9 +1,17 @@
 import { instance } from "..";
 
-export const kakaoLogin = (code) => {
-  return instance.post("/login", code);
+export const kakaoLogin = (payload) => {
+  return instance.post("/login", payload);
 };
 
-export const instagramConnect = (code) => {
-  return instance.post("/user/instagram", code);
+export const instagramConnect = (payload) => {
+  return instance.post("/user/instagram", payload);
+};
+
+export const fetchUserInfos = () => {
+  return instance.get("/user/info");
+};
+
+export const kakaoLogout = () => {
+  return instance.post("/user/logout");
 };

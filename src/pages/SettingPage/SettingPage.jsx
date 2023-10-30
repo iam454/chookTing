@@ -2,8 +2,10 @@ import React from "react";
 import Layout from "../../components/Layout";
 import ListItem from "./components/ListItem";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
+import { useMutation } from "@tanstack/react-query";
+import { kakaoLogout } from "../../apis/api/user";
 
 const Header = styled.header`
   width: 100%;
@@ -49,12 +51,22 @@ const Quit = styled.div`
 `;
 
 const SettingPage = () => {
+  const navigate = useNavigate();
+  const { mutate } = useMutation(kakaoLogout, {
+    onSuccess: () => {
+      navigate("/");
+    },
+    onError: (e) => {
+      console.log("카카오 로그아웃 실패", e);
+    },
+  });
+
   const handleAskClick = () => {
     console.log("카카오 문의하기 채널로 이동");
   };
 
   const handleSignOutClick = () => {
-    console.log("로그아웃 API");
+    mutate();
   };
 
   const handleQuitClick = () => {

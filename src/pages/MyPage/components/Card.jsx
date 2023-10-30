@@ -69,16 +69,16 @@ const Icon = styled.img`
 `;
 
 const Card = ({ photo, layoutId, onClick }) => {
-  const { image, createdAt, name, likes, instaViews } = photo;
+  const { imageUri, createdAt, nickname, likeCount, viewCount } = photo;
   return (
     <Layout layoutId={layoutId} onClick={onClick}>
       <Container>
-        <Image src={image} />
+        <Image src={`${process.env.REACT_APP_IMAGE_BASE_URL}${imageUri}`} />
         <Description>
-          <Name>{name}</Name>
+          <Name>{nickname}</Name>
           <Date>{createdAt}</Date>
           <Infos>
-            {likes !== 0 && (
+            {likeCount !== 0 && (
               <Info>
                 <svg
                   width="20"
@@ -94,13 +94,13 @@ const Card = ({ photo, layoutId, onClick }) => {
                     strokeWidth="2"
                   />
                 </svg>
-                <BoldText>{likes}</BoldText>
+                <BoldText>{likeCount}</BoldText>
               </Info>
             )}
-            {instaViews !== 0 && (
+            {viewCount !== 0 && (
               <Info>
                 <Icon src="/icons/instagram.png" />
-                <BoldText>{instaViews}</BoldText>
+                <BoldText>{viewCount}</BoldText>
               </Info>
             )}
           </Infos>
