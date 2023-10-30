@@ -109,6 +109,7 @@ npm start
   <img src="https://img.shields.io/badge/swiper-6332F6?style=for-the-badge&logo=swiper&logoColor=white">
   <img src="https://img.shields.io/badge/recoil-3578E5?style=for-the-badge&logo=recoil&logoColor=white">
   <img src="https://img.shields.io/badge/react query-FF4154?style=for-the-badge&logo=react query&logoColor=white">
+  <img src="https://img.shields.io/badge/egjs infinite grid-03C75A?style=for-the-badge&logo=naver&logoColor=white">
 </div>
 
 <br />
@@ -358,11 +359,25 @@ my-app
 <details>
   <summary>8주차(10.23 ~ 10.29)</summary>
   <div>
-  
+
+8주차는 중간고사 기간으로 자율적으로 개발했습니다.
+
 ### ✅ 산출물
 
 ```
-- to do
+- 완석
+카카오 로그인 API 임시 연결
+홈 전체 조회 API 임시 연결
+인기 전체 조회 API 연결 및 무한 스크롤 구현
+인기 상세 조회 API 연결
+좋아요 API 연결
+업로드 API 연결
+인스타그램 연결 로직 임시 생성
+로그아웃 API 임시 연결
+로그인 여부에 따른 접근 제한(로그인) 모달 생성
+MY 계정 정보 조회 API 임시 연결
+MY 전체 조회 API 임시 연결 및 무한 스크롤 구현
+MY 상세 조회 API 임시 연결
 ```
 
   </div>
