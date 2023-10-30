@@ -52,7 +52,7 @@ const Quit = styled.div`
 
 const SettingPage = () => {
   const navigate = useNavigate();
-  const { mutate } = useMutation(kakaoLogout, {
+  const { mutate: logout } = useMutation(kakaoLogout, {
     onSuccess: () => {
       localStorage.removeItem("token");
       navigate("/");
@@ -66,8 +66,8 @@ const SettingPage = () => {
     console.log("카카오 문의하기 채널로 이동");
   };
 
-  const handleSignOutClick = () => {
-    mutate();
+  const handleLogOutClick = () => {
+    logout();
   };
 
   const handleQuitClick = () => {
@@ -102,7 +102,7 @@ const SettingPage = () => {
         <Main>
           <List>
             <ListItem onClick={handleAskClick}>카카오 문의하기</ListItem>
-            <ListItem onClick={handleSignOutClick}>로그아웃</ListItem>
+            <ListItem onClick={handleLogOutClick}>로그아웃</ListItem>
           </List>
           <Quit onClick={handleQuitClick}>회원 탈퇴</Quit>
         </Main>
