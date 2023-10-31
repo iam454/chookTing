@@ -5,7 +5,7 @@ import styled from "styled-components";
 import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useMutation } from "@tanstack/react-query";
-import { kakaoLogout } from "../../apis/api/user";
+import { deleteUser, kakaoLogout } from "../../apis/api/user";
 
 const Header = styled.header`
   width: 100%;
@@ -61,8 +61,18 @@ const SettingPage = () => {
       console.log("로그아웃 실패", e);
     },
   });
+  const { mutate: quit } = useMutation(deleteUser, {
+    onSuccess: () => {
+      localStorage.removeItem("token");
+      navigate("/");
+    },
+    onError: (e) => {
+      console.log("탈퇴 실패", e);
+    },
+  });
 
   const handleAskClick = () => {
+    alert("미구현 기능입니다.");
     console.log("카카오 문의하기 채널로 이동");
   };
 
@@ -71,7 +81,7 @@ const SettingPage = () => {
   };
 
   const handleQuitClick = () => {
-    console.log("회원탈퇴 API");
+    quit();
   };
 
   return (
