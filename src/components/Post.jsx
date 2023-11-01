@@ -544,7 +544,12 @@ const MyPost = ({
             />
           </motion.svg>
         </IconButton>
-        <IconButton text={numberInstas}>
+        <IconButton
+          text={numberInstas}
+          onClick={() => {
+            console.log("WOW");
+          }}
+        >
           <img
             src="/icons/instagram.png"
             width={20}

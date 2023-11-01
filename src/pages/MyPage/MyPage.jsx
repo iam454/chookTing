@@ -13,53 +13,6 @@ import { fetchUserInfos } from "../../apis/api/user";
 import HeartLoader from "../../components/HeartLoader";
 import { fetchMyPosts } from "../../apis/api/post";
 
-const response = {
-  id: 14,
-  username: "춘식이",
-  email: "chooonsik@naver.com",
-  profileImage: "sample.png",
-  instagram: {
-    isLinked: true,
-    infos: {
-      totalLikes: 54,
-      totalViews: 48,
-      fireworks: 700,
-    },
-    photos: [
-      {
-        id: 4,
-        image: "/sample.png",
-        createdAt: "2023-09-02",
-        name: "안녕하세요",
-        hashtags: ["해쉬태그", "안녕"],
-        likes: 50,
-        instaViews: 39,
-        isLiked: true,
-      },
-      {
-        id: 19,
-        image: "/sample3.png",
-        createdAt: "2023-10-17",
-        name: "열두글자이름이름열두글자",
-        hashtags: ["여덟글자해쉬태그", "안녕안녕"],
-        likes: 4,
-        instaViews: 0,
-        isLiked: true,
-      },
-      {
-        id: 21,
-        image: "/sample4.png",
-        createdAt: "2023-11-02",
-        name: "english Name",
-        hashtags: ["english"],
-        likes: 0,
-        instaViews: 9,
-        isLiked: false,
-      },
-    ],
-  },
-};
-
 const response2 = {
   id: 14,
   username: "춘식이",
@@ -68,7 +21,6 @@ const response2 = {
   instagram: {
     isLinked: false,
     infos: {},
-    photos: [],
   },
 };
 
@@ -84,7 +36,6 @@ const response3 = {
       totalViews: 0,
       fireworks: 300,
     },
-    photos: [],
   },
 };
 
@@ -132,7 +83,7 @@ const MyPage = () => {
     username,
     email,
     profileImage,
-    instagram: { isLinked, infos, photos },
+    instagram: { isLinked, infos },
   } = response3;
   const navigate = useNavigate();
   const detailMatch = useMatch("/profile/post/:postId");
@@ -144,6 +95,8 @@ const MyPage = () => {
     },
   });
   const bottomObserverRef = useRef(null);
+
+  console.log(userInfos);
 
   const handleCardClick = (postId) => {
     navigate(`post/${postId}`);
