@@ -19,6 +19,7 @@ const sample = {
 
 const MyDetailPage = () => {
   const postId = useParams();
+  const id = postId.postId;
   const navigate = useNavigate();
   const {
     isLoading,
@@ -31,7 +32,6 @@ const MyDetailPage = () => {
       navigate("/profile");
     },
   });
-
   console.log("My Detail", postId, myDetail);
 
   if (isLoading) {
@@ -40,7 +40,7 @@ const MyDetailPage = () => {
 
   return (
     <Post.My
-      // id={}
+      id={id}
       image={myDetail.data.response.imageUri}
       info={
         <PostInfos
