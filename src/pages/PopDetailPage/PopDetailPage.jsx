@@ -13,7 +13,7 @@ const PopDetailPage = () => {
     isLoading,
     data: popDetail,
     refetch,
-  } = useQuery(["popDetail", postId], () => fetchPopPost(postId), {
+  } = useQuery(["popDetail", +postId.postId], () => fetchPopPost(postId), {
     onError: (e) => {
       alert("게시물을 찾을 수 없습니다.");
       refetch();
@@ -35,7 +35,7 @@ const PopDetailPage = () => {
         />
       }
       id={popDetail.data.response.postId}
-      // isLikedPost={photo.isLiked}
+      isLikedPost={popDetail.data.response.isLiked}
       numberLikes={popDetail.data.response.likeCount}
       points={popDetail.data.response.postPoint}
     />
