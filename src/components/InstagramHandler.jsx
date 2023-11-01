@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Layout from "./Layout";
 import styled from "styled-components";
 import HeartLoader from "./HeartLoader";
@@ -22,7 +22,6 @@ const InstagramHandler = () => {
     onSuccess: (res) => {
       const token = res.headers.authorization;
       localStorage.setItem("token", token);
-      console.log("인스타 토큰 발급 성공");
       navigate("/profile");
     },
     onError: (e) => {
@@ -30,6 +29,10 @@ const InstagramHandler = () => {
       navigate("/profile");
     },
   });
+
+  useEffect(() => {
+    mutate({ code });
+  }, []);
 
   return (
     <Layout>
