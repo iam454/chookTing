@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Layout from "../../components/Layout";
 // import { SkeletonPage } from "../SkeletonPage/SkeletonPage";
 import Post from "../../components/Post";
@@ -148,7 +148,7 @@ const HomePage = () => {
                   <PostInfos name={post.nickname} hashtags={post.hashTags} />
                 }
                 id={post.postId}
-                // isLikedPost={post.isLiked}
+                isLikedPost={post.isLiked}
                 points={post.postPoint}
                 handleAutoPlayPause={handleAutoPlayPause}
               />
