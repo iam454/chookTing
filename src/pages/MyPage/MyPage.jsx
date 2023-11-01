@@ -138,7 +138,11 @@ const MyPage = () => {
   const detailMatch = useMatch("/profile/post/:postId");
 
   const { data: userInfos } = useQuery(["userInfos"], fetchUserInfos);
-  const { data: my, fetchNextPage } = useInfiniteQuery(["my"], fetchMyPosts, {
+  const {
+    data: my,
+    fetchNextPage,
+    refetch,
+  } = useInfiniteQuery(["my"], fetchMyPosts, {
     getNextPageParam: (lastPage, allPages) => {
       return lastPage.data.response.hasNext ? allPages.length : undefined;
     },
@@ -149,7 +153,8 @@ const MyPage = () => {
     navigate(`post/${postId}`);
   };
 
-  const handleOverlayClick = () => {
+  const handleOverlayClick = async () => {
+    await refetch();
     navigate("/profile");
   };
 

@@ -148,7 +148,7 @@ const HomePage = () => {
                   <PostInfos name={post.nickname} hashtags={post.hashTags} />
                 }
                 id={post.postId}
-                // isLikedPost={post.isLiked}
+                isLikedPost={post.isLiked}
                 points={post.postPoint}
                 handleAutoPlayPause={handleAutoPlayPause}
               />

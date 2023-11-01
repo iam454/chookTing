@@ -11,14 +11,14 @@ import ToUploadPage from "./pages/UploadPage/ToUploadPage";
 import NotFoundPage from "./pages/NotFoundPage/NotFoundPage";
 import KakaoHandler from "./components/KakaoHandler";
 import InstagramHandler from "./components/InstagramHandler";
-import RequiredAuthLayout from "./layouts/RequiredAuthLayout";
+import AuthLayout from "./layouts/AuthLayout";
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<HomePage />}></Route>
-        <Route element={<RequiredAuthLayout />}>
+        <Route element={<AuthLayout />}>
           <Route path="/pop" element={<PopPage />}>
             <Route path="post/:postId" element={<PopPage />}></Route>
           </Route>

@@ -1,11 +1,11 @@
 import { useEffect } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 
-function RequiredAuthLayout() {
+function AuthLayout() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (localStorage.getItem("token") === null) {
+    if (!localStorage.getItem("token")) {
       navigate("/");
     }
   }, [navigate]);
@@ -13,4 +13,4 @@ function RequiredAuthLayout() {
   return <Outlet />;
 }
 
-export default RequiredAuthLayout;
+export default AuthLayout;
