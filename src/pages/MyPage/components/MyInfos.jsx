@@ -29,11 +29,11 @@ const MyInfos = ({ isLinked, infos }) => {
   return (
     <List>
       <Item>
-        <Number>{!isLinked ? totalLikes || "-" : "-"}</Number>
+        <Number>{isLinked ? totalLikes || "-" : "-"}</Number>
         <Text>내가 받은 좋아요</Text>
       </Item>
       <Item>
-        <Number>{!isLinked ? totalViews || "-" : "-"}</Number>
+        <Number>{isLinked ? totalViews || "-" : "-"}</Number>
         <Text>내가 받은 폭죽</Text>
       </Item>
       <Item onClick={() => setIsModalOpen(true)}>
