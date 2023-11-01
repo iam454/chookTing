@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Layout from "../../components/Layout";
 // import { SkeletonPage } from "../SkeletonPage/SkeletonPage";
 import Post from "../../components/Post";

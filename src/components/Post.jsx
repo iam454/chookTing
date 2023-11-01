@@ -6,7 +6,7 @@ import { Modal } from "./Modal";
 import ModalButton from "./ModalButton";
 import theme from "../theme";
 import SkeletonIcon from "../pages/SkeletonPage/components/SkeletonIcon";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { updateLike } from "../apis/api/post";
 import { KAKAO_AUTH_URL } from "../auth/kakao/auth";
 
@@ -71,6 +71,7 @@ const HomePost = ({
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const likeAnimation = useAnimation();
   const dbclickAnimation = useAnimation();
+
   const { mutate } = useMutation(updateLike, {
     onSuccess: (e) => {
       console.log("success", e);
@@ -260,6 +261,34 @@ const PopPost = ({ id, image, info, isLikedPost, numberLikes = 0, points }) => {
       console.log("err", e);
     },
   });
+
+  // 인기 api isLiked 수정하고 다시 한번 살펴보기
+  // const queryClient = useQueryClient();
+  // const { mutate } = useMutation((newOption) => updateLike(newOption), {
+  //   onMutate: async (newOption) => {
+  //     await queryClient.cancelQueries(["popDetail", id]);
+  //     const prevData = queryClient.getQueryData(["popDetail", id]);
+  //     console.log("option", newOption);
+  //     console.log("prev", prevData);
+  //     const newData = { ...prevData };
+  //     console.log(newData.data.response);
+  //     newData.data.response.isLiked = newOption.like;
+  //     console.log("new", newData);
+  //     queryClient.setQueryData(["popDetail", id], newData);
+
+  //     return { prevData };
+  //   },
+  //   onSuccess: (e) => {
+  //     console.log("좋아요 요청 성공", e);
+  //   },
+  //   onError: (error, _, context) => {
+  //     console.log("좋아요 요청 에러", error);
+  //     queryClient.setQueryData(["popDetail", id], context?.prevData);
+  //   },
+  //   onSettled: () => {
+  //     queryClient.invalidateQueries(["popDetail", id]);
+  //   },
+  // });
 
   const handleDoubleClick = (id) => {
     if (!toggleLikeOn) {
@@ -515,7 +544,12 @@ const MyPost = ({
             />
           </motion.svg>
         </IconButton>
-        <IconButton text={numberInstas}>
+        <IconButton
+          text={numberInstas}
+          onClick={() => {
+            console.log("WOW");
+          }}
+        >
           <img
             src="/icons/instagram.png"
             width={20}
