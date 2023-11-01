@@ -5,7 +5,7 @@ import styled from "styled-components";
 import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useMutation } from "@tanstack/react-query";
-import { kakaoLogout } from "../../apis/api/user";
+import { deleteUser, kakaoLogout } from "../../apis/api/user";
 
 const Header = styled.header`
   width: 100%;
@@ -52,25 +52,36 @@ const Quit = styled.div`
 
 const SettingPage = () => {
   const navigate = useNavigate();
-  const { mutate } = useMutation(kakaoLogout, {
+  const { mutate: logout } = useMutation(kakaoLogout, {
     onSuccess: () => {
+      localStorage.removeItem("token");
       navigate("/");
     },
     onError: (e) => {
-      console.log("카카오 로그아웃 실패", e);
+      console.log("로그아웃 실패", e);
+    },
+  });
+  const { mutate: quit } = useMutation(deleteUser, {
+    onSuccess: () => {
+      localStorage.removeItem("token");
+      navigate("/");
+    },
+    onError: (e) => {
+      console.log("탈퇴 실패", e);
     },
   });
 
   const handleAskClick = () => {
+    alert("미구현 기능입니다.");
     console.log("카카오 문의하기 채널로 이동");
   };
 
-  const handleSignOutClick = () => {
-    mutate();
+  const handleLogOutClick = () => {
+    logout();
   };
 
   const handleQuitClick = () => {
-    console.log("회원탈퇴 API");
+    quit();
   };
 
   return (
@@ -101,7 +112,7 @@ const SettingPage = () => {
         <Main>
           <List>
             <ListItem onClick={handleAskClick}>카카오 문의하기</ListItem>
-            <ListItem onClick={handleSignOutClick}>로그아웃</ListItem>
+            <ListItem onClick={handleLogOutClick}>로그아웃</ListItem>
           </List>
           <Quit onClick={handleQuitClick}>회원 탈퇴</Quit>
         </Main>

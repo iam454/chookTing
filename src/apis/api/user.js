@@ -15,3 +15,7 @@ export const fetchUserInfos = () => {
 export const kakaoLogout = () => {
   return instance.post("/user/logout");
 };
+
+export const deleteUser = () => {
+  return instance.delete("/user/account");
+};
