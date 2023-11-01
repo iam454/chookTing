@@ -11,27 +11,30 @@ import ToUploadPage from "./pages/UploadPage/ToUploadPage";
 import NotFoundPage from "./pages/NotFoundPage/NotFoundPage";
 import KakaoHandler from "./components/KakaoHandler";
 import InstagramHandler from "./components/InstagramHandler";
+import RequiredAuthLayout from "./layouts/RequiredAuthLayout";
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<HomePage />}></Route>
-        <Route path="/pop" element={<PopPage />}>
-          <Route path="post/:postId" element={<PopPage />}></Route>
+        <Route element={<RequiredAuthLayout />}>
+          <Route path="/pop" element={<PopPage />}>
+            <Route path="post/:postId" element={<PopPage />}></Route>
+          </Route>
+          <Route path="/profile" element={<MyPage />}>
+            <Route path="post/:postId" element={<MyDetailPage />}></Route>
+          </Route>
+          <Route path="/profile/setting" element={<SettingPage />}></Route>
+          <Route path="/toUpload" element={<ToUploadPage />}></Route>
+          <Route path="/upload" element={<UploadPage />}></Route>
+          <Route path="/upload-done" element={<UploadDonePage />}></Route>
+          <Route path="/kakao/callback" element={<KakaoHandler />}></Route>
+          <Route
+            path="/instagram/callback"
+            element={<InstagramHandler />}
+          ></Route>
         </Route>
-        <Route path="/profile" element={<MyPage />}>
-          <Route path="post/:postId" element={<MyDetailPage />}></Route>
-        </Route>
-        <Route path="/profile/setting" element={<SettingPage />}></Route>
-        <Route path="/toUpload" element={<ToUploadPage />}></Route>
-        <Route path="/upload" element={<UploadPage />}></Route>
-        <Route path="/upload-done" element={<UploadDonePage />}></Route>
-        <Route path="/kakao/callback" element={<KakaoHandler />}></Route>
-        <Route
-          path="/instagram/callback"
-          element={<InstagramHandler />}
-        ></Route>
         <Route path="*" element={<NotFoundPage />}></Route>
       </Routes>
       <NavigationBar />
