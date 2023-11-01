@@ -189,10 +189,10 @@ const MyPage = () => {
             page.data.response.postList.map((post) => {
               return (
                 <Card
-                  layoutId={"my" + post.postid}
-                  key={post.postid}
+                  layoutId={"my" + post.postId}
+                  key={post.postId}
                   photo={post}
-                  onClick={() => handleCardClick(post.postid)}
+                  onClick={() => handleCardClick(post.postId)}
                 />
               );
             })
