@@ -156,10 +156,7 @@ const HomePost = ({
         handleDoubleClick(id);
       }}
     >
-      <Image
-        src={`${process.env.REACT_APP_IMAGE_BASE_URL}${image}`}
-        alt="네컷 사진"
-      />
+      <Image src={`${image}`} alt="네컷 사진" />
       <InfoContainer>{info}</InfoContainer>
       <motion.svg
         width={48}
@@ -345,10 +342,7 @@ const PopPost = ({ id, image, info, isLikedPost, numberLikes = 0, points }) => {
 
   return (
     <Layout onDoubleClick={() => handleDoubleClick(id)}>
-      <Image
-        src={`${process.env.REACT_APP_IMAGE_BASE_URL}${image}`}
-        alt="네컷 사진"
-      />
+      <Image src={`${image}`} alt="네컷 사진" />
       <InfoContainer>{info}</InfoContainer>
       <motion.svg
         width={48}
@@ -496,10 +490,7 @@ const MyPost = ({
 
   return (
     <Layout onDoubleClick={() => handleDoubleClick(id)}>
-      <Image
-        src={`${process.env.REACT_APP_IMAGE_BASE_URL}${image}`}
-        alt="네컷 사진"
-      />
+      <Image src={`${image}`} alt="네컷 사진" />
       <InfoContainer>{info}</InfoContainer>
       <motion.svg
         width={48}

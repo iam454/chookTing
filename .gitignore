@@ -25,3 +25,7 @@ yarn-error.log*
 # 완석 https key
 localhost+2-key.pem
 localhost+2.pem
+
+# 건형 https key
+localhost+10-key.pem
+localhost+10.pem

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Post from "../../components/Post";
 import PostInfos from "../../components/PostInfos";
 import { useNavigate, useParams } from "react-router-dom";
@@ -30,8 +30,10 @@ const MyDetailPage = () => {
       refetch();
       navigate("/profile");
     },
+    cacheTime: 0,
   });
-  console.log("My Detail", postId, myDetail);
+
+  console.log(myDetail);
 
   if (isLoading) {
     return <SkeletonPage.My />;

@@ -12,6 +12,7 @@ import { useQuery, useInfiniteQuery, useQueries } from "@tanstack/react-query";
 import { fetchUserInfos } from "../../apis/api/user";
 import HeartLoader from "../../components/HeartLoader";
 import { fetchMyPosts } from "../../apis/api/post";
+import { SkeletonPage } from "../SkeletonPage/SkeletonPage";
 
 const response2 = {
   id: 14,
@@ -88,11 +89,15 @@ const MyPage = () => {
   const navigate = useNavigate();
   const detailMatch = useMatch("/profile/post/:postId");
 
-  const { data: userInfos } = useQuery(["userInfos"], fetchUserInfos);
+  const { data: userInfos, refetch: refetchUserInfos } = useQuery(
+    ["userInfos"],
+    fetchUserInfos
+  );
   const {
+    isLoading,
     data: my,
     fetchNextPage,
-    refetch,
+    refetch: refetchMy,
   } = useInfiniteQuery(["my"], fetchMyPosts, {
     getNextPageParam: (lastPage, allPages) => {
       return lastPage.data.response.hasNext ? allPages.length : undefined;
@@ -107,7 +112,8 @@ const MyPage = () => {
   };
 
   const handleOverlayClick = async () => {
-    await refetch();
+    await refetchMy();
+    await refetchUserInfos();
     navigate("/profile");
   };
 
@@ -132,6 +138,11 @@ const MyPage = () => {
       io.disconnect();
     };
   }, [bottomObserverRef, fetchNextPage]);
+
+  const aaa = false;
+  if (aaa) {
+    return <SkeletonPage.My />;
+  }
 
   return (
     <Layout>
@@ -163,6 +174,7 @@ const MyPage = () => {
           <>
             <Overlay
               onClick={handleOverlayClick}
+              initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
             />
