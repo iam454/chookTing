@@ -31,7 +31,7 @@ instance.interceptors.request.use((config) => {
 instance.interceptors.response.use(
   (res) => res,
   async (err) => {
-    if (err.response.data?.error.code === "4111") {
+    if (err.response?.data?.error.code === "4111") {
       localStorage.removeItem("token");
       const token = await reissueToken(instance);
       if (token) {
@@ -63,7 +63,7 @@ uploadInstance.interceptors.request.use((config) => {
 uploadInstance.interceptors.response.use(
   (res) => res,
   async (err) => {
-    if (err.response.data?.error.code === "4111") {
+    if (err.response?.data?.error.code === "4111") {
       localStorage.removeItem("token");
       const token = await reissueToken(uploadInstance);
       if (token) {
