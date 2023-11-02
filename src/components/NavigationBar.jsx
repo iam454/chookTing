@@ -9,7 +9,7 @@ import uploadFileState from "../recoil/uploadImage/atom";
 import { Modal } from "./Modal";
 import ModalButton from "./ModalButton";
 import theme from "../theme";
-import { KAKAO_AUTH_URL } from "../auth/kakao/auth";
+import { handleKaKaoLogin } from "../utils/handleKaKaoLogin";
 
 const Nav = styled.nav`
   z-index: 10;
@@ -65,10 +65,6 @@ const NavigationBar = () => {
     }
   };
 
-  const handleKakaoButtonClick = () => {
-    window.location.href = KAKAO_AUTH_URL;
-  };
-
   return (
     <Nav>
       <Tabs>
@@ -100,7 +96,7 @@ const NavigationBar = () => {
           isLong
           isTextBlack
           iconSrc="/icons/kakao.png"
-          onClick={handleKakaoButtonClick}
+          onClick={handleKaKaoLogin}
           text="카카오로 3초만에 시작하기"
           bgColor={theme.yellow}
         />

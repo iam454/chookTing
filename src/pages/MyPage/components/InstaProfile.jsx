@@ -5,7 +5,7 @@ import Text from "./Text";
 import { Modal } from "../../../components/Modal";
 import theme from "../../../theme";
 import ModalButton from "../../../components/ModalButton";
-import { INSTAGRAM_AUTH_URL } from "../../../auth/instagram/auth";
+import { handleInstagramLogin } from "../../../utils/handleInstagramLogin";
 
 const Profile = styled.div`
   padding: 8px 0;
@@ -50,10 +50,6 @@ const InstaProfile = ({ isLinked, infos }) => {
     }
   };
 
-  const handleInstagramConnection = () => {
-    window.location.href = INSTAGRAM_AUTH_URL;
-  };
-
   return (
     <Profile>
       <Text>포토카드에 SNS 계정을 연결해서 공유해 보세요.</Text>
@@ -70,7 +66,7 @@ const InstaProfile = ({ isLinked, infos }) => {
       >
         <ModalButton
           isLong
-          onClick={handleInstagramConnection}
+          onClick={handleInstagramLogin}
           iconSrc="/icons/instagram.png"
           bgColor={theme.pink}
           text="인스타그램 연결하기"
