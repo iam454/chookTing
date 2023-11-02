@@ -25,6 +25,6 @@ export const fetchMyPosts = () => {
   return instance.get("/post/user");
 };
 
-export const fetchMyPost = async ({ postId }) => {
-  return await instance.get(`/post/${postId}/user`);
+export const fetchMyPost = ({ postId }) => {
+  return instance.get(`/post/${postId}/user`);
 };

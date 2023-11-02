@@ -41,8 +41,8 @@ const MyDetailPage = () => {
 
   return (
     <Post.My
-      id={id}
-      image={myDetail.data.response.imageUri}
+      id={myDetail.data.response.postId}
+      image={myDetail?.data.response.imageUrl}
       info={
         <PostInfos
           name={myDetail.data.response.nickname}

@@ -105,10 +105,6 @@ const MyPage = () => {
   });
   const bottomObserverRef = useRef(null);
 
-  console.log("my", my);
-
-  console.log(userInfos);
-
   const handleCardClick = (postId) => {
     navigate(`post/${postId}`);
   };
@@ -141,11 +137,7 @@ const MyPage = () => {
     };
   }, [bottomObserverRef, fetchNextPage]);
 
-  const aaa = false;
-  if (aaa) {
-    return <SkeletonPage.My />;
-  }
-
+  console.log("유저 정보", userInfos?.data.response);
   return (
     <Layout>
       <Container>
@@ -153,8 +145,11 @@ const MyPage = () => {
           username={userInfos?.data.response.userName}
           profileImage={userInfos?.data.response.profileImageUrl}
         />
-        <InstaProfile isLinked={isLinked} infos={infos} />
-        <UploadButton isLinked={isLinked} />
+        <InstaProfile
+          isLinked={userInfos?.data.response.isInstaConnected}
+          infos={userInfos}
+        />
+        <UploadButton isLinked={userInfos?.data.response.isInstaConnected} />
         <Album>
           {my?.pages.map((page) =>
             page.data.response.postList.map((post) => {
