@@ -47,6 +47,7 @@ const PopPage = () => {
       },
     }
   );
+  console.log(pop);
   const bottomObserverRef = useRef(null);
 
   const handleCardClick = (postId) => {
@@ -90,7 +91,7 @@ const PopPage = () => {
                   layoutId={"pop" + post.postId}
                   key={post.postId}
                   level={post.postLevel}
-                  image={post.imageUri}
+                  image={post.imageUrl}
                   onClick={() => handleCardClick(post.postId)}
                 />
               );
