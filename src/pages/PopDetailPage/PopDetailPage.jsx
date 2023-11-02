@@ -27,7 +27,7 @@ const PopDetailPage = () => {
 
   return (
     <Post.Pop
-      image={popDetail.data.response.imageUri}
+      image={popDetail.data.response.imageUrl}
       info={
         <PostInfos
           name={popDetail.data.response.nickname}

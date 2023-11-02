@@ -73,7 +73,7 @@ const Card = ({ photo, layoutId, onClick }) => {
   return (
     <Layout layoutId={layoutId} onClick={onClick}>
       <Container>
-        <Image src={`${process.env.REACT_APP_IMAGE_BASE_URL}${imageUri}`} />
+        <Image src={imageUri} />
         <Description>
           <Name>{nickname}</Name>
           <Date>{createdAt}</Date>

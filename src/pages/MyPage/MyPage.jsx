@@ -96,6 +96,8 @@ const MyPage = () => {
   });
   const bottomObserverRef = useRef(null);
 
+  console.log("my", my);
+
   console.log(userInfos);
 
   const handleCardClick = (postId) => {
