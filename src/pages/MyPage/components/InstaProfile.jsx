@@ -5,7 +5,7 @@ import Text from "./Text";
 import { Modal } from "../../../components/Modal";
 import theme from "../../../theme";
 import ModalButton from "../../../components/ModalButton";
-import { INSTAGRAM_AUTH_URL } from "../../../auth/instagram/auth";
+import { handleInstagramLogin } from "../../../utils/handleInstagramLogin";
 
 const Profile = styled.div`
   padding: 8px 0;
@@ -35,10 +35,6 @@ const InstaButton = styled.button`
   background-color: transparent;
   color: ${(props) => props.theme.white};
   padding: 0;
-  font-family: "Pretendard Variable", Pretendard, -apple-system,
-    BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI",
-    "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji",
-    "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
 `;
 
 const InstaProfile = ({ isLinked, infos }) => {
@@ -48,10 +44,6 @@ const InstaProfile = ({ isLinked, infos }) => {
     if (!isLinked) {
       setIsModalOpen(true);
     }
-  };
-
-  const handleInstagramConnection = () => {
-    window.location.href = INSTAGRAM_AUTH_URL;
   };
 
   return (
@@ -70,7 +62,7 @@ const InstaProfile = ({ isLinked, infos }) => {
       >
         <ModalButton
           isLong
-          onClick={handleInstagramConnection}
+          onClick={handleInstagramLogin}
           iconSrc="/icons/instagram.png"
           bgColor={theme.pink}
           text="인스타그램 연결하기"

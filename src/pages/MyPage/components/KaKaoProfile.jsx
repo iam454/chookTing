@@ -26,7 +26,7 @@ const Name = styled.span`
   font-size: 16px;
 `;
 
-const KaKaoProfile = ({ username, email, profileImage }) => {
+const KaKaoProfile = ({ username, profileImage }) => {
   const navigate = useNavigate();
 
   const handleSettingButtonClick = () => {

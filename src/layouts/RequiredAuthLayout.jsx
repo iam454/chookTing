@@ -3,12 +3,13 @@ import { Outlet, useNavigate } from "react-router-dom";
 
 function RequiredAuthLayout() {
   const navigate = useNavigate();
+  const isLoggedIn = !!localStorage.getItem("token");
 
   useEffect(() => {
-    if (localStorage.getItem("token") === null) {
+    if (!isLoggedIn) {
       navigate("/");
     }
-  }, [navigate]);
+  }, [navigate, isLoggedIn]);
 
   return <Outlet />;
 }

@@ -38,10 +38,6 @@ const InputBox = styled.form`
 `;
 
 const Input = styled.input`
-  font-family: "Pretendard Variable", Pretendard, -apple-system,
-    BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI",
-    "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji",
-    "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
   width: 100%;
   height: 44px;
   padding: 12px;
