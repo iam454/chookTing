@@ -5,7 +5,7 @@ export const createPost = (payload) => {
 };
 
 export const fetchHomePosts = () => {
-  return instance.get("/post");
+  return instance.get("/post?lastPostId=10&size=10");
 };
 
 export const fetchPopPosts = () => {
