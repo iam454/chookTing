@@ -6,7 +6,7 @@ import { Modal } from "./Modal";
 import ModalButton from "./ModalButton";
 import theme from "../theme";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { updateLike } from "../apis/api/post";
+import { fetchInstagramId, updateLike } from "../apis/api/post";
 import { handleKaKaoLogin } from "../utils/handleKaKaoLogin";
 import { convertToK } from "../utils/convertToK";
 
@@ -203,7 +203,7 @@ const HomePost = ({
         <Modal.Long
           isOpen={isInstaModalOpen}
           onRequestClose={() => setIsInstaModalOpen(false)}
-          text1="폭죽을 사용하여"
+          text1={`${points} 폭죽을 사용하여`}
           text2="인스타그램 계정에 방문할 수 있어요!"
         >
           <ModalButton
@@ -211,9 +211,9 @@ const HomePost = ({
             onClick={() => {
               console.log("인스타그램 방문!");
             }}
-            iconSrc="/icons/instagram.png"
-            bgColor={theme.pink}
-            text="인스타그램 방문하기"
+            iconSrc="/icons/fireworks.png"
+            bgColor={theme.orange}
+            text="네, 사용할래요!"
           />
         </Modal.Long>
         <Modal.Short
@@ -241,12 +241,20 @@ const PopPost = ({ id, image, info, isLikedPost, numberLikes = 0, points }) => {
   const [likes, setLikes] = useState(numberLikes);
   const likeAnimation = useAnimation();
   const dbclickAnimation = useAnimation();
-  const { mutate } = useMutation(updateLike, {
+  const { mutate: postLike } = useMutation(updateLike, {
     onSuccess: (e) => {
       console.log("success", e);
     },
     onError: (e) => {
       console.log("err", e);
+    },
+  });
+  const { mutate: getInsta } = useMutation(fetchInstagramId, {
+    onSuccess: (e) => {
+      console.log("폭죽 사용 성공", e);
+    },
+    onError: (e) => {
+      console.log("폭죽 사용 실패", e);
     },
   });
 
@@ -286,7 +294,7 @@ const PopPost = ({ id, image, info, isLikedPost, numberLikes = 0, points }) => {
         scale: [1, 1.2, 1],
       });
       setLikes((prev) => prev + 1);
-      mutate({ postId: id, like: true });
+      postLike({ postId: id, like: true });
     }
     dbclickAnimation.start({
       fill: "rgba(254, 32, 32, 1)",
@@ -304,7 +312,7 @@ const PopPost = ({ id, image, info, isLikedPost, numberLikes = 0, points }) => {
         stroke: "rgba(245, 245, 245, 1)",
       });
       setLikes((prev) => prev - 1);
-      mutate({ postId: id, like: false });
+      postLike({ postId: id, like: false });
     } else {
       likeAnimation.start({
         fill: "rgba(254, 32, 32, 1)",
@@ -318,9 +326,15 @@ const PopPost = ({ id, image, info, isLikedPost, numberLikes = 0, points }) => {
         opacity: [1, 1, 0],
       });
       setLikes((prev) => prev + 1);
-      mutate({ postId: id, like: true });
+      postLike({ postId: id, like: true });
     }
     setToggleLikeOn((prev) => !prev);
+  };
+
+  const handlePointButtonClick = () => {
+    const payload = { postId: id, postLevel: 1 };
+    console.log(payload);
+    getInsta(payload);
   };
 
   return (
@@ -372,8 +386,6 @@ const PopPost = ({ id, image, info, isLikedPost, numberLikes = 0, points }) => {
         </IconButton>
         <IconButton
           onClick={() => {
-            console.log("폭죽 보낼 아이디: ", id);
-            console.log(points, "폭죽 소모");
             setIsModalOpen(true);
           }}
         >
@@ -387,17 +399,15 @@ const PopPost = ({ id, image, info, isLikedPost, numberLikes = 0, points }) => {
         <Modal.Long
           isOpen={isModalOpen}
           onRequestClose={() => setIsModalOpen(false)}
-          text1="폭죽을 사용하여"
+          text1={`${points} 폭죽을 사용하여`}
           text2="인스타그램 계정에 방문할 수 있어요!"
         >
           <ModalButton
             isLong
-            onClick={() => {
-              console.log("인스타그램 방문!");
-            }}
-            iconSrc="/icons/instagram.png"
-            bgColor={theme.pink}
-            text="인스타그램 방문하기"
+            onClick={handlePointButtonClick}
+            iconSrc="/icons/fireworks.png"
+            bgColor={theme.orange}
+            text="네, 사용할래요!"
           />
         </Modal.Long>
       </ButtonContainer>
@@ -521,12 +531,7 @@ const MyPost = ({
             />
           </motion.svg>
         </IconButton>
-        <IconButton
-          text={numberInstas.toLocaleString()}
-          onClick={() => {
-            console.log("WOW");
-          }}
-        >
+        <IconButton text={numberInstas.toLocaleString()}>
           <img
             src="/icons/instagram.png"
             width={20}
