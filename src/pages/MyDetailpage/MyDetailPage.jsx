@@ -33,7 +33,7 @@ const MyDetailPage = () => {
     cacheTime: 0,
   });
 
-  console.log(myDetail);
+  console.log("myDetail", myDetail);
 
   if (isLoading) {
     return <SkeletonPage.My />;
