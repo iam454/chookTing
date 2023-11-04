@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 
-function RequiredAuthLayout() {
+function AuthLayout() {
   const navigate = useNavigate();
   const isLoggedIn = !!localStorage.getItem("token");
 
@@ -14,4 +14,4 @@ function RequiredAuthLayout() {
   return <Outlet />;
 }
 
-export default RequiredAuthLayout;
+export default AuthLayout;

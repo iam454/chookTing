@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import Layout from "../../components/Layout";
 import styled from "styled-components";
 import UploadButton from "./components/UploadButton";
@@ -8,36 +8,10 @@ import Card from "./components/Card";
 import { AnimatePresence, motion } from "framer-motion";
 import { useMatch, useNavigate } from "react-router-dom";
 import MyDetailPage from "../MyDetailpage/MyDetailPage";
-import { useQuery, useInfiniteQuery, useQueries } from "@tanstack/react-query";
+import { useQuery, useInfiniteQuery } from "@tanstack/react-query";
 import { fetchUserInfos } from "../../apis/api/user";
-import HeartLoader from "../../components/HeartLoader";
 import { fetchMyPosts } from "../../apis/api/post";
-
-const response2 = {
-  id: 14,
-  username: "춘식이",
-  email: "chooonsik@naver.com",
-  profileImage: "/icons/accountIcon.png",
-  instagram: {
-    isLinked: false,
-    infos: {},
-  },
-};
-
-const response3 = {
-  id: 14,
-  username: "춘식이",
-  email: "chooonsik@naver.com",
-  profileImage: "/icons/accountIcon.png",
-  instagram: {
-    isLinked: true,
-    infos: {
-      totalLikes: 0,
-      totalViews: 0,
-      fireworks: 300,
-    },
-  },
-};
+import { SkeletonPage } from "../SkeletonPage/SkeletonPage";
 
 const Container = styled.div`
   width: 358px;
@@ -79,24 +53,42 @@ const Detail = styled(motion.div)`
 `;
 
 const MyPage = () => {
-  const {
-    username,
-    email,
-    profileImage,
-    instagram: { isLinked, infos },
-  } = response3;
   const navigate = useNavigate();
   const detailMatch = useMatch("/profile/post/:postId");
 
-  const { data: userInfos } = useQuery(["userInfos"], fetchUserInfos);
-  const { data: my, fetchNextPage } = useInfiniteQuery(["my"], fetchMyPosts, {
-    getNextPageParam: (lastPage, allPages) => {
-      return lastPage.data.response.hasNext ? allPages.length : undefined;
+  const {
+    isLoading,
+    data: userInfos,
+    refetch: refetchUserInfos,
+  } = useQuery(["userInfos"], fetchUserInfos, {
+    onError: (e) => {
+      alert("사용자 정보를 찾을 수 없습니다.");
+      refetchUserInfos();
+      navigate("/");
     },
   });
-  const bottomObserverRef = useRef(null);
 
-  console.log("my", my);
+  const {
+    data: my,
+    fetchNextPage,
+    refetch: refetchMy,
+  } = useInfiniteQuery(
+    ["my"],
+    fetchMyPosts,
+    {
+      getNextPageParam: (lastPage, allPages) => {
+        return lastPage.data.response.hasNext ? allPages.length : undefined;
+      },
+    },
+    {
+      onError: (e) => {
+        alert("게시물을 찾을 수 없습니다.");
+        refetchMy();
+        navigate("/");
+      },
+    }
+  );
+  const bottomObserverRef = useRef(null);
 
   console.log(userInfos);
 
@@ -104,7 +96,9 @@ const MyPage = () => {
     navigate(`post/${postId}`);
   };
 
-  const handleOverlayClick = () => {
+  const handleOverlayClick = async () => {
+    await refetchMy();
+    await refetchUserInfos();
     navigate("/profile");
   };
 
@@ -137,8 +131,11 @@ const MyPage = () => {
           username={userInfos?.data.response.userName}
           profileImage={userInfos?.data.response.profileImageUrl}
         />
-        <InstaProfile isLinked={isLinked} infos={infos} />
-        <UploadButton isLinked={isLinked} />
+        <InstaProfile
+          isLinked={userInfos?.data.response.isInstaConnected}
+          infos={userInfos}
+        />
+        <UploadButton isLinked={userInfos?.data.response.isInstaConnected} />
         <Album>
           {my?.pages.map((page) =>
             page.data.response.postList.map((post) => {
@@ -160,6 +157,7 @@ const MyPage = () => {
           <>
             <Overlay
               onClick={handleOverlayClick}
+              initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
             />
