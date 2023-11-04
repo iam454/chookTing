@@ -6,9 +6,14 @@ import { Modal } from "./Modal";
 import ModalButton from "./ModalButton";
 import theme from "../theme";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { fetchInstagramId, updateLike } from "../apis/api/post";
+import {
+  fetchHomeInstagramId,
+  fetchPopInstagramId,
+  updateLike,
+} from "../apis/api/post";
 import { handleKaKaoLogin } from "../utils/handleKaKaoLogin";
 import { convertToK } from "../utils/convertToK";
+import { useNavigate } from "react-router-dom";
 
 const Layout = styled.div`
   position: relative;
@@ -67,17 +72,28 @@ const HomePost = ({
 }) => {
   const isLoggedIn = !!localStorage.getItem("token");
   const [toggleLikeOn, setToggleLikeOn] = useState(isLikedPost);
-  const [isInstaModalOpen, setIsInstaModalOpen] = useState(false);
+  const [isPointModalOpen, setIsPointModalOpen] = useState(false);
+  const [isPointErrorModalOpen, setIsPointErrorModalOpen] = useState(false);
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+  const navigate = useNavigate();
   const likeAnimation = useAnimation();
   const dbclickAnimation = useAnimation();
-
-  const { mutate } = useMutation(updateLike, {
+  const { mutate: postLike } = useMutation(updateLike, {
     onSuccess: (e) => {
       console.log("success", e);
     },
     onError: (e) => {
       console.log("err", e);
+    },
+  });
+  const { mutate: getInsta } = useMutation(fetchHomeInstagramId, {
+    onSuccess: (e) => {
+      console.log("폭죽 사용 성공", e);
+    },
+    onError: (e) => {
+      console.log("폭죽 사용 실패", e);
+      setIsPointModalOpen(false);
+      setIsPointErrorModalOpen(true);
     },
   });
 
@@ -89,7 +105,7 @@ const HomePost = ({
           stroke: "rgba(254, 32, 32, 1)",
           scale: [1, 1.2, 1],
         });
-        mutate({ postId: id, like: true });
+        postLike({ postId: id, like: true });
       }
       dbclickAnimation.start({
         fill: "rgba(254, 32, 32, 1)",
@@ -111,7 +127,7 @@ const HomePost = ({
           fill: "rgba(254, 32, 32, 0)",
           stroke: "rgba(245, 245, 245, 1)",
         });
-        mutate({ postId: id, like: false });
+        postLike({ postId: id, like: false });
       } else {
         likeAnimation.start({
           fill: "rgba(254, 32, 32, 1)",
@@ -124,7 +140,7 @@ const HomePost = ({
           scale: [1, 1.2, 1],
           opacity: [1, 1, 0],
         });
-        mutate({ postId: id, like: true });
+        postLike({ postId: id, like: true });
       }
       setToggleLikeOn((prev) => !prev);
     } else {
@@ -133,16 +149,20 @@ const HomePost = ({
     }
   };
 
-  const handleInstaButtonClick = (id, points) => {
+  const handleInstaButtonClick = () => {
     if (isLoggedIn) {
-      console.log("폭죽 보낼 아이디: ", id);
-      console.log(points, "폭죽 소모");
       handleAutoPlayPause();
-      setIsInstaModalOpen(true);
+      setIsPointModalOpen(true);
     } else {
       handleAutoPlayPause();
       setIsLoginModalOpen(true);
     }
+  };
+
+  const handlePointButtonClick = () => {
+    const payload = { postId: id };
+    console.log(payload);
+    getInsta(payload);
   };
 
   return (
@@ -192,7 +212,7 @@ const HomePost = ({
             />
           </motion.svg>
         </IconButton>
-        <IconButton onClick={() => handleInstaButtonClick(id, points)}>
+        <IconButton onClick={handleInstaButtonClick}>
           <img
             src="/icons/instagram.png"
             width={20}
@@ -201,21 +221,35 @@ const HomePost = ({
           />
         </IconButton>
         <Modal.Long
-          isOpen={isInstaModalOpen}
-          onRequestClose={() => setIsInstaModalOpen(false)}
+          isOpen={isPointModalOpen}
+          onRequestClose={() => setIsPointModalOpen(false)}
           text1={`${points} 폭죽을 사용하여`}
           text2="인스타그램 계정에 방문할 수 있어요!"
         >
           <ModalButton
             isLong
-            onClick={() => {
-              console.log("인스타그램 방문!");
-            }}
+            onClick={handlePointButtonClick}
             iconSrc="/icons/fireworks.png"
             bgColor={theme.orange}
             text="네, 사용할래요!"
           />
         </Modal.Long>
+        <Modal.Short
+          isOpen={isPointErrorModalOpen}
+          text="보유 폭죽이 부족해요."
+          onRequestClose={() => setIsPointErrorModalOpen(false)}
+        >
+          <ModalButton
+            onClick={() => navigate("/profile")}
+            text="내 폭죽 보러가기"
+            bgColor={theme.modal.gray}
+          />
+          <ModalButton
+            onClick={() => setIsPointErrorModalOpen(false)}
+            text="확인"
+            bgColor={theme.orange}
+          />
+        </Modal.Short>
         <Modal.Short
           isOpen={isLoginModalOpen}
           text="로그인이 필요한 서비스입니다."
@@ -236,8 +270,10 @@ const HomePost = ({
 };
 
 const PopPost = ({ id, image, info, isLikedPost, numberLikes = 0, points }) => {
+  const [isPointModalOpen, setIsPointModalOpen] = useState(false);
+  const [isPointErrorModalOpen, setIsPointErrorModalOpen] = useState(false);
+  const navigate = useNavigate();
   const [toggleLikeOn, setToggleLikeOn] = useState(isLikedPost);
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const [likes, setLikes] = useState(numberLikes);
   const likeAnimation = useAnimation();
   const dbclickAnimation = useAnimation();
@@ -249,12 +285,14 @@ const PopPost = ({ id, image, info, isLikedPost, numberLikes = 0, points }) => {
       console.log("err", e);
     },
   });
-  const { mutate: getInsta } = useMutation(fetchInstagramId, {
+  const { mutate: getInsta } = useMutation(fetchPopInstagramId, {
     onSuccess: (e) => {
       console.log("폭죽 사용 성공", e);
     },
     onError: (e) => {
       console.log("폭죽 사용 실패", e);
+      setIsPointModalOpen(false);
+      setIsPointErrorModalOpen(true);
     },
   });
 
@@ -386,7 +424,7 @@ const PopPost = ({ id, image, info, isLikedPost, numberLikes = 0, points }) => {
         </IconButton>
         <IconButton
           onClick={() => {
-            setIsModalOpen(true);
+            setIsPointModalOpen(true);
           }}
         >
           <img
@@ -397,8 +435,8 @@ const PopPost = ({ id, image, info, isLikedPost, numberLikes = 0, points }) => {
           />
         </IconButton>
         <Modal.Long
-          isOpen={isModalOpen}
-          onRequestClose={() => setIsModalOpen(false)}
+          isOpen={isPointModalOpen}
+          onRequestClose={() => setIsPointModalOpen(false)}
           text1={`${points} 폭죽을 사용하여`}
           text2="인스타그램 계정에 방문할 수 있어요!"
         >
@@ -410,6 +448,22 @@ const PopPost = ({ id, image, info, isLikedPost, numberLikes = 0, points }) => {
             text="네, 사용할래요!"
           />
         </Modal.Long>
+        <Modal.Short
+          isOpen={isPointErrorModalOpen}
+          text="보유 폭죽이 부족해요."
+          onRequestClose={() => setIsPointErrorModalOpen(false)}
+        >
+          <ModalButton
+            onClick={() => navigate("/profile")}
+            text="내 폭죽 보러가기"
+            bgColor={theme.modal.gray}
+          />
+          <ModalButton
+            onClick={() => setIsPointErrorModalOpen(false)}
+            text="확인"
+            bgColor={theme.orange}
+          />
+        </Modal.Short>
       </ButtonContainer>
     </Layout>
   );

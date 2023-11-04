@@ -29,6 +29,10 @@ export const updateLike = (payload) => {
   return instance.post(`/post/${postId}/like`);
 };
 
-export const fetchInstagramId = (payload) => {
+export const fetchPopInstagramId = (payload) => {
   return instance.post("/point/popular-post");
+};
+
+export const fetchHomeInstagramId = (payload) => {
+  return instance.post("/point/post");
 };
