@@ -21,6 +21,8 @@ const PopDetailPage = () => {
     },
   });
 
+  console.log(popDetail);
+
   if (isLoading) {
     return <SkeletonPage.Pop />;
   }

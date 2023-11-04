@@ -34,7 +34,7 @@ const IconButton = ({ onClick, children, text }) => {
       <Button
         onClick={(e) => {
           e.stopPropagation();
-          onClick();
+          onClick?.();
         }}
       >
         {children}
