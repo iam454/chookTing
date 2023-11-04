@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import Layout from "../../components/Layout";
 import styled from "styled-components";
 import UploadButton from "./components/UploadButton";
@@ -8,37 +8,10 @@ import Card from "./components/Card";
 import { AnimatePresence, motion } from "framer-motion";
 import { useMatch, useNavigate } from "react-router-dom";
 import MyDetailPage from "../MyDetailpage/MyDetailPage";
-import { useQuery, useInfiniteQuery, useQueries } from "@tanstack/react-query";
+import { useQuery, useInfiniteQuery } from "@tanstack/react-query";
 import { fetchUserInfos } from "../../apis/api/user";
-import HeartLoader from "../../components/HeartLoader";
 import { fetchMyPosts } from "../../apis/api/post";
 import { SkeletonPage } from "../SkeletonPage/SkeletonPage";
-
-const response2 = {
-  id: 14,
-  username: "춘식이",
-  email: "chooonsik@naver.com",
-  profileImage: "/icons/accountIcon.png",
-  instagram: {
-    isLinked: false,
-    infos: {},
-  },
-};
-
-const response3 = {
-  id: 14,
-  username: "춘식이",
-  email: "chooonsik@naver.com",
-  profileImage: "/icons/accountIcon.png",
-  instagram: {
-    isLinked: true,
-    infos: {
-      totalLikes: 0,
-      totalViews: 0,
-      fireworks: 300,
-    },
-  },
-};
 
 const Container = styled.div`
   width: 358px;
@@ -80,30 +53,44 @@ const Detail = styled(motion.div)`
 `;
 
 const MyPage = () => {
-  const {
-    username,
-    email,
-    profileImage,
-    instagram: { isLinked, infos },
-  } = response3;
   const navigate = useNavigate();
   const detailMatch = useMatch("/profile/post/:postId");
 
-  const { data: userInfos, refetch: refetchUserInfos } = useQuery(
-    ["userInfos"],
-    fetchUserInfos
-  );
   const {
     isLoading,
+    data: userInfos,
+    refetch: refetchUserInfos,
+  } = useQuery(["userInfos"], fetchUserInfos, {
+    onError: (e) => {
+      alert("사용자 정보를 찾을 수 없습니다.");
+      refetchUserInfos();
+      navigate("/");
+    },
+  });
+
+  const {
     data: my,
     fetchNextPage,
     refetch: refetchMy,
-  } = useInfiniteQuery(["my"], fetchMyPosts, {
-    getNextPageParam: (lastPage, allPages) => {
-      return lastPage.data.response.hasNext ? allPages.length : undefined;
+  } = useInfiniteQuery(
+    ["my"],
+    fetchMyPosts,
+    {
+      getNextPageParam: (lastPage, allPages) => {
+        return lastPage.data.response.hasNext ? allPages.length : undefined;
+      },
     },
-  });
+    {
+      onError: (e) => {
+        alert("게시물을 찾을 수 없습니다.");
+        refetchMy();
+        navigate("/");
+      },
+    }
+  );
   const bottomObserverRef = useRef(null);
+
+  console.log(userInfos);
 
   const handleCardClick = (postId) => {
     navigate(`post/${postId}`);
@@ -137,7 +124,6 @@ const MyPage = () => {
     };
   }, [bottomObserverRef, fetchNextPage]);
 
-  console.log("유저 정보", userInfos?.data.response);
   return (
     <Layout>
       <Container>
