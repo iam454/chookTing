@@ -5,10 +5,10 @@ import { motion, useAnimation } from "framer-motion";
 import { Modal } from "./Modal";
 import ModalButton from "./ModalButton";
 import theme from "../theme";
-import SkeletonIcon from "../pages/SkeletonPage/components/SkeletonIcon";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { updateLike } from "../apis/api/post";
-import { KAKAO_AUTH_URL } from "../auth/kakao/auth";
+import { handleKaKaoLogin } from "../utils/handleKaKaoLogin";
+import { convertToK } from "../utils/convertToK";
 
 const Layout = styled.div`
   position: relative;
@@ -81,7 +81,7 @@ const HomePost = ({
     },
   });
 
-  const handleDoubleClick = (id) => {
+  const handleDoubleClick = () => {
     if (isLoggedIn) {
       if (!toggleLikeOn) {
         likeAnimation.start({
@@ -145,17 +145,8 @@ const HomePost = ({
     }
   };
 
-  const handleKakaoButtonClick = () => {
-    window.location.href = KAKAO_AUTH_URL;
-  };
-
   return (
-    <Layout
-      onDoubleClick={(e) => {
-        e.stopPropagation();
-        handleDoubleClick(id);
-      }}
-    >
+    <Layout onDoubleClick={handleDoubleClick}>
       <Image src={image} alt="네컷 사진" />
       <InfoContainer>{info}</InfoContainer>
       <motion.svg
@@ -234,7 +225,7 @@ const HomePost = ({
             isLong
             isTextBlack
             iconSrc="/icons/kakao.png"
-            onClick={handleKakaoButtonClick}
+            onClick={handleKaKaoLogin}
             text="카카오로 3초만에 시작하기"
             bgColor={theme.yellow}
           />
@@ -287,7 +278,7 @@ const PopPost = ({ id, image, info, isLikedPost, numberLikes = 0, points }) => {
   //   },
   // });
 
-  const handleDoubleClick = (id) => {
+  const handleDoubleClick = () => {
     if (!toggleLikeOn) {
       likeAnimation.start({
         fill: "rgba(254, 32, 32, 1)",
@@ -332,16 +323,8 @@ const PopPost = ({ id, image, info, isLikedPost, numberLikes = 0, points }) => {
     setToggleLikeOn((prev) => !prev);
   };
 
-  const convertToK = (number) => {
-    if (number >= 1000) {
-      return (number / 1000).toFixed(1) + "K";
-    } else {
-      return number + "";
-    }
-  };
-
   return (
-    <Layout onDoubleClick={() => handleDoubleClick(id)}>
+    <Layout onDoubleClick={handleDoubleClick}>
       <Image src={image} alt="네컷 사진" />
       <InfoContainer>{info}</InfoContainer>
       <motion.svg
@@ -443,7 +426,7 @@ const MyPost = ({
     },
   });
 
-  const handleDoubleClick = (id) => {
+  const handleDoubleClick = () => {
     if (!toggleLikeOn) {
       likeAnimation.start({
         fill: "rgba(254, 32, 32, 1)",
@@ -489,7 +472,7 @@ const MyPost = ({
   };
 
   return (
-    <Layout onDoubleClick={() => handleDoubleClick(id)}>
+    <Layout onDoubleClick={handleDoubleClick}>
       <Image src={image} alt="네컷 사진" />
       <InfoContainer>{info}</InfoContainer>
       <motion.svg
@@ -512,7 +495,10 @@ const MyPost = ({
         />
       </motion.svg>
       <ButtonContainer>
-        <IconButton onClick={handleLikeButtonClick} text={likes}>
+        <IconButton
+          onClick={handleLikeButtonClick}
+          text={likes.toLocaleString()}
+        >
           <motion.svg
             width={24}
             height={24}
@@ -536,7 +522,7 @@ const MyPost = ({
           </motion.svg>
         </IconButton>
         <IconButton
-          text={numberInstas}
+          text={numberInstas.toLocaleString()}
           onClick={() => {
             console.log("WOW");
           }}
