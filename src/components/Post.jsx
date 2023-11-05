@@ -80,8 +80,9 @@ const HomePost = ({ id, image, info, isLikedPost, handleAutoPlayPause }) => {
     },
   });
   const { mutate: getInsta } = useMutation(fetchHomeInstagramId, {
-    onSuccess: (e) => {
-      console.log("폭죽 사용 성공", e);
+    onSuccess: (res) => {
+      const instagramId = res.data.response.instaId;
+      window.location.href = `https://www.instagram.com/${instagramId}`;
     },
     onError: (err) => {
       if (err.response?.data?.error.code === "446") {
@@ -286,8 +287,9 @@ const PopPost = ({
     },
   });
   const { mutate: getInsta } = useMutation(fetchPopInstagramId, {
-    onSuccess: (e) => {
-      console.log("폭죽 사용 성공", e);
+    onSuccess: (res) => {
+      const instagramId = res.data.response.instaId;
+      window.location.href = `https://www.instagram.com/${instagramId}`;
     },
     onError: (err) => {
       if (err.response?.data?.error.code === "446") {
