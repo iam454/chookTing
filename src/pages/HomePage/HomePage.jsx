@@ -12,6 +12,7 @@ import { motion, useAnimation } from "framer-motion";
 
 import { useQuery, useInfiniteQuery } from "@tanstack/react-query";
 import { fetchHomePosts } from "../../apis/api/post";
+// import { threadId } from "worker_threads";
 
 const swiperStyle = {
   width: "100%",
@@ -55,7 +56,16 @@ const HomePage = () => {
   const progressBarRef = useRef();
   const pauseAnimation = useAnimation();
   const resumeAnimation = useAnimation();
-  const { data: home } = useQuery(["posts"], fetchHomePosts);
+  // const { data: home } = useQuery(["posts"], fetchHomePosts);
+  const {
+    data: home,
+    hasNextPage,
+    fetchNextPage,
+  } = useInfiniteQuery(["home"], fetchHomePosts, {
+    getNextPageParam: (lastPage, allPages) => {
+      return lastPage.data.id + 1;
+    },
+  });
 
   let clickTimer = null;
 
@@ -93,6 +103,36 @@ const HomePage = () => {
     swiperRef.autoplay.pause();
     setIsPlaying(false);
   };
+
+  const bottomObserverRef = useRef(null);
+
+  useEffect(() => {
+    if (!bottomObserverRef.current) {
+      return;
+    }
+
+    const handleObserver = (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting && hasNextPage) {
+          fetchNextPage();
+        }
+      });
+    };
+
+    const io = new IntersectionObserver(handleObserver, {
+      threshold: 0.3,
+      hasNextPage,
+      fetchNextPage,
+    });
+
+    if (bottomObserverRef.current) {
+      io.observe(bottomObserverRef.current);
+    }
+
+    return () => {
+      io.disconnect();
+    };
+  }, [bottomObserverRef, hasNextPage, fetchNextPage]);
 
   return (
     <Layout>
@@ -137,7 +177,7 @@ const HomePage = () => {
         autoplay={{ delay: 5000, disableOnInteraction: false }}
         onAutoplayTimeLeft={handleProgessBarPaint}
         onSwiper={setSwiperRef}
-        loop
+        // loop
       >
         {home?.data.response.postList.map((post) => {
           return (
@@ -158,6 +198,7 @@ const HomePage = () => {
         <ProgressBar viewBox="0 0 100 1" ref={progressBarRef}>
           <line x1="0" y1="1" x2="100" y2="1" />
         </ProgressBar>
+        <div ref={bottomObserverRef}></div>
       </Swiper>
     </Layout>
   );
