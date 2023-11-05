@@ -79,6 +79,7 @@ const MyPage = () => {
       getNextPageParam: (lastPage, allPages) => {
         return lastPage.data.response.hasNext ? allPages.length : undefined;
       },
+      cashTime: 0,
     },
     {
       onError: (e) => {
@@ -86,6 +87,7 @@ const MyPage = () => {
         refetchMy();
         navigate("/");
       },
+      cachTime: 0,
     }
   );
   const bottomObserverRef = useRef(null);
@@ -128,14 +130,14 @@ const MyPage = () => {
     <Layout>
       <Container>
         <KaKaoProfile
-          username={userInfos?.data.response.userName}
-          profileImage={userInfos?.data.response.profileImageUrl}
+          username={userInfos?.data.response.username}
+          profileImage={userInfos?.data.response.profileImage}
         />
         <InstaProfile
-          isLinked={userInfos?.data.response.isInstaConnected}
+          isLinked={userInfos?.data.response.instagram.isLinked}
           infos={userInfos}
         />
-        <UploadButton isLinked={userInfos?.data.response.isInstaConnected} />
+        <UploadButton isLinked={userInfos?.data.response.instagram.isLinked} />
         <Album>
           {my?.pages.map((page) =>
             page.data.response.postList.map((post) => {
