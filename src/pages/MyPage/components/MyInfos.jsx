@@ -23,23 +23,23 @@ const Number = styled.span`
 `;
 
 const MyInfos = ({ isLinked, infos }) => {
-  const { totalLike, totalPoint } = infos?.data.response || {};
+  const { totalLikes, totalReceivedfireworks } =
+    infos?.data.response.instagram.infos || {};
+  const fireworks = infos?.data.response.fireworks || 0;
   const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const totalViews = 0;
 
   return (
     <List>
       <Item>
-        <Number>{isLinked ? totalLike || "-" : "-"}</Number>
+        <Number>{isLinked ? totalLikes || "-" : "-"}</Number>
         <Text>내가 받은 좋아요</Text>
       </Item>
       <Item>
-        <Number>{isLinked ? totalViews || "-" : "-"}</Number>
+        <Number>{isLinked ? totalReceivedfireworks || "-" : "-"}</Number>
         <Text>내가 받은 폭죽</Text>
       </Item>
       <Item onClick={() => setIsModalOpen(true)}>
-        <Number>{isLinked ? totalPoint || "-" : "-"}</Number>
+        <Number>{fireworks || "-"}</Number>
         <Text>
           내 폭죽
           <svg
