@@ -62,14 +62,7 @@ const BasePost = ({ image, info, children }) => {
   );
 };
 
-const HomePost = ({
-  id,
-  image,
-  info,
-  isLikedPost,
-  points,
-  handleAutoPlayPause,
-}) => {
+const HomePost = ({ id, image, info, isLikedPost, handleAutoPlayPause }) => {
   const isLoggedIn = !!localStorage.getItem("token");
   const [toggleLikeOn, setToggleLikeOn] = useState(isLikedPost);
   const [isPointModalOpen, setIsPointModalOpen] = useState(false);
@@ -80,20 +73,22 @@ const HomePost = ({
   const dbclickAnimation = useAnimation();
   const { mutate: postLike } = useMutation(updateLike, {
     onSuccess: (e) => {
-      console.log("success", e);
+      console.log("좋아요 요청 성공", e);
     },
     onError: (e) => {
-      console.log("err", e);
+      console.log("좋아요 요청 실패", e);
     },
   });
   const { mutate: getInsta } = useMutation(fetchHomeInstagramId, {
-    onSuccess: (e) => {
-      console.log("폭죽 사용 성공", e);
+    onSuccess: (res) => {
+      const instagramId = res.data.response.instaId;
+      window.location.href = `https://www.instagram.com/${instagramId}`;
     },
-    onError: (e) => {
-      console.log("폭죽 사용 실패", e);
-      setIsPointModalOpen(false);
-      setIsPointErrorModalOpen(true);
+    onError: (err) => {
+      if (err.response?.data?.error.code === "446") {
+        setIsPointModalOpen(false);
+        setIsPointErrorModalOpen(true);
+      }
     },
   });
 
@@ -160,9 +155,7 @@ const HomePost = ({
   };
 
   const handlePointButtonClick = () => {
-    const payload = { postId: id };
-    console.log(payload);
-    getInsta(payload);
+    getInsta({ postId: id });
   };
 
   return (
@@ -223,7 +216,7 @@ const HomePost = ({
         <Modal.Long
           isOpen={isPointModalOpen}
           onRequestClose={() => setIsPointModalOpen(false)}
-          text1={`${points} 폭죽을 사용하여`}
+          text1="100 폭죽을 사용하여"
           text2="인스타그램 계정에 방문할 수 있어요!"
         >
           <ModalButton
@@ -269,7 +262,15 @@ const HomePost = ({
   );
 };
 
-const PopPost = ({ id, image, info, isLikedPost, numberLikes = 0, points }) => {
+const PopPost = ({
+  id,
+  image,
+  info,
+  isLikedPost,
+  numberLikes = 0,
+  points,
+  level,
+}) => {
   const [isPointModalOpen, setIsPointModalOpen] = useState(false);
   const [isPointErrorModalOpen, setIsPointErrorModalOpen] = useState(false);
   const navigate = useNavigate();
@@ -286,13 +287,15 @@ const PopPost = ({ id, image, info, isLikedPost, numberLikes = 0, points }) => {
     },
   });
   const { mutate: getInsta } = useMutation(fetchPopInstagramId, {
-    onSuccess: (e) => {
-      console.log("폭죽 사용 성공", e);
+    onSuccess: (res) => {
+      const instagramId = res.data.response.instaId;
+      window.location.href = `https://www.instagram.com/${instagramId}`;
     },
-    onError: (e) => {
-      console.log("폭죽 사용 실패", e);
-      setIsPointModalOpen(false);
-      setIsPointErrorModalOpen(true);
+    onError: (err) => {
+      if (err.response?.data?.error.code === "446") {
+        setIsPointModalOpen(false);
+        setIsPointErrorModalOpen(true);
+      }
     },
   });
 
@@ -370,9 +373,7 @@ const PopPost = ({ id, image, info, isLikedPost, numberLikes = 0, points }) => {
   };
 
   const handlePointButtonClick = () => {
-    const payload = { postId: id, postLevel: 1 };
-    console.log(payload);
-    getInsta(payload);
+    getInsta({ postId: id, postLevel: level });
   };
 
   return (
