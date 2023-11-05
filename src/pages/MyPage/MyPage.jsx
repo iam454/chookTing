@@ -12,6 +12,15 @@ import { useQuery, useInfiniteQuery } from "@tanstack/react-query";
 import { fetchUserInfos } from "../../apis/api/user";
 import { fetchMyPosts } from "../../apis/api/post";
 import { SkeletonPage } from "../SkeletonPage/SkeletonPage";
+import HeartLoader from "../../components/HeartLoader";
+
+const LoaderContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+`;
 
 const Container = styled.div`
   width: 358px;
@@ -55,9 +64,8 @@ const Detail = styled(motion.div)`
 const MyPage = () => {
   const navigate = useNavigate();
   const detailMatch = useMatch("/profile/post/:postId");
-
   const {
-    isLoading,
+    isLoading: isUserInfosLoading,
     data: userInfos,
     refetch: refetchUserInfos,
   } = useQuery(["userInfos"], fetchUserInfos, {
@@ -67,7 +75,6 @@ const MyPage = () => {
       navigate("/");
     },
   });
-
   const {
     data: my,
     fetchNextPage,
@@ -79,7 +86,7 @@ const MyPage = () => {
       getNextPageParam: (lastPage, allPages) => {
         return lastPage.data.response.hasNext ? allPages.length : undefined;
       },
-      cashTime: 0,
+      cacheTime: 0,
     },
     {
       onError: (e) => {
@@ -87,7 +94,7 @@ const MyPage = () => {
         refetchMy();
         navigate("/");
       },
-      cachTime: 0,
+      cacheTime: 0,
     }
   );
   const bottomObserverRef = useRef(null);
@@ -126,18 +133,28 @@ const MyPage = () => {
     };
   }, [bottomObserverRef, fetchNextPage]);
 
+  if (isUserInfosLoading) {
+    return (
+      <Layout>
+        <LoaderContainer>
+          <HeartLoader />
+        </LoaderContainer>
+      </Layout>
+    );
+  }
+
   return (
     <Layout>
       <Container>
         <KaKaoProfile
-          username={userInfos?.data.response.username}
-          profileImage={userInfos?.data.response.profileImage}
+          username={userInfos.data.response.username}
+          profileImage={userInfos.data.response.profileImage}
         />
         <InstaProfile
-          isLinked={userInfos?.data.response.instagram.isLinked}
-          infos={userInfos}
+          isLinked={userInfos.data.response.instagram.isLinked}
+          infos={userInfos.data.response}
         />
-        <UploadButton isLinked={userInfos?.data.response.instagram.isLinked} />
+        <UploadButton isLinked={userInfos.data.response.instagram.isLinked} />
         <Album>
           {my?.pages.map((page) =>
             page.data.response.postList.map((post) => {

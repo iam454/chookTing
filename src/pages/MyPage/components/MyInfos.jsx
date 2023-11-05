@@ -23,9 +23,12 @@ const Number = styled.span`
 `;
 
 const MyInfos = ({ isLinked, infos }) => {
-  const { totalLikes, totalReceivedfireworks } =
-    infos?.data.response.instagram.infos || {};
-  const fireworks = infos?.data.response.fireworks || 0;
+  const {
+    fireworks,
+    instagram: {
+      infos: { totalLikes, totalReceivedfireworks },
+    },
+  } = infos;
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
