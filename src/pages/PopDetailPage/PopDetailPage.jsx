@@ -40,6 +40,7 @@ const PopDetailPage = () => {
       isLikedPost={popDetail.data.response.isLiked}
       numberLikes={popDetail.data.response.likeCount}
       points={popDetail.data.response.postPoint}
+      level={popDetail.data.response.postLevel}
     />
   );
 };

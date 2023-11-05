@@ -56,6 +56,7 @@ const HomePage = () => {
   const pauseAnimation = useAnimation();
   const resumeAnimation = useAnimation();
   const { data: home } = useQuery(["posts"], fetchHomePosts);
+  console.log(home);
 
   let clickTimer = null;
 
@@ -149,7 +150,6 @@ const HomePage = () => {
                 }
                 id={post.postId}
                 isLikedPost={post.isLiked}
-                points={post.postPoint}
                 handleAutoPlayPause={handleAutoPlayPause}
               />
             </SwiperSlide>
