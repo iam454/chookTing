@@ -56,10 +56,6 @@ const HomePage = () => {
   const progressBarRef = useRef();
   const pauseAnimation = useAnimation();
   const resumeAnimation = useAnimation();
-<<<<<<< HEAD
-  const { data: home } = useQuery(["posts"], fetchHomePosts);
-  console.log(home);
-=======
   const {
     data: home,
     fetchNextPage,
@@ -69,7 +65,6 @@ const HomePage = () => {
       return lastPage.data.response.hasNext ? allPages.length : undefined;
     },
   });
->>>>>>> feature/1103
 
   let clickTimer = null;
 
