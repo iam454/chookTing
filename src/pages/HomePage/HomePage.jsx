@@ -56,14 +56,13 @@ const HomePage = () => {
   const progressBarRef = useRef();
   const pauseAnimation = useAnimation();
   const resumeAnimation = useAnimation();
-  // const { data: home } = useQuery(["posts"], fetchHomePosts);
   const {
     data: home,
-    hasNextPage,
     fetchNextPage,
+    hasNextPage,
   } = useInfiniteQuery(["home"], fetchHomePosts, {
     getNextPageParam: (lastPage, allPages) => {
-      return lastPage.data.id + 1;
+      return lastPage.data.response.hasNext ? allPages.length : undefined;
     },
   });
 
@@ -121,8 +120,6 @@ const HomePage = () => {
 
     const io = new IntersectionObserver(handleObserver, {
       threshold: 0.3,
-      hasNextPage,
-      fetchNextPage,
     });
 
     if (bottomObserverRef.current) {
@@ -134,6 +131,7 @@ const HomePage = () => {
     };
   }, [bottomObserverRef, hasNextPage, fetchNextPage]);
 
+  console.log(home);
   return (
     <Layout>
       <VideoController
@@ -177,28 +175,31 @@ const HomePage = () => {
         autoplay={{ delay: 5000, disableOnInteraction: false }}
         onAutoplayTimeLeft={handleProgessBarPaint}
         onSwiper={setSwiperRef}
-        // loop
+        onReachEnd={fetchNextPage}
       >
-        {home?.data.response.postList.map((post) => {
-          return (
-            <SwiperSlide key={post.postId} onClick={handleSwiperClick}>
-              <Post.Home
-                image={post.imageUri}
-                info={
-                  <PostInfos name={post.nickname} hashtags={post.hashTags} />
-                }
-                id={post.postId}
-                isLikedPost={post.isLiked}
-                points={post.postPoint}
-                handleAutoPlayPause={handleAutoPlayPause}
-              />
-            </SwiperSlide>
-          );
-        })}
+        {home?.pages.map((page) =>
+          page.data.response.postList.map((post) => {
+            console.log(page.data.response.lasPostId);
+            return (
+              <SwiperSlide key={post.postId} onClick={handleSwiperClick}>
+                <Post.Home
+                  image={post.imageUri}
+                  info={
+                    <PostInfos name={post.nickname} hashtags={post.hashTags} />
+                  }
+                  id={post.postId}
+                  isLikedPost={post.isLiked}
+                  points={post.postPoint}
+                  handleAutoPlayPause={handleAutoPlayPause}
+                />
+              </SwiperSlide>
+            );
+          })
+        )}
         <ProgressBar viewBox="0 0 100 1" ref={progressBarRef}>
           <line x1="0" y1="1" x2="100" y2="1" />
         </ProgressBar>
-        <div ref={bottomObserverRef}></div>
+        {/* <div ref={bottomObserverRef}></div> */}
       </Swiper>
     </Layout>
   );
