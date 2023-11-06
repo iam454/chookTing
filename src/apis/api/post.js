@@ -4,8 +4,13 @@ export const createPost = (payload) => {
   return uploadInstance.post("/post", payload);
 };
 
+<<<<<<< HEAD
 export const fetchHomePosts = () => {
   return instance.get("/post?lastPostId=0&size=10");
+=======
+export const fetchHomePosts = (lastPostId) => {
+  return instance.get(`/post?lastPostId=${lastPostId}`);
+>>>>>>> feature/login-recoil
 };
 
 export const fetchPopPosts = () => {

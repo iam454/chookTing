@@ -74,6 +74,7 @@ const MyPage = () => {
       refetchUserInfos();
       navigate("/");
     },
+    cacheTime: 0,
   });
   const {
     data: my,
