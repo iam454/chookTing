@@ -1,19 +1,15 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import Layout from "../../components/Layout";
 import { SkeletonPage } from "../SkeletonPage/SkeletonPage";
 import Post from "../../components/Post";
 import PostInfos from "../../components/PostInfos";
-
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
 import "swiper/css";
 import styled from "styled-components";
 import { motion, useAnimation } from "framer-motion";
-
-import { useQuery, useInfiniteQuery } from "@tanstack/react-query";
+import { useInfiniteQuery } from "@tanstack/react-query";
 import { fetchHomePosts } from "../../apis/api/post";
-import { useRecoilState } from "recoil";
-import lastPostIdState from "../../recoil/lastPostId/atom";
 
 const swiperStyle = {
   width: "100%",
