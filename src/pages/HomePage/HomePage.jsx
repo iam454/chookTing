@@ -56,16 +56,16 @@ const HomePage = () => {
   const progressBarRef = useRef();
   const pauseAnimation = useAnimation();
   const resumeAnimation = useAnimation();
-  const {
-    data: home,
-    fetchNextPage,
-    hasNextPage,
-  } = useInfiniteQuery(["home"], fetchHomePosts, {
-    getNextPageParam: (lastPage, allPages) => {
-      return lastPage.data.response.hasNext ? allPages.length : undefined;
-    },
-  });
-
+  const { data: home, fetchNextPage } = useInfiniteQuery(
+    ["home"],
+    fetchHomePosts,
+    {
+      getNextPageParam: (lastPage, allPages) => {
+        return lastPage.data.response.hasNext ? allPages.length : undefined;
+      },
+    }
+  );
+  console.log(home);
   let clickTimer = null;
 
   const handleProgessBarPaint = (s, t, progress) => {
@@ -102,34 +102,6 @@ const HomePage = () => {
     swiperRef.autoplay.pause();
     setIsPlaying(false);
   };
-
-  const bottomObserverRef = useRef(null);
-
-  useEffect(() => {
-    if (!bottomObserverRef.current) {
-      return;
-    }
-
-    const handleObserver = (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting && hasNextPage) {
-          fetchNextPage();
-        }
-      });
-    };
-
-    const io = new IntersectionObserver(handleObserver, {
-      threshold: 0.3,
-    });
-
-    if (bottomObserverRef.current) {
-      io.observe(bottomObserverRef.current);
-    }
-
-    return () => {
-      io.disconnect();
-    };
-  }, [bottomObserverRef, hasNextPage, fetchNextPage]);
 
   return (
     <Layout>
@@ -178,6 +150,7 @@ const HomePage = () => {
       >
         {home?.pages.map((page) =>
           page.data.response.postList.map((post) => {
+            console.log(page.data.response.lastPostId);
             return (
               <SwiperSlide key={post.postId} onClick={handleSwiperClick}>
                 <Post.Home
@@ -197,7 +170,6 @@ const HomePage = () => {
         <ProgressBar viewBox="0 0 100 1" ref={progressBarRef}>
           <line x1="0" y1="1" x2="100" y2="1" />
         </ProgressBar>
-        {/* <div ref={bottomObserverRef}></div> */}
       </Swiper>
     </Layout>
   );
