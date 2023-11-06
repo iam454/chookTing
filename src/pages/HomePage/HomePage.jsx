@@ -131,7 +131,6 @@ const HomePage = () => {
     };
   }, [bottomObserverRef, hasNextPage, fetchNextPage]);
 
-  console.log(home);
   return (
     <Layout>
       <VideoController
@@ -179,7 +178,6 @@ const HomePage = () => {
       >
         {home?.pages.map((page) =>
           page.data.response.postList.map((post) => {
-            console.log(page.data.response.lasPostId);
             return (
               <SwiperSlide key={post.postId} onClick={handleSwiperClick}>
                 <Post.Home
