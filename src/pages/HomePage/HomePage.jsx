@@ -1,18 +1,15 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import Layout from "../../components/Layout";
-// import { SkeletonPage } from "../SkeletonPage/SkeletonPage";
+import { SkeletonPage } from "../SkeletonPage/SkeletonPage";
 import Post from "../../components/Post";
 import PostInfos from "../../components/PostInfos";
-
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
 import "swiper/css";
 import styled from "styled-components";
 import { motion, useAnimation } from "framer-motion";
-
-import { useQuery, useInfiniteQuery } from "@tanstack/react-query";
+import { useInfiniteQuery } from "@tanstack/react-query";
 import { fetchHomePosts } from "../../apis/api/post";
-// import { threadId } from "worker_threads";
 
 const swiperStyle = {
   width: "100%",
@@ -56,16 +53,26 @@ const HomePage = () => {
   const progressBarRef = useRef();
   const pauseAnimation = useAnimation();
   const resumeAnimation = useAnimation();
-  const { data: home, fetchNextPage } = useInfiniteQuery(
-    ["home"],
-    fetchHomePosts,
+  const {
+    isLoading,
+    data: home,
+    fetchNextPage,
+  } = useInfiniteQuery(
+    ["posts"],
+    ({ pageParam = 0 }) => fetchHomePosts(pageParam),
     {
       getNextPageParam: (lastPage, allPages) => {
-        return lastPage.data.response.hasNext ? allPages.length : undefined;
+        const {
+          data: {
+            response: { hasNext, lastPostId },
+          },
+        } = lastPage;
+        return hasNext ? lastPostId : 0;
       },
+      cacheTime: 0,
     }
   );
-  console.log(home);
+
   let clickTimer = null;
 
   const handleProgessBarPaint = (s, t, progress) => {
@@ -102,6 +109,14 @@ const HomePage = () => {
     swiperRef.autoplay.pause();
     setIsPlaying(false);
   };
+
+  if (isLoading) {
+    return (
+      <Layout>
+        <SkeletonPage.Home />
+      </Layout>
+    );
+  }
 
   return (
     <Layout>
@@ -150,7 +165,6 @@ const HomePage = () => {
       >
         {home?.pages.map((page) =>
           page.data.response.postList.map((post) => {
-            console.log(page.data.response.lastPostId);
             return (
               <SwiperSlide key={post.postId} onClick={handleSwiperClick}>
                 <Post.Home
@@ -160,7 +174,6 @@ const HomePage = () => {
                   }
                   id={post.postId}
                   isLikedPost={post.isLiked}
-                  points={post.postPoint}
                   handleAutoPlayPause={handleAutoPlayPause}
                 />
               </SwiperSlide>

@@ -23,6 +23,7 @@ const KakaoHandler = () => {
       const token = res.headers.authorization;
       localStorage.setItem("token", token);
       navigate("/");
+      window.location.reload();
     },
     onError: (e) => {
       console.log("카카오 로그인 실패", e);

@@ -56,6 +56,7 @@ const SettingPage = () => {
     onSuccess: () => {
       localStorage.removeItem("token");
       navigate("/");
+      window.location.reload();
     },
     onError: (e) => {
       console.log("로그아웃 실패", e);
@@ -65,6 +66,7 @@ const SettingPage = () => {
     onSuccess: () => {
       localStorage.removeItem("token");
       navigate("/");
+      window.location.reload();
     },
     onError: (e) => {
       console.log("탈퇴 실패", e);

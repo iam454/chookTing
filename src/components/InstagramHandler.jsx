@@ -23,10 +23,11 @@ const InstagramHandler = () => {
       const token = res.headers.authorization;
       localStorage.setItem("token", token);
       navigate("/profile");
+      window.location.reload();
     },
     onError: (e) => {
-      console.log("인스타 연결 실패", e);
       navigate("/profile");
+      window.location.reload();
     },
   });
 
