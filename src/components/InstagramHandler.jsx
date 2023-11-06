@@ -23,11 +23,9 @@ const InstagramHandler = () => {
       const token = res.headers.authorization;
       localStorage.setItem("token", token);
       navigate("/profile");
-      window.location.reload();
     },
     onError: (e) => {
       navigate("/profile");
-      window.location.reload();
     },
   });
 
