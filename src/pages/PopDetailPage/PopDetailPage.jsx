@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Post from "../../components/Post";
 import PostInfos from "../../components/PostInfos";
 import { useQuery } from "@tanstack/react-query";
@@ -20,8 +20,6 @@ const PopDetailPage = () => {
       navigate("/pop");
     },
   });
-
-  console.log(popDetail);
 
   if (isLoading) {
     return <SkeletonPage.Pop />;
