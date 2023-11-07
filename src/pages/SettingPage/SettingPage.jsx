@@ -75,7 +75,6 @@ const SettingPage = () => {
 
   const handleAskClick = () => {
     alert("미구현 기능입니다.");
-    console.log("카카오 문의하기 채널로 이동");
   };
 
   const handleLogOutClick = () => {
