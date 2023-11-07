@@ -50,9 +50,14 @@ const PopPage = () => {
     isLoading,
     data: pop,
     fetchNextPage,
+    refetch,
   } = useInfiniteQuery(["pop"], fetchPopPosts, {
     getNextPageParam: (lastPage, allPages) => {
       return allPages.length;
+    },
+    onError: (e) => {
+      alert("네트워크 연결이 불안정합니다.");
+      refetch();
     },
   });
 

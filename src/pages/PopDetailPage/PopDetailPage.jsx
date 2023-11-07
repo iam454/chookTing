@@ -13,7 +13,7 @@ const PopDetailPage = () => {
     isLoading,
     data: popDetail,
     refetch,
-  } = useQuery(["popDetail", +postId.postId], () => fetchPopPost(postId), {
+  } = useQuery(["popDetail", postId], () => fetchPopPost(postId), {
     onError: (e) => {
       alert("게시물을 찾을 수 없습니다.");
       refetch();
