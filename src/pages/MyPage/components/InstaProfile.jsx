@@ -37,7 +37,7 @@ const InstaButton = styled.button`
   padding: 0;
 `;
 
-const InstaProfile = ({ isLinked, infos }) => {
+const InstaProfile = ({ isLinked, infos, fireworks }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleButtonClick = () => {
@@ -53,7 +53,7 @@ const InstaProfile = ({ isLinked, infos }) => {
         <Icon src="/icons/instagram.png" $isLinked={isLinked} />
         <Text>{isLinked ? "연결 완료" : "연결하기"}</Text>
       </InstaButton>
-      <MyInfos isLinked={isLinked} infos={infos} />
+      <MyInfos isLinked={isLinked} fireworks={fireworks} infos={infos} />
       <Modal.Long
         isOpen={isModalOpen}
         onRequestClose={() => setIsModalOpen(false)}
