@@ -2,7 +2,7 @@ import axios from "axios";
 
 export const instance = axios.create({
   baseURL: process.env.REACT_APP_BASE_URL,
-  timeout: 1500,
+  timeout: 3000,
   headers: {
     "Content-Type": "application/json",
   },
@@ -45,7 +45,7 @@ instance.interceptors.response.use(
 
 export const uploadInstance = axios.create({
   baseURL: process.env.REACT_APP_BASE_URL,
-  timeout: 1500,
+  timeout: 3000,
   headers: {
     "Content-Type": "multipart/form-data",
   },
