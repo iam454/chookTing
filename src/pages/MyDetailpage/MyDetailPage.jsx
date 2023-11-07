@@ -19,6 +19,7 @@ const MyDetailPage = () => {
       refetch();
       navigate("/profile");
     },
+    cacheTime: 0,
   });
 
   if (isLoading) {

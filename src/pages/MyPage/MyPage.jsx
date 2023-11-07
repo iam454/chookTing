@@ -73,6 +73,7 @@ const MyPage = () => {
       refetchUserInfos();
       navigate("/");
     },
+    cacheTime: 0,
   });
   const {
     isLoading: isMyLoading,
@@ -100,9 +101,9 @@ const MyPage = () => {
     navigate(`post/${postId}`);
   };
 
-  const handleOverlayClick = async () => {
-    await refetchMy();
-    await refetchUserInfos();
+  const handleOverlayClick = () => {
+    refetchMy();
+    refetchUserInfos();
     navigate("/profile");
   };
 
