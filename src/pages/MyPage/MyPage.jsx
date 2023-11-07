@@ -92,6 +92,7 @@ const MyPage = () => {
       alert("게시물을 찾을 수 없습니다.");
       refetchMy();
     },
+    cacheTime: 0,
   });
   const bottomObserverRef = useRef(null);
 
@@ -109,7 +110,6 @@ const MyPage = () => {
     const handleObserver = (entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          console.log("안녕");
           fetchNextPage();
         }
       });
