@@ -5,7 +5,7 @@ import { motion, useAnimation } from "framer-motion";
 import { Modal } from "./Modal";
 import ModalButton from "./ModalButton";
 import theme from "../theme";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 import {
   fetchHomeInstagramId,
   fetchPopInstagramId,
@@ -298,34 +298,6 @@ const PopPost = ({
       }
     },
   });
-
-  // 인기 api isLiked 수정하고 다시 한번 살펴보기
-  // const queryClient = useQueryClient();
-  // const { mutate } = useMutation((newOption) => updateLike(newOption), {
-  //   onMutate: async (newOption) => {
-  //     await queryClient.cancelQueries(["popDetail", id]);
-  //     const prevData = queryClient.getQueryData(["popDetail", id]);
-  //     console.log("option", newOption);
-  //     console.log("prev", prevData);
-  //     const newData = { ...prevData };
-  //     console.log(newData.data.response);
-  //     newData.data.response.isLiked = newOption.like;
-  //     console.log("new", newData);
-  //     queryClient.setQueryData(["popDetail", id], newData);
-
-  //     return { prevData };
-  //   },
-  //   onSuccess: (e) => {
-  //     console.log("좋아요 요청 성공", e);
-  //   },
-  //   onError: (error, _, context) => {
-  //     console.log("좋아요 요청 에러", error);
-  //     queryClient.setQueryData(["popDetail", id], context?.prevData);
-  //   },
-  //   onSettled: () => {
-  //     queryClient.invalidateQueries(["popDetail", id]);
-  //   },
-  // });
 
   const handleDoubleClick = () => {
     if (!toggleLikeOn) {

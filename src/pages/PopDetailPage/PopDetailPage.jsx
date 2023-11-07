@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Post from "../../components/Post";
 import PostInfos from "../../components/PostInfos";
 import { useQuery } from "@tanstack/react-query";
@@ -13,15 +13,13 @@ const PopDetailPage = () => {
     isLoading,
     data: popDetail,
     refetch,
-  } = useQuery(["popDetail", +postId.postId], () => fetchPopPost(postId), {
+  } = useQuery(["popDetail", postId], () => fetchPopPost(postId), {
     onError: (e) => {
       alert("게시물을 찾을 수 없습니다.");
       refetch();
       navigate("/pop");
     },
   });
-
-  console.log(popDetail);
 
   if (isLoading) {
     return <SkeletonPage.Pop />;

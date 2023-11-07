@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import Layout from "../../components/Layout";
 import Container from "./components/Container";
 import Card from "./components/Card";
@@ -6,10 +6,18 @@ import { MasonryInfiniteGrid } from "@egjs/react-infinitegrid";
 import { useMatch, useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { styled } from "styled-components";
-import { SkeletonPage } from "../SkeletonPage/SkeletonPage";
 import PopDetailPage from "../PopDetailPage/PopDetailPage";
-import { useQuery, useInfiniteQuery } from "@tanstack/react-query";
+import { useInfiniteQuery } from "@tanstack/react-query";
 import { fetchPopPosts } from "../../apis/api/post";
+import HeartLoader from "../../components/HeartLoader";
+
+const LoaderContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+`;
 
 const Overlay = styled(motion.div)`
   position: fixed;
@@ -38,16 +46,21 @@ const Detail = styled(motion.div)`
 const PopPage = () => {
   const navigate = useNavigate();
   const detailMatch = useMatch("/pop/post/:postId");
-  const { data: pop, fetchNextPage } = useInfiniteQuery(
-    ["pop"],
-    fetchPopPosts,
-    {
-      getNextPageParam: (lastPage, allPages) => {
-        return allPages.length;
-      },
-    }
-  );
-  console.log(pop);
+  const {
+    isLoading,
+    data: pop,
+    fetchNextPage,
+    refetch,
+  } = useInfiniteQuery(["pop"], fetchPopPosts, {
+    getNextPageParam: (lastPage, allPages) => {
+      return allPages.length;
+    },
+    onError: (e) => {
+      alert("네트워크 연결이 불안정합니다.");
+      refetch();
+    },
+  });
+
   const bottomObserverRef = useRef(null);
 
   const handleCardClick = (postId) => {
@@ -78,13 +91,23 @@ const PopPage = () => {
     return () => {
       io.disconnect();
     };
-  }, [bottomObserverRef, fetchNextPage]);
+  }, [bottomObserverRef, fetchNextPage, pop]);
+
+  if (isLoading) {
+    return (
+      <Layout>
+        <LoaderContainer>
+          <HeartLoader />
+        </LoaderContainer>
+      </Layout>
+    );
+  }
 
   return (
     <Layout>
       <Container>
         <MasonryInfiniteGrid gap={8} isConstantSize={true} column={2}>
-          {pop?.pages.map((page) =>
+          {pop.pages.map((page) =>
             page.data.response.popularPosts.map((post) => {
               return (
                 <Card

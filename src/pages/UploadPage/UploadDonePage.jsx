@@ -68,7 +68,7 @@ const UploadDonePage = () => {
   const handleConfirmButtonClick = () => {
     setUploadFile({});
     setUploadContents({});
-    navigate("/");
+    navigate("/profile");
   };
 
   return (

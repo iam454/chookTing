@@ -57,6 +57,7 @@ const HomePage = () => {
     isLoading,
     data: home,
     fetchNextPage,
+    refetch,
   } = useInfiniteQuery(
     ["posts"],
     ({ pageParam = 0 }) => fetchHomePosts(pageParam),
@@ -69,7 +70,10 @@ const HomePage = () => {
         } = lastPage;
         return hasNext ? lastPostId : 0;
       },
-      cacheTime: 0,
+      onError: () => {
+        alert("네트워크 연결이 불안정합니다.");
+        refetch();
+      },
     }
   );
 
@@ -163,7 +167,7 @@ const HomePage = () => {
         onSwiper={setSwiperRef}
         onReachEnd={fetchNextPage}
       >
-        {home?.pages.map((page) =>
+        {home.pages.map((page) =>
           page.data.response.postList.map((post) => {
             return (
               <SwiperSlide key={post.postId} onClick={handleSwiperClick}>

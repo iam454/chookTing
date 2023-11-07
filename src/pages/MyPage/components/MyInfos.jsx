@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import Text from "./Text";
 import InfoModal from "./InfoModal";
+import { convertToK } from "../../../utils/convertToK";
 
 const List = styled.ul`
   width: 100%;
@@ -22,27 +23,26 @@ const Number = styled.span`
   font-size: 20px;
 `;
 
-const MyInfos = ({ isLinked, infos }) => {
-  const {
-    fireworks,
-    instagram: {
-      infos: { totalLikes, totalReceivedfireworks },
-    },
-  } = infos;
+const MyInfos = ({ isLinked, fireworks, infos }) => {
+  const { totalLikes, totalViews } = { ...infos };
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
     <List>
       <Item>
-        <Number>{isLinked ? totalLikes || "-" : "-"}</Number>
+        <Number>
+          {isLinked ? (totalLikes && totalLikes.toLocaleString()) || "-" : "-"}
+        </Number>
         <Text>내가 받은 좋아요</Text>
       </Item>
       <Item>
-        <Number>{isLinked ? totalReceivedfireworks || "-" : "-"}</Number>
-        <Text>내가 받은 폭죽</Text>
+        <Number>
+          {isLinked ? (totalViews && totalViews.toLocaleString()) || "-" : "-"}
+        </Number>
+        <Text>내 SNS 방문자</Text>
       </Item>
       <Item onClick={() => setIsModalOpen(true)}>
-        <Number>{fireworks || "-"}</Number>
+        <Number>{fireworks ? convertToK(fireworks) : "-"}</Number>
         <Text>
           내 폭죽
           <svg
