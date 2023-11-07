@@ -26,7 +26,7 @@ const MyInfos = ({ isLinked, infos }) => {
   const {
     fireworks,
     instagram: {
-      infos: { totalLikes, totalReceivedfireworks },
+      infos: { totalLikes, totalViews },
     },
   } = infos;
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -34,12 +34,16 @@ const MyInfos = ({ isLinked, infos }) => {
   return (
     <List>
       <Item>
-        <Number>{isLinked ? totalLikes || "-" : "-"}</Number>
+        <Number>
+          {isLinked ? (totalLikes ? totalLikes.toLocaleString() : "-") : "-"}
+        </Number>
         <Text>내가 받은 좋아요</Text>
       </Item>
       <Item>
-        <Number>{isLinked ? totalReceivedfireworks || "-" : "-"}</Number>
-        <Text>내가 받은 폭죽</Text>
+        <Number>
+          {isLinked ? (totalViews ? totalViews.toLocaleString() : "-") : "-"}
+        </Number>
+        <Text>내 SNS 방문자</Text>
       </Item>
       <Item onClick={() => setIsModalOpen(true)}>
         <Number>{fireworks || "-"}</Number>
