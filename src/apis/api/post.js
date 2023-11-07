@@ -16,8 +16,8 @@ export const fetchPopPost = ({ postId }) => {
   return instance.get(`/popular-post/${postId}`);
 };
 
-export const fetchMyPosts = () => {
-  return instance.get("/post/user");
+export const fetchMyPosts = (lastPostId) => {
+  return instance.get(`/post/user?lastPostId=${lastPostId}`);
 };
 
 export const fetchMyPost = ({ postId }) => {
