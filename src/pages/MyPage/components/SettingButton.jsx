@@ -16,7 +16,7 @@ const Button = styled.button`
 
 const SettingButton = ({ onClick }) => {
   return (
-    <Button onClick={onClick}>
+    <Button onClick={onClick} title="Settings">
       <svg
         width="24"
         height="24"

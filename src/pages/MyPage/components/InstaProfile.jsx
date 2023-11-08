@@ -50,8 +50,16 @@ const InstaProfile = ({ isLinked, infos, fireworks }) => {
   return (
     <Profile>
       <Text>포토카드에 SNS 계정을 연결해서 공유해 보세요.</Text>
-      <InstaButton onClick={handleButtonClick} $isLinked={isLinked}>
-        <Icon src="/icons/instagram.png" $isLinked={isLinked} />
+      <InstaButton
+        onClick={handleButtonClick}
+        $isLinked={isLinked}
+        title="Connect instagram"
+      >
+        <Icon
+          src="/icons/instagram.png"
+          alt="인스타그램"
+          $isLinked={isLinked}
+        />
         <Text>{isLinked ? "연결 완료" : "연결하기"}</Text>
       </InstaButton>
       <MyInfos isLinked={isLinked} fireworks={fireworks} infos={infos} />
