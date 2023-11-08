@@ -16,6 +16,7 @@ const Item = styled.li`
   justify-content: center;
   align-items: center;
   gap: 4px;
+  cursor: ${(props) => (props.$hasClickEvent ? "pointer" : "default")};
 `;
 
 const Number = styled.span`
@@ -41,7 +42,7 @@ const MyInfos = ({ isLinked, fireworks, infos }) => {
         </Number>
         <Text>내 SNS 방문자</Text>
       </Item>
-      <Item onClick={() => setIsModalOpen(true)}>
+      <Item onClick={() => setIsModalOpen(true)} $hasClickEvent>
         <Number>{fireworks ? convertToK(fireworks) : "-"}</Number>
         <Text>
           내 폭죽
