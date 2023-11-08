@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Layout from "../../components/Layout";
 import ListItem from "./components/ListItem";
 import styled from "styled-components";
@@ -6,6 +6,9 @@ import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useMutation } from "@tanstack/react-query";
 import { deleteUser, kakaoLogout } from "../../apis/api/user";
+import { Modal } from "../../components/Modal";
+import theme from "../../theme";
+import ModalButton from "../../components/ModalButton";
 
 const Header = styled.header`
   width: 100%;
@@ -51,6 +54,7 @@ const Quit = styled.div`
 `;
 
 const SettingPage = () => {
+  const [isLogOutModalOpen, setIsLogOutModalOpen] = useState(false);
   const navigate = useNavigate();
   const { mutate: logout } = useMutation(kakaoLogout, {
     onSuccess: () => {
@@ -75,10 +79,6 @@ const SettingPage = () => {
 
   const handleAskClick = () => {
     alert("미구현 기능입니다.");
-  };
-
-  const handleLogOutClick = () => {
-    logout();
   };
 
   const handleQuitClick = () => {
@@ -113,11 +113,26 @@ const SettingPage = () => {
         <Main>
           <List>
             <ListItem onClick={handleAskClick}>카카오 문의하기</ListItem>
-            <ListItem onClick={handleLogOutClick}>로그아웃</ListItem>
+            <ListItem onClick={() => setIsLogOutModalOpen(true)}>
+              로그아웃
+            </ListItem>
           </List>
           <Quit onClick={handleQuitClick}>회원 탈퇴</Quit>
         </Main>
       </motion.div>
+      <Modal.Long
+        isOpen={isLogOutModalOpen}
+        onRequestClose={() => setIsLogOutModalOpen(false)}
+        text1="로그아웃 하시겠어요?"
+        text2="서비스 이용이 제한될 수 있습니다."
+      >
+        <ModalButton
+          onClick={() => setIsLogOutModalOpen(false)}
+          bgColor={theme.modal.gray}
+          text="취소"
+        />
+        <ModalButton onClick={logout} bgColor={theme.red} text="로그아웃" />
+      </Modal.Long>
     </Layout>
   );
 };
