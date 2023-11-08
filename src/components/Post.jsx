@@ -182,7 +182,7 @@ const HomePost = ({ id, image, info, isLikedPost, handleAutoPlayPause }) => {
         />
       </motion.svg>
       <ButtonContainer>
-        <IconButton onClick={handleLikeButtonClick}>
+        <IconButton onClick={handleLikeButtonClick} name="like">
           <motion.svg
             width={24}
             height={24}
@@ -205,7 +205,7 @@ const HomePost = ({ id, image, info, isLikedPost, handleAutoPlayPause }) => {
             />
           </motion.svg>
         </IconButton>
-        <IconButton onClick={handleInstaButtonClick}>
+        <IconButton onClick={handleInstaButtonClick} name="instagram">
           <img
             src="/icons/instagram.png"
             width={20}
@@ -372,7 +372,11 @@ const PopPost = ({
         />
       </motion.svg>
       <ButtonContainer>
-        <IconButton onClick={handleLikeButtonClick} text={convertToK(likes)}>
+        <IconButton
+          onClick={handleLikeButtonClick}
+          text={convertToK(likes)}
+          name="like"
+        >
           <motion.svg
             width={24}
             height={24}
@@ -399,6 +403,7 @@ const PopPost = ({
           onClick={() => {
             setIsPointModalOpen(true);
           }}
+          name="instagram"
         >
           <img
             src="/icons/instagram.png"
@@ -535,6 +540,7 @@ const MyPost = ({
         <IconButton
           onClick={handleLikeButtonClick}
           text={likes.toLocaleString()}
+          name="like"
         >
           <motion.svg
             width={24}
@@ -558,7 +564,7 @@ const MyPost = ({
             />
           </motion.svg>
         </IconButton>
-        <IconButton text={numberInstas.toLocaleString()}>
+        <IconButton text={numberInstas.toLocaleString()} name="instagram">
           <img
             src="/icons/instagram.png"
             width={20}
@@ -570,6 +576,7 @@ const MyPost = ({
           onClick={() => {
             alert("미구현 기능입니다.");
           }}
+          name="download"
         >
           <svg
             width="24"

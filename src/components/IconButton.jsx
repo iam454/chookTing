@@ -33,15 +33,17 @@ const Text = styled.span`
   text-shadow: 2px 2px 10px black;
 `;
 
-const IconButton = ({ onClick, children, text }) => {
+const IconButton = ({ name, onClick, children, text }) => {
   return (
-    <Layout>
+    <Layout htmlFor={name}>
       <Button
         onClick={(e) => {
           e.stopPropagation();
           onClick?.();
         }}
         $hasClickEvent={onClick}
+        id={name}
+        title={name}
       >
         {children}
       </Button>
