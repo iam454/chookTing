@@ -71,14 +71,7 @@ const HomePost = ({ id, image, info, isLikedPost, handleAutoPlayPause }) => {
   const navigate = useNavigate();
   const likeAnimation = useAnimation();
   const dbclickAnimation = useAnimation();
-  const { mutate: postLike } = useMutation(updateLike, {
-    onSuccess: (e) => {
-      console.log("좋아요 요청 성공", e);
-    },
-    onError: (e) => {
-      console.log("좋아요 요청 실패", e);
-    },
-  });
+  const { mutate: postLike } = useMutation(updateLike);
   const { mutate: getInsta } = useMutation(fetchHomeInstagramId, {
     onSuccess: (res) => {
       const instagramId = res.data.response.instaId;
@@ -286,14 +279,7 @@ const PopPost = ({
   const [likes, setLikes] = useState(numberLikes);
   const likeAnimation = useAnimation();
   const dbclickAnimation = useAnimation();
-  const { mutate: postLike } = useMutation(updateLike, {
-    onSuccess: (e) => {
-      console.log("success", e);
-    },
-    onError: (e) => {
-      console.log("err", e);
-    },
-  });
+  const { mutate: postLike } = useMutation(updateLike);
   const { mutate: getInsta } = useMutation(fetchPopInstagramId, {
     onSuccess: (res) => {
       const instagramId = res.data.response.instaId;
@@ -469,14 +455,7 @@ const MyPost = ({
   const [likes, setLikes] = useState(numberLikes);
   const likeAnimation = useAnimation();
   const dbclickAnimation = useAnimation();
-  const { mutate } = useMutation(updateLike, {
-    onSuccess: (e) => {
-      console.log("success", e);
-    },
-    onError: (e) => {
-      console.log("err", e);
-    },
-  });
+  const { mutate } = useMutation(updateLike);
 
   const handleDoubleClick = () => {
     if (!toggleLikeOn) {
