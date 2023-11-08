@@ -73,7 +73,7 @@ const Card = ({ photo, layoutId, onClick }) => {
   return (
     <Layout layoutId={layoutId} onClick={onClick}>
       <Container>
-        <Image src={imageUri} />
+        <Image src={imageUri} alt="네컷사진" />
         <Description>
           <Name>{nickname}</Name>
           <Date>{createdAt}</Date>
