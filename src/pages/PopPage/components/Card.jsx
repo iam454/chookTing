@@ -1,8 +1,7 @@
 import React from "react";
 import { styled } from "styled-components";
-import { motion } from "framer-motion";
 
-const Box = styled(motion.div)`
+const Box = styled.div`
   width: 175px;
   height: ${(props) => {
     switch (props.$level) {
@@ -28,9 +27,9 @@ const Photo = styled.img`
   object-fit: cover;
 `;
 
-const Card = ({ layoutId, level, image, onClick }) => {
+const Card = ({ level, image, onClick }) => {
   return (
-    <Box layoutId={layoutId} $level={level} onClick={onClick}>
+    <Box $level={level} onClick={onClick}>
       <Photo src={image} alt="네컷사진" />
     </Box>
   );
