@@ -1,18 +1,9 @@
 import React, { useEffect } from "react";
 import Layout from "./Layout";
 import { useLocation, useNavigate } from "react-router-dom";
-import styled from "styled-components";
-import HeartLoader from "./HeartLoader";
+import { CenteredHeart } from "./HeartLoader";
 import { kakaoLogin } from "../apis/api/user";
 import { useMutation } from "@tanstack/react-query";
-
-const Container = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 100%;
-`;
 
 const KakaoHandler = () => {
   const navigate = useNavigate();
@@ -37,9 +28,7 @@ const KakaoHandler = () => {
 
   return (
     <Layout>
-      <Container>
-        <HeartLoader />
-      </Container>
+      <CenteredHeart />
     </Layout>
   );
 };

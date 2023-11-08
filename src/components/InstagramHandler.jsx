@@ -1,18 +1,9 @@
 import React, { useEffect } from "react";
 import Layout from "./Layout";
-import styled from "styled-components";
-import HeartLoader from "./HeartLoader";
+import { CenteredHeart } from "./HeartLoader";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
 import { instagramConnect } from "../apis/api/user";
-
-const Container = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 100%;
-`;
 
 const InstagramHandler = () => {
   const location = useLocation();
@@ -35,9 +26,7 @@ const InstagramHandler = () => {
 
   return (
     <Layout>
-      <Container>
-        <HeartLoader />
-      </Container>
+      <CenteredHeart />
     </Layout>
   );
 };
