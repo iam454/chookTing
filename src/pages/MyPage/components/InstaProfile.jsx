@@ -35,6 +35,7 @@ const InstaButton = styled.button`
   background-color: transparent;
   color: ${(props) => props.theme.white};
   padding: 0;
+  cursor: ${(props) => (props.$isLinked ? "default" : "pointer")};
 `;
 
 const InstaProfile = ({ isLinked, infos, fireworks }) => {
@@ -49,7 +50,7 @@ const InstaProfile = ({ isLinked, infos, fireworks }) => {
   return (
     <Profile>
       <Text>포토카드에 SNS 계정을 연결해서 공유해 보세요.</Text>
-      <InstaButton onClick={handleButtonClick}>
+      <InstaButton onClick={handleButtonClick} $isLinked={isLinked}>
         <Icon src="/icons/instagram.png" $isLinked={isLinked} />
         <Text>{isLinked ? "연결 완료" : "연결하기"}</Text>
       </InstaButton>
