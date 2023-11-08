@@ -68,6 +68,7 @@ const GlobalStyle = createGlobalStyle`
     color: ${(props) => props.theme.white};
     font-size: 14px;
     font-weight: 400;
+    cursor: default;
   }
   a {
     text-decoration: none;
