@@ -36,7 +36,7 @@ const KaKaoProfile = ({ username, profileImage }) => {
   return (
     <Profile>
       <SettingButton onClick={handleSettingButtonClick} />
-      <Image src={profileImage} />
+      <Image src={profileImage} alt="프로필 이미지" />
       <Name>{username}</Name>
     </Profile>
   );

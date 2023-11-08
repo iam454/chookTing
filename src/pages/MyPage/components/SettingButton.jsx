@@ -11,11 +11,12 @@ const Button = styled.button`
   position: absolute;
   top: 8px;
   right: 0;
+  cursor: pointer;
 `;
 
 const SettingButton = ({ onClick }) => {
   return (
-    <Button onClick={onClick}>
+    <Button onClick={onClick} title="Settings">
       <svg
         width="24"
         height="24"

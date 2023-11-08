@@ -71,14 +71,7 @@ const HomePost = ({ id, image, info, isLikedPost, handleAutoPlayPause }) => {
   const navigate = useNavigate();
   const likeAnimation = useAnimation();
   const dbclickAnimation = useAnimation();
-  const { mutate: postLike } = useMutation(updateLike, {
-    onSuccess: (e) => {
-      console.log("좋아요 요청 성공", e);
-    },
-    onError: (e) => {
-      console.log("좋아요 요청 실패", e);
-    },
-  });
+  const { mutate: postLike } = useMutation(updateLike);
   const { mutate: getInsta } = useMutation(fetchHomeInstagramId, {
     onSuccess: (res) => {
       const instagramId = res.data.response.instaId;
@@ -182,7 +175,11 @@ const HomePost = ({ id, image, info, isLikedPost, handleAutoPlayPause }) => {
         />
       </motion.svg>
       <ButtonContainer>
-        <IconButton onClick={handleLikeButtonClick}>
+        <IconButton
+          onClick={handleLikeButtonClick}
+          name="like"
+          title="Update like"
+        >
           <motion.svg
             width={24}
             height={24}
@@ -205,7 +202,11 @@ const HomePost = ({ id, image, info, isLikedPost, handleAutoPlayPause }) => {
             />
           </motion.svg>
         </IconButton>
-        <IconButton onClick={handleInstaButtonClick}>
+        <IconButton
+          onClick={handleInstaButtonClick}
+          name="instagram"
+          title="Visit instagram"
+        >
           <img
             src="/icons/instagram.png"
             width={20}
@@ -278,14 +279,7 @@ const PopPost = ({
   const [likes, setLikes] = useState(numberLikes);
   const likeAnimation = useAnimation();
   const dbclickAnimation = useAnimation();
-  const { mutate: postLike } = useMutation(updateLike, {
-    onSuccess: (e) => {
-      console.log("success", e);
-    },
-    onError: (e) => {
-      console.log("err", e);
-    },
-  });
+  const { mutate: postLike } = useMutation(updateLike);
   const { mutate: getInsta } = useMutation(fetchPopInstagramId, {
     onSuccess: (res) => {
       const instagramId = res.data.response.instaId;
@@ -372,7 +366,12 @@ const PopPost = ({
         />
       </motion.svg>
       <ButtonContainer>
-        <IconButton onClick={handleLikeButtonClick} text={convertToK(likes)}>
+        <IconButton
+          onClick={handleLikeButtonClick}
+          text={convertToK(likes)}
+          name="like"
+          title="Update like"
+        >
           <motion.svg
             width={24}
             height={24}
@@ -399,6 +398,8 @@ const PopPost = ({
           onClick={() => {
             setIsPointModalOpen(true);
           }}
+          name="instagram"
+          title="Visit instagram"
         >
           <img
             src="/icons/instagram.png"
@@ -454,14 +455,7 @@ const MyPost = ({
   const [likes, setLikes] = useState(numberLikes);
   const likeAnimation = useAnimation();
   const dbclickAnimation = useAnimation();
-  const { mutate } = useMutation(updateLike, {
-    onSuccess: (e) => {
-      console.log("success", e);
-    },
-    onError: (e) => {
-      console.log("err", e);
-    },
-  });
+  const { mutate } = useMutation(updateLike);
 
   const handleDoubleClick = () => {
     if (!toggleLikeOn) {
@@ -535,6 +529,8 @@ const MyPost = ({
         <IconButton
           onClick={handleLikeButtonClick}
           text={likes.toLocaleString()}
+          name="like"
+          title="Update like"
         >
           <motion.svg
             width={24}
@@ -558,7 +554,11 @@ const MyPost = ({
             />
           </motion.svg>
         </IconButton>
-        <IconButton text={numberInstas.toLocaleString()}>
+        <IconButton
+          text={numberInstas.toLocaleString()}
+          name="instagram"
+          title="Visit instagram"
+        >
           <img
             src="/icons/instagram.png"
             width={20}
@@ -568,8 +568,10 @@ const MyPost = ({
         </IconButton>
         <IconButton
           onClick={() => {
-            console.log("다운로드 이벤트 발생");
+            alert("미구현 기능입니다.");
           }}
+          name="download"
+          title="Download"
         >
           <svg
             width="24"

@@ -19,6 +19,7 @@ const Box = styled(motion.div)`
   border-radius: 8px;
   overflow: hidden;
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  cursor: pointer;
 `;
 
 const Photo = styled.img`
@@ -30,7 +31,7 @@ const Photo = styled.img`
 const Card = ({ layoutId, level, image, onClick }) => {
   return (
     <Box layoutId={layoutId} $level={level} onClick={onClick}>
-      <Photo src={image} />
+      <Photo src={image} alt="네컷사진" />
     </Box>
   );
 };

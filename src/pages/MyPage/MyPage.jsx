@@ -11,15 +11,7 @@ import MyDetailPage from "../MyDetailpage/MyDetailPage";
 import { useQuery, useInfiniteQuery } from "@tanstack/react-query";
 import { fetchUserInfos } from "../../apis/api/user";
 import { fetchMyPosts } from "../../apis/api/post";
-import HeartLoader from "../../components/HeartLoader";
-
-const LoaderContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 100%;
-`;
+import { CenteredHeart } from "../../components/HeartLoader";
 
 const Container = styled.div`
   width: 358px;
@@ -132,9 +124,7 @@ const MyPage = () => {
   if (isUserInfosLoading || isMyLoading) {
     return (
       <Layout>
-        <LoaderContainer>
-          <HeartLoader />
-        </LoaderContainer>
+        <CenteredHeart />
       </Layout>
     );
   }

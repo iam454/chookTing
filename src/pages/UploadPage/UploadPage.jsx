@@ -78,7 +78,6 @@ const UploadPage = () => {
       navigate("/upload-done");
     },
     onError: (e) => {
-      console.log("error", e);
       alert("업로드에 실패하였습니다.");
     },
   });
@@ -164,7 +163,7 @@ const UploadPage = () => {
   const handleUploadClick = (e) => {
     e.preventDefault();
     if (!name) {
-      // 닉네임은 필수항목입니다. - 사용자가 알아챌 수 있도록
+      alert("닉네임을 입력해주세요.");
       return;
     }
     setUploadContents({ name: name.trim(), hashtags });

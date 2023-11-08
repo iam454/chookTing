@@ -9,15 +9,7 @@ import { styled } from "styled-components";
 import PopDetailPage from "../PopDetailPage/PopDetailPage";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { fetchPopPosts } from "../../apis/api/post";
-import HeartLoader from "../../components/HeartLoader";
-
-const LoaderContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 100%;
-`;
+import { CenteredHeart } from "../../components/HeartLoader";
 
 const Overlay = styled(motion.div)`
   position: fixed;
@@ -96,9 +88,7 @@ const PopPage = () => {
   if (isLoading) {
     return (
       <Layout>
-        <LoaderContainer>
-          <HeartLoader />
-        </LoaderContainer>
+        <CenteredHeart />
       </Layout>
     );
   }
