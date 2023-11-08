@@ -141,7 +141,7 @@ const SettingPage = () => {
           bgColor={theme.modal.gray}
           text="취소"
         />
-        <ModalButton onClick={quit} bgColor={theme.red} text="회원탈퇴" />
+        <ModalButton onClick={quit} bgColor={theme.red} text="탈퇴하기" />
       </Modal.Long>
     </Layout>
   );
