@@ -568,7 +568,7 @@ const MyPost = ({
         </IconButton>
         <IconButton
           onClick={() => {
-            console.log("다운로드 이벤트 발생");
+            alert("미구현 기능입니다.");
           }}
         >
           <svg

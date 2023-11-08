@@ -6,7 +6,7 @@ const Layout = styled.label`
 `;
 
 const Button = styled.button`
-  cursor: pointer;
+  cursor: ${(props) => (props.$hasClickEvent ? "pointer" : "default")};
   width: 48px;
   height: 48px;
   border: none;
@@ -17,6 +17,11 @@ const Button = styled.button`
   justify-content: center;
   align-items: center;
   box-shadow: rgba(0, 0, 0, 0.35) 0 5px 15px;
+
+  &:hover {
+    background-color: ${(props) =>
+      props.$hasClickEvent && props.theme.icon.hover};
+  }
 `;
 
 const Text = styled.span`
@@ -36,6 +41,7 @@ const IconButton = ({ onClick, children, text }) => {
           e.stopPropagation();
           onClick?.();
         }}
+        $hasClickEvent={onClick}
       >
         {children}
       </Button>
