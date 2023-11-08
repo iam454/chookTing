@@ -182,7 +182,11 @@ const HomePost = ({ id, image, info, isLikedPost, handleAutoPlayPause }) => {
         />
       </motion.svg>
       <ButtonContainer>
-        <IconButton onClick={handleLikeButtonClick} name="like">
+        <IconButton
+          onClick={handleLikeButtonClick}
+          name="like"
+          title="Update like"
+        >
           <motion.svg
             width={24}
             height={24}
@@ -205,7 +209,11 @@ const HomePost = ({ id, image, info, isLikedPost, handleAutoPlayPause }) => {
             />
           </motion.svg>
         </IconButton>
-        <IconButton onClick={handleInstaButtonClick} name="instagram">
+        <IconButton
+          onClick={handleInstaButtonClick}
+          name="instagram"
+          title="Visit instagram"
+        >
           <img
             src="/icons/instagram.png"
             width={20}
@@ -376,6 +384,7 @@ const PopPost = ({
           onClick={handleLikeButtonClick}
           text={convertToK(likes)}
           name="like"
+          title="Update like"
         >
           <motion.svg
             width={24}
@@ -404,6 +413,7 @@ const PopPost = ({
             setIsPointModalOpen(true);
           }}
           name="instagram"
+          title="Visit instagram"
         >
           <img
             src="/icons/instagram.png"
@@ -541,6 +551,7 @@ const MyPost = ({
           onClick={handleLikeButtonClick}
           text={likes.toLocaleString()}
           name="like"
+          title="Update like"
         >
           <motion.svg
             width={24}
@@ -564,7 +575,11 @@ const MyPost = ({
             />
           </motion.svg>
         </IconButton>
-        <IconButton text={numberInstas.toLocaleString()} name="instagram">
+        <IconButton
+          text={numberInstas.toLocaleString()}
+          name="instagram"
+          title="Visit instagram"
+        >
           <img
             src="/icons/instagram.png"
             width={20}
@@ -577,6 +592,7 @@ const MyPost = ({
             alert("미구현 기능입니다.");
           }}
           name="download"
+          title="Download"
         >
           <svg
             width="24"

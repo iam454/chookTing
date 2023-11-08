@@ -33,7 +33,7 @@ const Text = styled.span`
   text-shadow: 2px 2px 10px black;
 `;
 
-const IconButton = ({ name, onClick, children, text }) => {
+const IconButton = ({ title, name, onClick, children, text }) => {
   return (
     <Layout htmlFor={name}>
       <Button
@@ -43,7 +43,7 @@ const IconButton = ({ name, onClick, children, text }) => {
         }}
         $hasClickEvent={onClick}
         id={name}
-        title={name}
+        title={title}
       >
         {children}
       </Button>
