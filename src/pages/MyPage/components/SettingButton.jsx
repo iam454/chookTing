@@ -11,6 +11,7 @@ const Button = styled.button`
   position: absolute;
   top: 8px;
   right: 0;
+  cursor: pointer;
 `;
 
 const SettingButton = ({ onClick }) => {
