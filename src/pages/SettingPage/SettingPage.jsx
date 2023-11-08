@@ -55,6 +55,7 @@ const Quit = styled.div`
 
 const SettingPage = () => {
   const [isLogOutModalOpen, setIsLogOutModalOpen] = useState(false);
+  const [isQuitModalOpen, setIsQuitModalOpen] = useState(false);
   const navigate = useNavigate();
   const { mutate: logout } = useMutation(kakaoLogout, {
     onSuccess: () => {
@@ -79,10 +80,6 @@ const SettingPage = () => {
 
   const handleAskClick = () => {
     alert("미구현 기능입니다.");
-  };
-
-  const handleQuitClick = () => {
-    quit();
   };
 
   return (
@@ -117,7 +114,7 @@ const SettingPage = () => {
               로그아웃
             </ListItem>
           </List>
-          <Quit onClick={handleQuitClick}>회원 탈퇴</Quit>
+          <Quit onClick={() => setIsQuitModalOpen(true)}>회원 탈퇴</Quit>
         </Main>
       </motion.div>
       <Modal.Long
@@ -132,6 +129,19 @@ const SettingPage = () => {
           text="취소"
         />
         <ModalButton onClick={logout} bgColor={theme.red} text="로그아웃" />
+      </Modal.Long>
+      <Modal.Long
+        isOpen={isQuitModalOpen}
+        onRequestClose={() => setIsQuitModalOpen(false)}
+        text1="정말 탈퇴하시겠습니까?"
+        text2="30일 후 계정 정보가 삭제됩니다."
+      >
+        <ModalButton
+          onClick={() => setIsQuitModalOpen(false)}
+          bgColor={theme.modal.gray}
+          text="취소"
+        />
+        <ModalButton onClick={quit} bgColor={theme.red} text="회원탈퇴" />
       </Modal.Long>
     </Layout>
   );
