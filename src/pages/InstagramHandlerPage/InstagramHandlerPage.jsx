@@ -1,24 +1,22 @@
 import React, { useEffect } from "react";
-import Layout from "./Layout";
+import Layout from "../../components/Layout";
+import { CenteredHeart } from "../../components/HeartLoader";
 import { useLocation, useNavigate } from "react-router-dom";
-import { CenteredHeart } from "./HeartLoader";
-import { kakaoLogin } from "../apis/api/user";
 import { useMutation } from "@tanstack/react-query";
+import { instagramConnect } from "../../apis/api/user";
 
-const KakaoHandler = () => {
-  const navigate = useNavigate();
+const InstagramHandlerPage = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const code = new URLSearchParams(location.search).get("code");
-  const { mutate } = useMutation(kakaoLogin, {
+  const { mutate } = useMutation(instagramConnect, {
     onSuccess: (res) => {
       const token = res.headers.authorization;
       localStorage.setItem("token", token);
-      navigate("/");
-      window.location.reload();
+      navigate("/profile");
     },
     onError: (e) => {
-      console.log("카카오 로그인 실패", e);
-      navigate("/");
+      navigate("/profile");
     },
   });
 
@@ -33,4 +31,4 @@ const KakaoHandler = () => {
   );
 };
 
-export default KakaoHandler;
+export default InstagramHandlerPage;
