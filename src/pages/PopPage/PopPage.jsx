@@ -16,7 +16,6 @@ const Overlay = styled(motion.div)`
   width: 390px;
   height: 100%;
   background-color: ${(props) => props.theme.modal.dim};
-  opacity: 0;
 `;
 
 const Detail = styled(motion.div)`
@@ -36,6 +35,7 @@ const Detail = styled(motion.div)`
 `;
 
 const PopPage = () => {
+  const bottomObserverRef = useRef(null);
   const navigate = useNavigate();
   const detailMatch = useMatch("/pop/post/:postId");
   const {
@@ -52,16 +52,6 @@ const PopPage = () => {
       refetch();
     },
   });
-
-  const bottomObserverRef = useRef(null);
-
-  const handleCardClick = (postId) => {
-    navigate(`post/${postId}`);
-  };
-
-  const handleOverlayClick = () => {
-    navigate("/pop");
-  };
 
   useEffect(() => {
     const handleObserver = (entries) => {
@@ -85,6 +75,14 @@ const PopPage = () => {
     };
   }, [bottomObserverRef, fetchNextPage, pop]);
 
+  const handleCardClick = (postId) => {
+    navigate(`post/${postId}`);
+  };
+
+  const handleOverlayClick = () => {
+    navigate("/pop");
+  };
+
   if (isLoading) {
     return (
       <Layout>
@@ -97,12 +95,11 @@ const PopPage = () => {
     <Layout>
       <Container>
         <MasonryInfiniteGrid gap={8} isConstantSize={true} column={2}>
-          {pop.pages.map((page) =>
-            page.data.response.popularPosts.map((post) => {
+          {pop.pages.map((page, pageIndex) =>
+            page.data.response.popularPosts.map((post, postIndex) => {
               return (
                 <Card
-                  layoutId={"pop" + post.postId}
-                  key={post.postId}
+                  key={`${pageIndex}${postIndex}`}
                   level={post.postLevel}
                   image={post.imageUrl}
                   onClick={() => handleCardClick(post.postId)}
@@ -118,10 +115,16 @@ const PopPage = () => {
           <>
             <Overlay
               onClick={handleOverlayClick}
+              initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
             />
-            <Detail layoutId={"pop" + detailMatch.params.postId}>
+            <Detail
+              initial={{ scale: 0 }}
+              animate={{ scale: 1 }}
+              exit={{ scale: 0 }}
+              transition={{ duration: 0.3 }}
+            >
               <PopDetailPage />
             </Detail>
           </>

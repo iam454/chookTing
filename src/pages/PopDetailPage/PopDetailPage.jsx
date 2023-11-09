@@ -19,6 +19,7 @@ const PopDetailPage = () => {
       refetch();
       navigate("/pop");
     },
+    cacheTime: 0,
   });
 
   if (isLoading) {
