@@ -7,7 +7,6 @@ import SettingPage from "./pages/SettingPage/SettingPage";
 import MyDetailPage from "./pages/MyDetailpage/MyDetailPage";
 import UploadPage from "./pages/UploadPage/UploadPage";
 import UploadDonePage from "./pages/UploadPage/UploadDonePage";
-import ToUploadPage from "./pages/UploadPage/ToUploadPage";
 import NotFoundPage from "./pages/NotFoundPage/NotFoundPage";
 import KakaoHandler from "./components/KakaoHandler";
 import InstagramHandler from "./components/InstagramHandler";
@@ -26,7 +25,6 @@ function App() {
             <Route path="post/:postId" element={<MyDetailPage />}></Route>
           </Route>
           <Route path="/profile/setting" element={<SettingPage />}></Route>
-          <Route path="/toUpload" element={<ToUploadPage />}></Route>
           <Route path="/upload" element={<UploadPage />}></Route>
           <Route path="/upload-done" element={<UploadDonePage />}></Route>
           <Route path="/kakao/callback" element={<KakaoHandler />}></Route>
