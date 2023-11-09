@@ -5,7 +5,7 @@ import ModalButton from "../../components/ModalButton";
 import theme from "../../theme";
 import Post from "../../components/Post";
 import PostInfos from "../../components/PostInfos";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useSetRecoilState } from "recoil";
 import uploadFileState from "../../recoil/uploadImage/atom";
 import { useNavigate } from "react-router-dom";
 import uploadContentsState from "../../recoil/uploadContents/atom";
@@ -67,8 +67,7 @@ const isEmptyValue = (value) => {
 
 const UploadPage = () => {
   const [uploadFile, setUploadFile] = useRecoilState(uploadFileState);
-  const [uploadContents, setUploadContents] =
-    useRecoilState(uploadContentsState);
+  const setUploadContents = useSetRecoilState(uploadContentsState);
   const [name, setName] = useState("");
   const [inputHashtag, setInputHashtag] = useState("");
   const [hashtags, setHashtags] = useState([]);
