@@ -6,7 +6,7 @@ import NavigationBar from "./components/NavigationBar";
 import SettingPage from "./pages/SettingPage/SettingPage";
 import MyDetailPage from "./pages/MyDetailpage/MyDetailPage";
 import UploadPage from "./pages/UploadPage/UploadPage";
-import UploadDonePage from "./pages/UploadPage/UploadDonePage";
+import UploadDonePage from "./pages/UploadDonePage/UploadDonePage";
 import NotFoundPage from "./pages/NotFoundPage/NotFoundPage";
 import KakaoHandlerPage from "./pages/KakaoHandlerPage/KakaoHandlerPage";
 import InstagramHandlerPage from "./pages/InstagramHandlerPage/InstagramHandlerPage";

@@ -1,8 +1,7 @@
 import React, { useEffect } from "react";
 import Layout from "../../components/Layout";
 import styled from "styled-components";
-import Button from "./components/Button";
-
+import Button from "../../components/Button";
 import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import uploadFileState from "../../recoil/uploadImage/atom";
