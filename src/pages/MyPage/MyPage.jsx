@@ -53,6 +53,7 @@ const Detail = styled(motion.div)`
 `;
 
 const MyPage = () => {
+  const bottomObserverRef = useRef(null);
   const navigate = useNavigate();
   const detailMatch = useMatch("/profile/post/:postId");
   const {
@@ -87,7 +88,6 @@ const MyPage = () => {
     },
     cacheTime: 0,
   });
-  const bottomObserverRef = useRef(null);
 
   const handleCardClick = (postId) => {
     navigate(`post/${postId}`);

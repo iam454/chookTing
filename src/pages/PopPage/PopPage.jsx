@@ -1,6 +1,5 @@
 import React, { useEffect, useRef } from "react";
 import Layout from "../../components/Layout";
-import Container from "./components/Container";
 import Card from "./components/Card";
 import { MasonryInfiniteGrid } from "@egjs/react-infinitegrid";
 import { useMatch, useNavigate } from "react-router-dom";
@@ -10,6 +9,14 @@ import PopDetailPage from "../PopDetailPage/PopDetailPage";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { fetchPopPosts } from "../../apis/api/post";
 import { CenteredHeart } from "../../components/HeartLoader";
+
+const Container = styled.main`
+  width: 358px;
+  position: absolute;
+  top: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+`;
 
 const Overlay = styled(motion.div)`
   position: fixed;
