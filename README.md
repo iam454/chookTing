@@ -1,31 +1,18 @@
 # 카카오 테크 캠퍼스 3단계 과제: 축팅
 
+<div style="display: flex; justify-content: center;" align="center">
+  <img src="img/home.png" alt="홈페이지" width="250px" />
+  <img src="img/pop.png" alt="인기페이지" width="250px" />
+  <img src="img/my.png" alt="마이페이지" width="250px" />
+</div>
+
 포토부스의 사진을 공유하고, 만남을 연결하는 서비스 **축팅**입니다.
 
 <br />
 
 ## 🏁 시작하기
 
-파일을 저장한 후 다음의 명령어로 직접 프로젝트를 실행할 수 있습니다.
-
-```zsh
-npm install
-npm start
-```
-
-<br />
-
-## 🧐 프로젝트 소개
-
-개발 기간 : 2023년 9월 24일 ~ 진행 중
-
-카카오 테크 캠퍼스(이하 카테캠) 3단계 과제 수행 프로젝트 중 FE 개발을 다루고 있습니다.
-
-기획부터 배포까지 서비스 개발에 필요한 전반적인 과정을 경험하고 있습니다.
-
-기획안 발표 자료(PowerPoint) : [다운로드](https://drive.google.com/file/d/1NsLP3KFZE2CUSgwqEm7uGOyySQEIONOg/view?usp=sharing)
-
-와이어프레임(Figma) : [보러가기](https://www.figma.com/file/n1fenCQYDfghtHT2Qua0YL/kakao14WireBoard?type=design&node-id=0%3A1&mode=design&t=oSx3LovlAi3IIcv2-1)
+23년 11월 말부터 [배포 주소](https://k2bf481c846ffa.user-app.krampoline.com/)는 동작하지 않습니다.
 
 <br />
 
@@ -33,62 +20,86 @@ npm start
 
 프론트엔드 3인, 백엔드 4인으로 이루어진 7인 팀 SPARK 입니다.
 
-<div style="display: flex; gap: 24px;">
-  <div>
-    <h3>FE</h3>
-    <table>
-      <thead>
-        <tr>
-          <th>이름</th>
-          <th>역할</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><a href="https://github.com/MINJOO-KIM" target="_blank">김민주</a></td>
-          <td>리액셔너</td>
-        </tr>
-        <tr>
-          <td><a href="https://github.com/GhoRid" target="_blank">박건형</a></td>
-          <td>기획리더</td>
-        </tr>
-        <tr>
-          <td><a href="https://github.com/iam454" target="_blank">서완석</a></td>
-          <td>테크리더</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-  <div>
-    <h3>BE</h3>
-    <table>
-      <thead>
-        <tr>
-          <th>이름</th>
-          <th>역할</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><a href="https://github.com/GoBeromsu" target="_blank">고범수</a></td>
-          <td>테크리더</td>
-        </tr>
-        <tr>
-          <td><a href="https://github.com/yuseonkim" target="_blank">김유선</a></td>
-          <td>타임키퍼</td>
-        </tr>
-        <tr>
-          <td><a href="https://github.com/SongGaEun16" target="_blank">송가은</a></td>
-          <td>리마인더</td>
-        </tr>
-        <tr>
-          <td><a href="https://github.com/hwangdaesun" target="_blank">황대선</a></td>
-          <td>조장</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-</div>
+### FE
+
+<table>
+  <tr>
+    <td align="center"><a href="https://github.com/MINJOO-KIM"><img src="https://github.com/MINJOO-KIM.png" width="50"></a></td>
+    <td align="center"><a href="https://github.com/GhoRid"><img src="https://github.com/GhoRid.png" width="50"></a></td>
+    <td align="center"><a href="https://github.com/iam454"><img src="https://github.com/iam454.png" width="50"></a></td>
+  </tr>
+  <tr>
+    <td align="center"><a href="https://github.com/MINJOO-KIM">김민주(MINJOO-KIM)</a></td>
+    <td align="center"><a href="https://github.com/GhoRid">박건형(GhoRid)</a></td>
+    <td align="center"><a href="https://github.com/iam454">서완석(iam454)</a></td>
+  </tr>
+  <tr>
+    <td align="center">리액셔너</td>
+    <td align="center">기획리더</td>
+    <td align="center">테크리더</td>
+  </tr>
+<table>
+
+### BE
+
+<table>
+  <tr>
+    <td align="center"><a href="https://github.com/GoBeromsu"><img src="https://github.com/GoBeromsu.png" width="50"></a></td>
+    <td align="center"><a href="https://github.com/yuseonkim"><img src="https://github.com/yuseonkim.png" width="50"></a></td>
+    <td align="center"><a href="https://github.com/SongGaEun16"><img src="https://github.com/SongGaEun16.png" width="50"></a></td>
+    <td align="center"><a href="https://github.com/hwangdaesun"><img src="https://github.com/hwangdaesun.png" width="50"></a></td>
+  </tr>
+  <tr>
+    <td align="center"><a href="https://github.com/GoBeromsu">고범수(GoBeromsu)</a></td>
+    <td align="center"><a href="https://github.com/yuseonkim">김유선(yuseonkim)</a></td>
+    <td align="center"><a href="https://github.com/SongGaEun16">송가은(SongGaEun16)</a></td>
+    <td align="center"><a href="https://github.com/hwangdaesun">황대선(hwangdaesun)</a></td>
+  </tr>
+  <tr>
+    <td align="center">테크리더</td>
+    <td align="center">타임키퍼</td>
+    <td align="center">리마인더</td>
+    <td align="center">조장</td>
+  </tr>
+<table>
+
+<br />
+
+## 🧐 프로젝트 소개
+
+개발 기간 : 2023년 8월 25일 ~ 2023년 11월 11일
+
+카카오 테크 캠퍼스(이하 카테캠) 3단계 과제 수행 프로젝트 중 FE 개발을 다루고 있습니다.
+
+기획부터 배포까지 서비스 개발에 필요한 전반적인 과정을 경험했습니다.
+
+### 📝 기획
+
+축팅은 네컷사진을 중심으로 한 만남의 플랫폼입니다.
+
+남성 사용자가 많은 데이팅 앱 시장의 문제점을 해결하기 위해 여성 사용자가 많은 네컷사진 시장을 접목시켰습니다.
+
+사용자는 네컷사진을 게시하고, 축팅의 재화인 폭죽을 사용하여 마음에 드는 상대의 인스타그램에 방문할 수 있습니다.
+
+- [기획안 발표 자료(PowerPoint) 다운로드](https://drive.google.com/file/d/1NsLP3KFZE2CUSgwqEm7uGOyySQEIONOg/view?usp=sharing)
+
+### 🎨 디자인
+
+일관된 경험을 제공하기 위해 4배수 디자인을 적용했습니다.
+
+서비스의 주요 타겟인 모바일 사용자를 위해 Thumb Zone을 고려했습니다.
+
+행동을 유도하기 위해 Affordance에 대해 고민했습니다.
+
+- [와이어프레임(Figma) 보러가기](https://www.figma.com/file/n1fenCQYDfghtHT2Qua0YL/kakao14WireBoard?type=design&node-id=0%3A1&mode=design&t=oSx3LovlAi3IIcv2-1)
+
+### 🖥️ 화면
+
+1️⃣ 홈
+
+2️⃣ 인기
+
+3️⃣ 마이
 
 <br />
 
