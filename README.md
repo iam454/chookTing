@@ -93,13 +93,65 @@
 
 - [와이어프레임(Figma) 보러가기](https://www.figma.com/file/n1fenCQYDfghtHT2Qua0YL/kakao14WireBoard?type=design&node-id=0%3A1&mode=design&t=oSx3LovlAi3IIcv2-1)
 
-### 🖥️ 화면
+### 🖥️ 화면 및 기능
 
-1️⃣ 홈
+1️⃣ 홈 페이지
 
-2️⃣ 인기
+<div style="display: flex; justify-content: center; gap: 8px;" align="center">
+  <img src="img/home.gif" alt="홈"/>
+  <img src="img/pause.gif" alt="일시정지"/>
+</div>
 
-3️⃣ 마이
+- 숏폼 형식으로 콘텐츠를 제공합니다.
+- 일시정지 및 재생이 가능합니다.
+
+2️⃣ 카카오 로그인/로그아웃, 인스타그램 연결
+
+<div style="display: flex; justify-content: center; gap: 8px;" align="center">
+  <img src="img/login.gif" alt="로그인"/>
+  <img src="img/logout.gif" alt="로그아웃"/>
+</div>
+
+- 카카오 로그인, 인스타그램 연결을 통해 축팅의 모든 서비스를 이용할 수 있습니다.
+- 로그아웃과 탈퇴가 가능합니다.
+
+3️⃣ 좋아요
+
+<div style="display: flex; justify-content: center; gap: 8px;" align="center">
+  <img src="img/like.gif" alt="좋아요"/>
+  <img src="img/like-undo.gif" alt="좋아요 취소"/>
+</div>
+
+- 빈 하트 아이콘을 누르거나 화면을 빠르게 두 번 눌러 게시물에 좋아요를 남길 수 있습니다.
+- 채워진 하트 아이콘을 누르는 것으로 좋아요를 취소할 수 있습니다.
+
+4️⃣ 인스타 방문
+
+<div style="display: flex; justify-content: center; gap: 8px;" align="center">
+  <img src="img/fireworks.gif" alt="인스타 방문"/>
+</div>
+
+- 축팅의 재화인 폭죽을 사용하여 게시물 작성자의 인스타그램에 방문할 수 있습니다.
+
+5️⃣ 인기 페이지
+
+<div style="display: flex; justify-content: center; gap: 8px;" align="center">
+  <img src="img/pop.gif" alt="인기"/>
+  <img src="img/pop-detail.gif" alt="인기 상세"/>
+</div>
+
+- Masonry Layout의 형식으로 여러 게시물을 볼 수 있습니다.
+- 게시물의 크기는 인기도가 높을수록 커집니다.
+- 게시물의 인기도는 세 단계로 나뉩니다.
+
+6️⃣ 마이 페이지
+
+<div style="display: flex; justify-content: center; gap: 8px;" align="center">
+  <img src="img/my-detail.gif" alt="마이"/>
+</div>
+
+- 내 정보(로그인한 계정, 인스타 연결 유무, 받은 좋아요 수, 인스타그램 방문자 수, 보유 폭죽)를 확인할 수 있습니다.
+- 게시물 정보를 확인할 수 있습니다.
 
 <br />
 
